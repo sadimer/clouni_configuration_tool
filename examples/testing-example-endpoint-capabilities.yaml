@@ -1,0 +1,12 @@
+topology_template:
+  node_templates:
+    server_master:
+      capabilities:
+        endpoint:
+          properties:
+            initiator: target
+            port: 1000
+            protocol: tcp
+            ip_address: 0.0.0.0
+      type: tosca.nodes.Compute
+tosca_definitions_version: tosca_simple_yaml_1_0

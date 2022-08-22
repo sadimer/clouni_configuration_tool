@@ -1,0 +1,296 @@
+---
+- name: 'Create OpenStack component openstack cluster: tosca_server_example_security_group:create'
+  hosts: localhost
+  tasks:
+  - file:
+      path: id_vars_example.yaml
+      state: absent
+  - file:
+      path: id_vars_example.yaml
+      state: touch
+  - include_vars: id_vars_example.yaml
+  - name: Create OpenStack component security group
+    os_security_group:
+      name: tosca_server_example_security_group
+    register: tosca_server_example_security_group
+  - set_fact:
+      tosca_server_example_security_group_list: '{{ tosca_server_example_security_group_list
+        | default([]) }} + [ "{{ item.id }}" ]'
+    loop: '{{ tosca_server_example_security_group.results | flatten(levels=1)  }}'
+    when: item.id  is defined
+  - set_fact:
+      tosca_server_example_security_group_list: '{{ tosca_server_example_security_group_list
+        | default([]) }} + [ "{{ item.security_group_ids[0] }}" ]'
+    loop: '{{ tosca_server_example_security_group.results | flatten(levels=1)  }}'
+    when: item.security_group_ids is defined
+  - set_fact:
+      tosca_server_example_security_group_list:
+        tosca_server_example_security_group_ids: '{{ tosca_server_example_security_group_list
+          }}'
+    when: tosca_server_example_security_group_list is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_security_group_delete: {{ tosca_server_example_security_group.id
+        }}'
+    when: tosca_server_example_security_group.id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_security_group_delete: {{ tosca_server_example_security_group.security_group_id
+        }}'
+    when: tosca_server_example_security_group.security_group_id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_security_group_delete: {{ tosca_server_example_security_group.security.id
+        }}'
+    when: tosca_server_example_security_group.security.id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_security_group_delete: {{ tosca_server_example_security_group.group.id
+        }}'
+    when: tosca_server_example_security_group.group.id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: '{{ tosca_server_example_security_group_list | to_nice_yaml }}'
+    when: tosca_server_example_security_group_list is defined
+  - fail:
+      msg: Variable tosca_server_example_security_group is undefined! So it will not
+        be deleted
+    when: tosca_server_example_security_group_list is undefined and tosca_server_example_security_group.id
+      is undefined
+    ignore_errors: true
+- name: 'Create OpenStack component openstack cluster: tosca_server_example_keypair:create'
+  hosts: localhost
+  tasks:
+  - include_vars: id_vars_example.yaml
+  - name: Create OpenStack component keypair
+    os_keypair:
+      name: tosca_server_example_keypair
+      public_key: '{{ lookup(''file'', ''~/.ssh/id_rsa.pub'') }}'
+    register: tosca_server_example_keypair
+  - set_fact:
+      tosca_server_example_keypair_list: '{{ tosca_server_example_keypair_list | default([])
+        }} + [ "{{ item.id }}" ]'
+    loop: '{{ tosca_server_example_keypair.results | flatten(levels=1)  }}'
+    when: item.id  is defined
+  - set_fact:
+      tosca_server_example_keypair_list: '{{ tosca_server_example_keypair_list | default([])
+        }} + [ "{{ item.keypair_ids[0] }}" ]'
+    loop: '{{ tosca_server_example_keypair.results | flatten(levels=1)  }}'
+    when: item.keypair_ids is defined
+  - set_fact:
+      tosca_server_example_keypair_list:
+        tosca_server_example_keypair_ids: '{{ tosca_server_example_keypair_list }}'
+    when: tosca_server_example_keypair_list is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_keypair_delete: {{ tosca_server_example_keypair.id
+        }}'
+    when: tosca_server_example_keypair.id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_keypair_delete: {{ tosca_server_example_keypair.keypair_id
+        }}'
+    when: tosca_server_example_keypair.keypair_id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_keypair_delete: {{ tosca_server_example_keypair.keypair.id
+        }}'
+    when: tosca_server_example_keypair.keypair.id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: '{{ tosca_server_example_keypair_list | to_nice_yaml }}'
+    when: tosca_server_example_keypair_list is defined
+  - fail:
+      msg: Variable tosca_server_example_keypair is undefined! So it will not be deleted
+    when: tosca_server_example_keypair_list is undefined and tosca_server_example_keypair.id
+      is undefined
+    ignore_errors: true
+- name: 'Create OpenStack component openstack cluster: tosca_server_example_security_group_rule:create'
+  hosts: localhost
+  tasks:
+  - include_vars: id_vars_example.yaml
+  - name: Create OpenStack component security group rule
+    os_security_group_rule:
+      direction: '{{ initiator[item | int] | default(omit) }}'
+      ethertype: IPv4
+      port_range_max: '{{ port[item | int] | default(omit) }}'
+      port_range_min: '{{ port[item | int] | default(omit) }}'
+      protocol: '{{ protocol[item | int] | default(omit) }}'
+      remote_ip_prefix: 0.0.0.0
+      security_group: tosca_server_example_security_group
+    register: tosca_server_example_security_group_rule
+    with_sequence: start=0 end={{ [protocol | length, port | length, initiator | length]
+      | max - 1 }} format=%d
+    vars:
+      protocol:
+      - tcp
+      port:
+      - 22
+      initiator:
+      - ingress
+  - set_fact:
+      tosca_server_example_security_group_rule_list: '{{ tosca_server_example_security_group_rule_list
+        | default([]) }} + [ "{{ item.id }}" ]'
+    loop: '{{ tosca_server_example_security_group_rule.results | flatten(levels=1)  }}'
+    when: item.id  is defined
+  - set_fact:
+      tosca_server_example_security_group_rule_list: '{{ tosca_server_example_security_group_rule_list
+        | default([]) }} + [ "{{ item.security_group_rule_ids[0] }}" ]'
+    loop: '{{ tosca_server_example_security_group_rule.results | flatten(levels=1)  }}'
+    when: item.security_group_rule_ids is defined
+  - set_fact:
+      tosca_server_example_security_group_rule_list:
+        tosca_server_example_security_group_rule_ids: '{{ tosca_server_example_security_group_rule_list
+          }}'
+    when: tosca_server_example_security_group_rule_list is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_security_group_rule_delete: {{ tosca_server_example_security_group_rule.id
+        }}'
+    when: tosca_server_example_security_group_rule.id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_security_group_rule_delete: {{ tosca_server_example_security_group_rule.security_group_rule_id
+        }}'
+    when: tosca_server_example_security_group_rule.security_group_rule_id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_security_group_rule_delete: {{ tosca_server_example_security_group_rule.security.id
+        }}'
+    when: tosca_server_example_security_group_rule.security.id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_security_group_rule_delete: {{ tosca_server_example_security_group_rule.group.id
+        }}'
+    when: tosca_server_example_security_group_rule.group.id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_security_group_rule_delete: {{ tosca_server_example_security_group_rule.rule.id
+        }}'
+    when: tosca_server_example_security_group_rule.rule.id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: '{{ tosca_server_example_security_group_rule_list | to_nice_yaml }}'
+    when: tosca_server_example_security_group_rule_list is defined
+  - fail:
+      msg: Variable tosca_server_example_security_group_rule is undefined! So it will
+        not be deleted
+    when: tosca_server_example_security_group_rule_list is undefined and tosca_server_example_security_group_rule.id
+      is undefined
+    ignore_errors: true
+- name: 'Create OpenStack component openstack cluster: tosca_server_example_server:create'
+  hosts: localhost
+  tasks:
+  - include_vars: id_vars_example.yaml
+  - name: Create OpenStack component server
+    os_server:
+      auto_ip: false
+      boot_from_volume: false
+      reuse_ips: true
+      config_drive: false
+      meta: cube_master=true
+      name: tosca_server_example
+      nics:
+      - net-name: sandbox_net
+      key_name: tosca_server_example_keypair
+      flavor: 3d7e6639-730d-4bac-aebd-60b1baa2dd70
+      security_groups:
+      - tosca_server_example_security_group
+      image: cirros-0.4.0-x86_64
+    register: tosca_server_example_server
+    with_sequence: start=1 end=1 format=%d
+  - set_fact:
+      ansible_user: cirros
+    with_sequence: start=1 end=1 format=%d
+  - set_fact:
+      host_ip: '{{ host_ip | default([]) + [[ "tosca_server_example_private_address_"
+        + item, tosca_server_example_server.results[item | int - 1].server.public_v4
+        ]] }}'
+    with_sequence: start=1 end=1 format=%d
+  - set_fact:
+      group: tosca_server_example_server_private_address
+    with_sequence: start=1 end=1 format=%d
+  - include: /tmp/clouni/example/artifacts/add_host.yaml
+  - set_fact:
+      tosca_server_example_server_list: '{{ tosca_server_example_server_list | default([])
+        }} + [ "{{ item.id }}" ]'
+    loop: '{{ tosca_server_example_server.results | flatten(levels=1)  }}'
+    when: item.id  is defined
+  - set_fact:
+      tosca_server_example_server_list: '{{ tosca_server_example_server_list | default([])
+        }} + [ "{{ item.server_ids[0] }}" ]'
+    loop: '{{ tosca_server_example_server.results | flatten(levels=1)  }}'
+    when: item.server_ids is defined
+  - set_fact:
+      tosca_server_example_server_list:
+        tosca_server_example_server_ids: '{{ tosca_server_example_server_list }}'
+    when: tosca_server_example_server_list is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_server_delete: {{ tosca_server_example_server.id
+        }}'
+    when: tosca_server_example_server.id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_server_delete: {{ tosca_server_example_server.server_id
+        }}'
+    when: tosca_server_example_server.server_id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_server_delete: {{ tosca_server_example_server.server.id
+        }}'
+    when: tosca_server_example_server.server.id is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: '{{ tosca_server_example_server_list | to_nice_yaml }}'
+    when: tosca_server_example_server_list is defined
+  - fail:
+      msg: Variable tosca_server_example_server is undefined! So it will not be deleted
+    when: tosca_server_example_server_list is undefined and tosca_server_example_server.id
+      is undefined
+    ignore_errors: true
+- name: 'Create OpenStack component openstack cluster: tosca_server_example_floating_ip:create'
+  hosts: localhost
+  tasks:
+  - include_vars: id_vars_example.yaml
+  - name: Create OpenStack component floating ip
+    os_floating_ip:
+      floating_ip_address: 10.100.157.77
+      server: tosca_server_example
+      network: not_found
+    register: tosca_server_example_floating_ip
+    with_sequence: start=1 end=1 format=%d
+  - set_fact:
+      ansible_user: cirros
+    with_sequence: start=1 end=1 format=%d
+  - set_fact:
+      host_ip: '{{ host_ip | default([]) + [[ "tosca_server_example_public_address_"
+        + item, tosca_server_example_floating_ip.results[item | int - 1].floating_ip.floating_ip_address
+        ]] }}'
+    with_sequence: start=1 end=1 format=%d
+  - set_fact:
+      group: tosca_server_example_server_public_address
+    with_sequence: start=1 end=1 format=%d
+  - include: /tmp/clouni/example/artifacts/add_host.yaml
+  - set_fact:
+      tosca_server_example_floating_ip_dict:
+        floating_ip_address: '{{ item.floating_ip.floating_ip_address }}'
+        server: '{{ item.floating_ip.port_details.device_id }}'
+        purge: 'yes'
+        state: absent
+    with_items: '{{ tosca_server_example_floating_ip.results }}'
+    when: tosca_server_example_floating_ip is defined
+    register: tmp
+  - set_fact:
+      tosca_server_example_floating_ip_dicts: '{{ tosca_server_example_floating_ip_dicts
+        | default([]) + [item.ansible_facts.tosca_server_example_floating_ip_dict]
+        }}'
+    with_items: '{{ tmp.results }}'
+    when: tosca_server_example_floating_ip_dict is defined
+  - lineinfile:
+      path: id_vars_example.yaml
+      line: 'tosca_server_example_floating_ip_dicts:
+
+        {{ tosca_server_example_floating_ip_dicts | to_nice_yaml }}'
+    when: tosca_server_example_floating_ip_dicts is defined
+
