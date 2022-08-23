@@ -1,13 +1,12 @@
-import ast
-import json
 import logging
 import os
 import sys
 
-import six
+import yaml
+from yaml import Loader
 
-from configuration_tool.common.tosca_reserved_keys import IMPORTS, DEFAULT_ARTIFACTS_DIRECTORY,\
-    EXECUTOR, NAME, TOSCA_ELEMENTS_MAP_FILE, TOSCA_ELEMENTS_DEFINITION_FILE
+from configuration_tool.common.tosca_reserved_keys import IMPORTS, DEFAULT_ARTIFACTS_DIRECTORY, \
+    EXECUTOR, NAME, TOSCA_ELEMENTS_MAP_FILE, TOSCA_ELEMENTS_DEFINITION_FILE, TOPOLOGY_TEMPLATE
 from configuration_tool.common import utils
 from configuration_tool.common.configuration import Configuration
 from configuration_tool.configuration_tools.combined.combine_configuration_tools import get_configuration_tool_class
@@ -20,8 +19,8 @@ REQUIRED_CONFIGURATION_PARAMS = (TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFAC
 REQUIRED_CONFIGURATION_PARAMS = (TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFACTS_DIRECTORY, TOSCA_ELEMENTS_MAP_FILE)
 
 
-def translate(provider_template, configuration_tool, cluster_name, is_software_component,
-              is_delete=False, extra=None, log_level='info', host_ip_parameter='public_address', debug=False):
+def translate(provider_template, configuration_tool, cluster_name, is_delete=False,
+              extra=None, log_level='info', debug=False, host_ip_parameter='public_address'):
     log_map = dict(
         debug=logging.DEBUG,
         info=logging.INFO,
@@ -40,29 +39,28 @@ def translate(provider_template, configuration_tool, cluster_name, is_software_c
             logging.error('Provider configuration parameter "%s" is missing in configuration file' % sec)
             sys.exit(1)
 
-    map_files = config.get_section(config.MAIN_SECTION).get(TOSCA_ELEMENTS_MAP_FILE)
-    if isinstance(map_files, six.string_types):
-        map_files = [map_files]
-    default_map_files = []
-    for map_file in map_files:
-        default_map_files.append(os.path.join(utils.get_project_root_path(), map_file))
-    logging.info("Default TOSCA template map file to be used \'%s\'" % json.dumps(default_map_files))
+    provider_template = yaml.load(provider_template, Loader=Loader)
+    provider_template = provider_template.get(TOPOLOGY_TEMPLATE)
 
-    # Parse and generate new TOSCA service template with only provider specific TOSCA types from normative types
+    # tmp version - provider gets from first node template (can't use different providers in template)
+    provider = None
+    for key in provider_template.get('node_templates').keys():
+        provider_template_name = key
+        tosca_type = provider_template.get('node_templates').get(provider_template_name).get('type')
+        (provider, _, _) = utils.tosca_type_parse(tosca_type)
+        if provider is not None and provider != 'tosca':
+            break
+
     tosca = ProviderToscaTemplate(provider_template, provider, configuration_tool, cluster_name,
-                                  host_ip_parameter, is_delete, common_map_files=default_map_files)
+                                  host_ip_parameter, is_delete)
 
-    provider_template_name = list(provider_template.keys())[0]
-    tosca_type = provider_template_name.get(provider_template_name).get('type')
-    (provider, _, _) = utils.tosca_type_parse(tosca_type)
     tool = get_configuration_tool_class(configuration_tool)(provider)
 
     default_artifacts_directory = config.get_section(config.MAIN_SECTION).get(DEFAULT_ARTIFACTS_DIRECTORY)
 
-    configuration_content = tool.to_dsl(tosca.provider_operations, tosca.reversed_provider_operations,
-                                        tosca.cluster_name, is_delete,
-                                        artifacts=tool_artifacts, target_directory=default_artifacts_directory,
-                                        inputs=tosca.inputs, outputs=tosca.outputs, extra=extra_full, debug=debug)
+    configuration_content = tool.to_dsl(provider, tosca.provider_operations, tosca.reversed_provider_operations,
+                                        tosca.cluster_name, is_delete, target_directory=default_artifacts_directory,
+                                        inputs=tosca.inputs, outputs=tosca.outputs, extra=extra, debug=debug)
     return configuration_content
 
 

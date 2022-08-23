@@ -1,5 +1,5 @@
-import ast
-
+import yaml
+from yaml import Loader
 
 from configuration_tool.common.translator_to_configuration_dsl import translate
 from grpc_server.api_pb2 import ClouniConfigurationToolResponse, ClouniConfigurationToolRequest
@@ -11,7 +11,6 @@ import argparse
 import sys
 import atexit
 import os
-import six
 import signal
 from time import sleep
 from functools import partial
@@ -40,17 +39,13 @@ class TranslatorServer(object):
             self.debug = True
             self.log_level = 'debug'
 
-        for k, v in self.extra.items():
-            if isinstance(v, six.string_types):
-                if v.isnumeric():
-                    if int(v) == float(v):
-                        self.extra[k] = int(v)
-                    else:
-                        self.extra[k] = float(v)
+        if self.extra:
+            self.extra = yaml.load(self.extra, Loader=Loader)
 
         self.working_dir = os.getcwd()
-        self.output = str(translate(self.provider_template, self.configuration_tool,
-                                self.cluster_name, self.is_delete, self.extra, self.log_level, self.debug))
+        self.output = translate(self.provider_template, self.configuration_tool,
+                                self.cluster_name, is_delete=self.is_delete, extra=self.extra,
+                                    log_level=self.log_level, debug=self.debug)
 
 
 class ClouniConfigurationToolServicer(api_pb2_grpc.ClouniConfigurationToolServicer):
@@ -97,9 +92,10 @@ class ClouniConfigurationToolServicer(api_pb2_grpc.ClouniConfigurationToolServic
             args['configuration_tool'] = request.configuration_tool
         else:
             args['configuration_tool'] = 'ansible'
-        args['extra'] = {}
-        for key, value in request.extra.items():
-            args['extra'][key] = value
+        if request.extra != "":
+            args['extra'] = request.extra
+        else:
+            args['extra'] = None
         if request.log_level != "":
             args['log_level'] = request.log_level
         else:

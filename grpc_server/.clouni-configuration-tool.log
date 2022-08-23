@@ -1,0 +1,136 @@
+2022-08-23 18:31:34,517 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 18:31:34,522 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 18:31:34,562 - INFO - MainThread - Server started
+2022-08-23 18:31:38,182 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 18:31:38,183 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 18:31:42,293 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-23 18:34:14,332 - INFO - MainThread - Server stopped
+2022-08-23 18:34:14,332 - INFO - MainThread - Exited
+2022-08-23 18:34:16,159 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 18:34:16,167 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 18:34:16,170 - INFO - MainThread - Server started
+2022-08-23 18:34:20,384 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 18:34:20,385 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 18:45:14,100 - INFO - MainThread - Server stopped
+2022-08-23 18:45:14,102 - INFO - MainThread - Exited
+2022-08-23 18:45:17,487 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 18:45:17,499 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 18:45:17,509 - INFO - MainThread - Server started
+2022-08-23 18:45:21,581 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 18:45:21,581 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 18:45:25,656 - INFO - MainThread - Server stopped
+2022-08-23 18:45:25,658 - INFO - MainThread - Exited
+2022-08-23 18:45:29,154 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 18:45:29,165 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 18:45:29,181 - INFO - MainThread - Server started
+2022-08-23 18:45:30,401 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 18:45:30,401 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 19:12:12,977 - INFO - MainThread - Server stopped
+2022-08-23 19:12:12,980 - INFO - MainThread - Exited
+2022-08-23 19:12:31,651 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 19:12:31,656 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 19:12:31,657 - INFO - MainThread - Server started
+2022-08-23 19:22:03,925 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 19:22:03,925 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 19:22:08,040 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-23 19:22:15,475 - INFO - MainThread - Server stopped
+2022-08-23 19:22:15,475 - INFO - MainThread - Exited
+2022-08-23 19:22:30,860 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 19:22:30,869 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 19:22:30,871 - INFO - MainThread - Server started
+2022-08-23 19:22:32,856 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 19:22:32,856 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 19:32:10,430 - INFO - MainThread - Server stopped
+2022-08-23 19:32:10,431 - INFO - MainThread - Exited
+2022-08-23 19:32:13,006 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 19:32:13,024 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 19:32:13,048 - INFO - MainThread - Server started
+2022-08-23 19:32:15,813 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 19:32:15,814 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 19:32:19,930 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-23 19:33:30,107 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 19:33:30,107 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 19:33:34,221 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-23 19:34:51,722 - INFO - MainThread - Server stopped
+2022-08-23 19:34:51,722 - INFO - MainThread - Exited
+2022-08-23 19:34:53,425 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 19:34:53,434 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 19:34:53,436 - INFO - MainThread - Server started
+2022-08-23 19:34:56,530 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 19:34:56,530 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 19:37:25,957 - INFO - MainThread - Server stopped
+2022-08-23 19:37:25,957 - INFO - MainThread - Exited
+2022-08-23 19:37:28,469 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 19:37:28,478 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 19:37:28,480 - INFO - MainThread - Server started
+2022-08-23 19:37:31,146 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 19:37:31,146 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 19:37:40,843 - INFO - MainThread - Server stopped
+2022-08-23 19:37:40,844 - INFO - MainThread - Exited
+2022-08-23 19:37:43,502 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 19:37:43,506 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 19:37:43,508 - INFO - MainThread - Server started
+2022-08-23 19:37:50,974 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 19:37:50,975 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 19:37:55,087 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-23 19:38:01,466 - INFO - MainThread - Server stopped
+2022-08-23 19:38:01,466 - INFO - MainThread - Exited
+2022-08-23 19:38:31,096 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 19:38:31,104 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 19:38:31,107 - INFO - MainThread - Server started
+2022-08-23 19:38:35,269 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 19:38:35,269 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 19:38:56,172 - INFO - MainThread - Server stopped
+2022-08-23 19:38:56,173 - INFO - MainThread - Exited
+2022-08-23 19:43:43,087 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 19:43:43,095 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 19:43:43,099 - INFO - MainThread - Server started
+2022-08-23 19:43:46,011 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 19:43:46,011 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 19:43:50,127 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-23 19:49:44,650 - INFO - MainThread - Server stopped
+2022-08-23 19:49:44,650 - INFO - MainThread - Exited
+2022-08-23 19:49:51,812 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 19:49:51,820 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 19:49:51,823 - INFO - MainThread - Server started
+2022-08-23 19:49:55,688 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 19:49:55,688 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 19:49:55,710 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 46, in translate
+    for key in provider_template.get('node_templates').keys():
+AttributeError: 'NoneType' object has no attribute 'keys'
+2022-08-23 19:49:55,710 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-23 19:49:55,710 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-23 19:51:13,618 - INFO - MainThread - Server stopped
+2022-08-23 19:51:13,618 - INFO - MainThread - Exited
+2022-08-23 19:51:15,211 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 19:51:15,216 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 19:51:15,218 - INFO - MainThread - Server started
+2022-08-23 19:51:20,645 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 19:51:20,645 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 19:51:20,666 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 46, in translate
+    for key in provider_template.get('node_templates').keys():
+AttributeError: 'NoneType' object has no attribute 'keys'
+2022-08-23 19:51:20,667 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-23 19:51:20,667 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-23 19:52:01,602 - INFO - MainThread - Server stopped
+2022-08-23 19:52:01,602 - INFO - MainThread - Exited
+2022-08-23 19:52:03,142 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-23 19:52:03,146 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-23 19:52:03,148 - INFO - MainThread - Server started
+2022-08-23 19:52:07,471 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-23 19:52:07,471 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-23 19:52:11,586 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-23 19:52:29,306 - INFO - MainThread - Server stopped
+2022-08-23 19:52:29,307 - INFO - MainThread - Exited

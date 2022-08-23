@@ -1,6 +1,6 @@
+
 import time
 from multiprocessing import Queue
-from random import seed, randint
 
 from graphlib import TopologicalSorter
 
@@ -49,16 +49,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
         for param in REQUIRED_CONFIG_PARAMS:
             setattr(self, param, main_config[param])
 
-    def to_dsl(self, operations_graph, reversed_operations_graph, cluster_name, is_delete,
-               artifacts=None, target_directory=None, inputs=None, outputs=None, extra=None, debug=False):
-        if artifacts is None:
-            artifacts = []
-        if target_directory is None:
-            target_directory = self.initial_artifacts_directory
-
-        self.artifacts = {}
-        for art in artifacts:
-            self.artifacts[art[NAME]] = art
+    def to_dsl(self, provider, operations_graph, reversed_operations_graph, cluster_name, is_delete,
+               target_directory=None, inputs=None, outputs=None, extra=None, debug=False):
 
         provider_config = ProviderConfiguration(self.provider)
         ansible_config = provider_config.get_section(ANSIBLE)
@@ -68,14 +60,12 @@ class AnsibleConfigurationTool(ConfigurationTool):
 
         self.init_global_variables(inputs)
 
-        operations_graph = self.init_graph(operations_graph)
         # the graph of operations at the moment is a dictionary of copies of ProviderTemplatre objects,
         # of the form Node/Relationship: {the set of opers of Nodes/Relationships on which it depends}
         elements = TopologicalSorter(operations_graph)
         # use TopologicalSorter for creating graph
 
         if is_delete:
-            reversed_operations_graph = self.init_graph(reversed_operations_graph)
             elements = TopologicalSorter(reversed_operations_graph)
 
         elements.prepare()
@@ -108,8 +98,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
             for v in elements.get_ready():
                 # in delete mode we skip all operations exept delete and create operation transforms to delete
                 if is_delete:
-                    if v.operation == 'create':
-                        v.operation = 'delete'
+                    if v['operation'] == 'create':
+                        v['operation'] = 'delete'
                     else:
                         elements.done(v)
                         continue

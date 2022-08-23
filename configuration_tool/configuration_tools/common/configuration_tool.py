@@ -24,11 +24,12 @@ class ConfigurationTool(object):
 
         self.tool_config = ConfigurationToolConfiguration(self.TOOL_NAME)
 
-    def to_dsl(self, provider, nodes_relationships_queue, cluster_name, is_delete, artifacts=None,
-               target_directory=None, inputs=None, outputs=None, extra=None):
+    def to_dsl(self, provider, nodes_relationships_queue, reversed_nodes_relationships_queue,
+               cluster_name, is_delete, target_directory=None, inputs=None, outputs=None, extra=None):
         """
         Generate scenarios for configuration tool to execute
         :param provider: provider type key name
+        :param reversed_nodes_relationships_queue: can be of class ProviderResource or RelationshipTemplate
         :param nodes_relationships_queue: can be of class ProviderResource or RelationshipTemplate
         :param cluster_name: unified name of cluster of template
         :param is_delete: boolean value that means if scenario should create or delete cluster

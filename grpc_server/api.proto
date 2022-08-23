@@ -18,7 +18,7 @@ message ClouniProviderToolRequest {
     bool delete = 4;
     string provider = 5;
     string configuration_tool = 6;
-    map<string, string> extra = 7;
+    string extra = 7;
     string log_level = 8;
     bool debug = 9;
     string host_parameter = 10;
@@ -54,7 +54,7 @@ message ClouniConfigurationToolRequest {
     string cluster_name = 2;
     bool delete = 3;
     string configuration_tool = 4;
-    map<string, string> extra = 5;
+    string extra = 5;
     string log_level = 6;
     bool debug = 7;
 }

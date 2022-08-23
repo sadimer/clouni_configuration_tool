@@ -1,6 +1,7 @@
 from toscaparser.imports import ImportsLoader
 
 from configuration_tool.common import utils
+from configuration_tool.common.configuration import Configuration
 from configuration_tool.common.tosca_reserved_keys import *
 
 from configuration_tool.providers.common.provider_configuration import ProviderConfiguration
@@ -16,24 +17,15 @@ class ProviderToscaTemplate(object):
     DEPENDENCY_FUNCTIONS = (GET_PROPERTY, GET_ATTRIBUTE, GET_OPERATION_OUTPUT)
     DEFAULT_ARTIFACTS_DIRECTOR = ARTIFACTS
 
-    def __init__(self, topology_template, provider, configuration_tool, cluster_name, host_ip_parameter, is_delete, common_map_files=[]):
+    def __init__(self, topology_template, provider, configuration_tool, cluster_name, host_ip_parameter, is_delete):
         self.host_ip_parameter = host_ip_parameter
         self.provider = provider
         self.is_delete = is_delete
         self.configuration_tool = configuration_tool
         self.provider_config = ProviderConfiguration(self.provider)
+        self.base_config = Configuration()
         self.cluster_name = cluster_name
         self.software_types = set()
-        self.fulfil_definitions_with_parents()
-
-        if topology_template[NODE_TEMPLATES]:
-            self.node_templates = topology_template[NODE_TEMPLATES]
-        if topology_template[RELATIONSHIP_TEMPLATES]:
-            self.relationship_templates = topology_template[RELATIONSHIP_TEMPLATES]
-        if topology_template[OUTPUTS]:
-            self.outputs = topology_template[OUTPUTS]
-        if topology_template[INPUTS]:
-            self.inputs = topology_template[INPUTS]
 
         for sec in self.REQUIRED_CONFIG_PARAMS:
             if not self.provider_config.config[self.provider_config.MAIN_SECTION].get(sec):
@@ -43,8 +35,28 @@ class ProviderToscaTemplate(object):
 
         self.definitions = {}
         import_definition_file = ImportsLoader([self.definition_file()], None, list(SERVICE_TEMPLATE_KEYS),
-                                               topology_template.tpl)
+                                               topology_template)
         self.definitions.update(import_definition_file.get_custom_defs())
+
+        import_definition_file = ImportsLoader(self.base_definition_file(), None, list(SERVICE_TEMPLATE_KEYS),
+                                               topology_template)
+        self.definitions.update(import_definition_file.get_custom_defs())
+
+        self.fulfil_definitions_with_parents()
+
+        self.node_templates = {}
+        self.relationship_templates = {}
+        self.inputs = {}
+        self.outputs = {}
+
+        if topology_template.get(NODE_TEMPLATES):
+            self.node_templates = topology_template[NODE_TEMPLATES]
+        if topology_template.get(RELATIONSHIP_TEMPLATES):
+            self.relationship_templates = topology_template[RELATIONSHIP_TEMPLATES]
+        if topology_template.get(OUTPUTS):
+            self.outputs = topology_template[OUTPUTS]
+        if topology_template.get(INPUTS):
+            self.inputs = topology_template[INPUTS]
 
         self.configuration_content = None
         self.configuration_ready = None
@@ -106,6 +118,20 @@ class ProviderToscaTemplate(object):
                 self.template_dependencies[node_name] = {dependency_name}
             else:
                 self.template_dependencies[node_name].add(dependency_name)
+
+    def base_definition_file(self):
+        file_definitions = self.base_config.config['main'][TOSCA_ELEMENTS_DEFINITION_FILE].split(',')
+        def_list = []
+        for file_definition in file_definitions:
+            if not os.path.isabs(file_definition):
+                file_definition = os.path.join(utils.get_project_root_path(), file_definition)
+                def_list.append(file_definition)
+
+            if not os.path.isfile(file_definition):
+                logging.error("TOSCA definition file not found: %s" % file_definition)
+                sys.exit(1)
+
+        return def_list
 
     def definition_file(self):
         file_definition = self.provider_config.config['main'][TOSCA_ELEMENTS_DEFINITION_FILE]
@@ -287,11 +313,9 @@ class ProviderToscaTemplate(object):
         templ_mappling = {}
         for elem in new_dependencies:
             templ_name = elem.split(SEPARATOR)[0]
-            templ = {}
-            templ['template'] = {templ_name: self.provider_nodes.get(templ_name, self.provider_relations.get(templ_name)).tmpl}
-            templ['configuration_args'] = self.provider_nodes.get(templ_name, self.provider_relations.get(templ_name)).configuration_args
-            templ['operation'] = elem.split(SEPARATOR)[1]
-            templ_mappling[elem] = str(templ)
+            templ = copy.deepcopy(self.provider_nodes.get(templ_name, self.provider_relations.get(templ_name)))
+            templ.operation = elem.split(SEPARATOR)[1]
+            templ_mappling[elem] = templ
         templ_dependencies = {}
         reversed_templ_dependencies = {}
         # create dict where all elements will be replaced with provider template from templ_mappling

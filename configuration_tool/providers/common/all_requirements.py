@@ -29,8 +29,6 @@ class ProviderRequirements (object):
             if req_node:
                 (_, _, type_name) = utils.tosca_type_parse(req_node)
                 node_name = utils.snake_case(type_name)
-                if node_name == 'root':
-                    continue
                 temp_req_val = self._node_name_by_requirement_name.get(req_name)
                 if temp_req_val is None:
                     temp_req_val = node_name
