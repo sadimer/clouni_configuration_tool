@@ -473,3 +473,840 @@ Exception: Configuration files were missing in possible locations: ["/home/sadim
 2022-08-24 16:24:15,525 - INFO - ThreadPoolExecutor-0_0 - Request received
 2022-08-24 16:24:15,526 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
 2022-08-24 16:24:18,603 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 17:28:39,581 - INFO - MainThread - Server stopped
+2022-08-24 17:28:39,581 - INFO - MainThread - Exited
+2022-08-24 17:29:06,054 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 17:29:06,059 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 17:29:06,060 - INFO - MainThread - Server started
+2022-08-24 17:29:57,815 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 17:29:57,815 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 17:30:00,905 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 17:35:01,857 - INFO - MainThread - Server stopped
+2022-08-24 17:35:01,857 - INFO - MainThread - Exited
+2022-08-24 17:35:03,248 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 17:35:03,253 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 17:35:03,259 - INFO - MainThread - Server started
+2022-08-24 17:35:07,693 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 17:35:07,693 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 17:35:10,780 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 17:35:30,600 - INFO - MainThread - Server stopped
+2022-08-24 17:35:30,601 - INFO - MainThread - Exited
+2022-08-24 18:15:50,903 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 18:15:50,908 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 18:15:50,909 - INFO - MainThread - Server started
+2022-08-24 18:15:57,699 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 18:15:57,699 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 18:15:57,716 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 78, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 62, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 60, in translate
+    template = yaml.load(provider_template, Loader=Loader)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/yaml/__init__.py", line 79, in load
+    loader = Loader(stream)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/yaml/loader.py", line 44, in __init__
+    Reader.__init__(self, stream)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/yaml/reader.py", line 85, in __init__
+    self.determine_encoding()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/yaml/reader.py", line 124, in determine_encoding
+    self.update_raw()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/yaml/reader.py", line 178, in update_raw
+    data = self.stream.read(size)
+AttributeError: 'dict' object has no attribute 'read'
+2022-08-24 18:15:57,717 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-24 18:15:57,717 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 18:26:10,698 - INFO - MainThread - Server stopped
+2022-08-24 18:26:10,698 - INFO - MainThread - Exited
+2022-08-24 18:26:48,245 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 18:26:48,250 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 18:26:48,251 - INFO - MainThread - Server started
+2022-08-24 18:27:56,142 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 18:27:56,142 - INFO - ThreadPoolExecutor-0_0 - Validate only request - status TEMPLATE_VALID
+2022-08-24 18:27:56,210 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 92, in translate
+    tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py", line 115, in __init__
+    self.verify_template()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py", line 312, in verify_template
+    '\n\t'.join(ExceptionCollector.getExceptionsReport()))
+toscaparser.common.exception.ValidationError: 
+The pre-parsed input failed validation with the following error(s): 
+
+	MissingRequiredFieldError: Template is missing required field "tosca_definitions_version".
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 99, in __init__
+			self._validate_field()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 264, in _validate_field
+			required=DEFINITION_VERSION))
+
+	ImportError: Relative file name "/home/sadimer/Desktop/clouni_configuration_tool/TOSCA_amazon_definition_1_0.yaml" cannot be used in a pre-parsed input template.
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 101, in __init__
+			self.relationship_types = self._tpl_relationship_types()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 157, in _tpl_relationship_types
+			custom_rel, _ = self._get_custom_types(RELATIONSHIP_TYPES)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 212, in _get_custom_types
+			ImportsLoader(imports, path, type_defs, self.tpl)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/imports.py, line 56, in __init__
+			self._validate_and_load_imports()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/imports.py, line 99, in _validate_and_load_imports
+			None, import_def)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/imports.py, line 254, in _load_import_template
+			ExceptionCollector.appendException(ImportError(msg))
+
+	InvalidTypeError: Type "amazon.nodes.Group" is not a valid type.
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 103, in __init__
+			self.topology_template = self._topology_template()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 122, in _topology_template
+			None)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 57, in __init__
+			self.nodetemplates = self._nodetemplates()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 92, in _nodetemplates
+			self.rel_types)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/nodetemplate.py, line 43, in __init__
+			custom_def)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 53, in __init__
+			if type is not None else None
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/elements/nodetype.py, line 32, in __init__
+			super(NodeType, self).__init__(ntype, self.NODE_PREFIX, custom_def)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/elements/statefulentitytype.py, line 51, in __init__
+			InvalidTypeError(what=entitytype))
+
+	UnknownFieldError: "properties" of template "testing_tosca_group" contains unknown field "description". Refer to the definition to verify valid values.
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 103, in __init__
+			self.topology_template = self._topology_template()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 122, in _topology_template
+			None)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 57, in __init__
+			self.nodetemplates = self._nodetemplates()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 97, in _nodetemplates
+			tpl.validate(self)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/nodetemplate.py, line 190, in validate
+			self._validate_properties(self.entity_tpl, self.type_definition)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 174, in _validate_properties
+			self._common_validate_properties(entitytype, properties)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 228, in _common_validate_properties
+			'properties')
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 272, in _common_validate_field
+			field=name))
+
+	UnknownFieldError: "properties" of template "testing_tosca_group" contains unknown field "name". Refer to the definition to verify valid values.
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 103, in __init__
+			self.topology_template = self._topology_template()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 122, in _topology_template
+			None)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 57, in __init__
+			self.nodetemplates = self._nodetemplates()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 97, in _nodetemplates
+			tpl.validate(self)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/nodetemplate.py, line 190, in validate
+			self._validate_properties(self.entity_tpl, self.type_definition)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 174, in _validate_properties
+			self._common_validate_properties(entitytype, properties)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 228, in _common_validate_properties
+			'properties')
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 272, in _common_validate_field
+			field=name))
+
+	UnknownFieldError: "properties" of template "testing_tosca_group" contains unknown field "rules". Refer to the definition to verify valid values.
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 103, in __init__
+			self.topology_template = self._topology_template()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 122, in _topology_template
+			None)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 57, in __init__
+			self.nodetemplates = self._nodetemplates()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 97, in _nodetemplates
+			tpl.validate(self)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/nodetemplate.py, line 190, in validate
+			self._validate_properties(self.entity_tpl, self.type_definition)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 174, in _validate_properties
+			self._common_validate_properties(entitytype, properties)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 228, in _common_validate_properties
+			'properties')
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 272, in _common_validate_field
+			field=name))
+
+	UnknownFieldError: "properties" of template "testing_tosca_group" contains unknown field "rules_egress". Refer to the definition to verify valid values.
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 103, in __init__
+			self.topology_template = self._topology_template()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 122, in _topology_template
+			None)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 57, in __init__
+			self.nodetemplates = self._nodetemplates()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 97, in _nodetemplates
+			tpl.validate(self)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/nodetemplate.py, line 190, in validate
+			self._validate_properties(self.entity_tpl, self.type_definition)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 174, in _validate_properties
+			self._common_validate_properties(entitytype, properties)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 228, in _common_validate_properties
+			'properties')
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 272, in _common_validate_field
+			field=name))
+
+	InvalidTypeError: Type "amazon.nodes.Instance" is not a valid type.
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 103, in __init__
+			self.topology_template = self._topology_template()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 122, in _topology_template
+			None)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 57, in __init__
+			self.nodetemplates = self._nodetemplates()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 92, in _nodetemplates
+			self.rel_types)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/nodetemplate.py, line 43, in __init__
+			custom_def)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 53, in __init__
+			if type is not None else None
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/elements/nodetype.py, line 32, in __init__
+			super(NodeType, self).__init__(ntype, self.NODE_PREFIX, custom_def)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/elements/statefulentitytype.py, line 51, in __init__
+			InvalidTypeError(what=entitytype))
+
+	UnknownFieldError: "properties" of template "testing_tosca_instance" contains unknown field "name". Refer to the definition to verify valid values.
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 103, in __init__
+			self.topology_template = self._topology_template()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 122, in _topology_template
+			None)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 57, in __init__
+			self.nodetemplates = self._nodetemplates()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 97, in _nodetemplates
+			tpl.validate(self)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/nodetemplate.py, line 190, in validate
+			self._validate_properties(self.entity_tpl, self.type_definition)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 174, in _validate_properties
+			self._common_validate_properties(entitytype, properties)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 228, in _common_validate_properties
+			'properties')
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 272, in _common_validate_field
+			field=name))
+
+	UnknownFieldError: "properties" of template "testing_tosca_instance" contains unknown field "network". Refer to the definition to verify valid values.
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 103, in __init__
+			self.topology_template = self._topology_template()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 122, in _topology_template
+			None)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 57, in __init__
+			self.nodetemplates = self._nodetemplates()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 97, in _nodetemplates
+			tpl.validate(self)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/nodetemplate.py, line 190, in validate
+			self._validate_properties(self.entity_tpl, self.type_definition)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 174, in _validate_properties
+			self._common_validate_properties(entitytype, properties)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 228, in _common_validate_properties
+			'properties')
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 272, in _common_validate_field
+			field=name))
+
+	UnknownFieldError: "properties" of template "testing_tosca_instance" contains unknown field "tags". Refer to the definition to verify valid values.
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 103, in __init__
+			self.topology_template = self._topology_template()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 122, in _topology_template
+			None)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 57, in __init__
+			self.nodetemplates = self._nodetemplates()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 97, in _nodetemplates
+			tpl.validate(self)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/nodetemplate.py, line 190, in validate
+			self._validate_properties(self.entity_tpl, self.type_definition)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 174, in _validate_properties
+			self._common_validate_properties(entitytype, properties)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 228, in _common_validate_properties
+			'properties')
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 272, in _common_validate_field
+			field=name))
+
+	InvalidTypeError: Type "amazon.nodes.Key" is not a valid type.
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 103, in __init__
+			self.topology_template = self._topology_template()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 122, in _topology_template
+			None)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 57, in __init__
+			self.nodetemplates = self._nodetemplates()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 92, in _nodetemplates
+			self.rel_types)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/nodetemplate.py, line 43, in __init__
+			custom_def)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 53, in __init__
+			if type is not None else None
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/elements/nodetype.py, line 32, in __init__
+			super(NodeType, self).__init__(ntype, self.NODE_PREFIX, custom_def)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/elements/statefulentitytype.py, line 51, in __init__
+			InvalidTypeError(what=entitytype))
+
+	UnknownFieldError: "properties" of template "testing_tosca_key" contains unknown field "key_material". Refer to the definition to verify valid values.
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 103, in __init__
+			self.topology_template = self._topology_template()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 122, in _topology_template
+			None)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 57, in __init__
+			self.nodetemplates = self._nodetemplates()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 97, in _nodetemplates
+			tpl.validate(self)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/nodetemplate.py, line 190, in validate
+			self._validate_properties(self.entity_tpl, self.type_definition)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 174, in _validate_properties
+			self._common_validate_properties(entitytype, properties)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 228, in _common_validate_properties
+			'properties')
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 272, in _common_validate_field
+			field=name))
+
+	UnknownFieldError: "properties" of template "testing_tosca_key" contains unknown field "name". Refer to the definition to verify valid values.
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 103, in __init__
+			self.topology_template = self._topology_template()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 122, in _topology_template
+			None)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 57, in __init__
+			self.nodetemplates = self._nodetemplates()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 97, in _nodetemplates
+			tpl.validate(self)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/nodetemplate.py, line 190, in validate
+			self._validate_properties(self.entity_tpl, self.type_definition)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 174, in _validate_properties
+			self._common_validate_properties(entitytype, properties)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 228, in _common_validate_properties
+			'properties')
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/entity_template.py, line 272, in _common_validate_field
+			field=name))
+
+	ValidationError: parent_req is None
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 92, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 103, in __init__
+			self.topology_template = self._topology_template()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 122, in _topology_template
+			None)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/topology_template.py, line 60, in __init__
+			self.graph = ToscaGraph(self.nodetemplates)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tpl_relationship_graph.py, line 19, in __init__
+			self._create()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tpl_relationship_graph.py, line 40, in _create
+			relation = node.relationships
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/nodetemplate.py, line 61, in relationships
+			explicit = self._get_explicit_relationship(r, value)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/nodetemplate.py, line 106, in _get_explicit_relationship
+			str(parent_reqs)))
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 84, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 95, in translate
+    raise Exception("Got exception from OpenStack tosca-parser")
+Exception: Got exception from OpenStack tosca-parser
+2022-08-24 18:27:56,211 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-24 18:27:56,211 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 18:29:51,314 - INFO - MainThread - Server stopped
+2022-08-24 18:29:51,314 - INFO - MainThread - Exited
+2022-08-24 18:30:05,712 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 18:30:05,720 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 18:30:05,723 - INFO - MainThread - Server started
+2022-08-24 18:30:07,742 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 18:30:07,743 - INFO - ThreadPoolExecutor-0_0 - Validate only request - status TEMPLATE_VALID
+2022-08-24 18:36:08,042 - INFO - MainThread - Server stopped
+2022-08-24 18:36:08,043 - INFO - MainThread - Exited
+2022-08-24 18:36:12,073 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 18:36:12,078 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 18:36:12,079 - INFO - MainThread - Server started
+2022-08-24 18:36:16,254 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 18:36:16,255 - INFO - ThreadPoolExecutor-0_0 - Validate only request - status TEMPLATE_VALID
+2022-08-24 18:36:16,333 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 94, in translate
+    tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py", line 115, in __init__
+    self.verify_template()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py", line 312, in verify_template
+    '\n\t'.join(ExceptionCollector.getExceptionsReport()))
+toscaparser.common.exception.ValidationError: 
+The pre-parsed input failed validation with the following error(s): 
+
+	MissingRequiredFieldError: Template is missing required field "tosca_definitions_version".
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 94, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 99, in __init__
+			self._validate_field()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 264, in _validate_field
+			required=DEFINITION_VERSION))
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 84, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 97, in translate
+    raise Exception("Got exception from OpenStack tosca-parser")
+Exception: Got exception from OpenStack tosca-parser
+2022-08-24 18:36:16,333 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-24 18:36:16,333 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 18:36:28,228 - INFO - MainThread - Server stopped
+2022-08-24 18:36:28,229 - INFO - MainThread - Exited
+2022-08-24 18:36:31,480 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 18:36:31,488 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 18:36:31,490 - INFO - MainThread - Server started
+2022-08-24 18:36:33,183 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 18:36:33,184 - INFO - ThreadPoolExecutor-0_0 - Validate only request - status TEMPLATE_VALID
+2022-08-24 18:37:12,185 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 94, in translate
+    tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py", line 115, in __init__
+    self.verify_template()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py", line 312, in verify_template
+    '\n\t'.join(ExceptionCollector.getExceptionsReport()))
+toscaparser.common.exception.ValidationError: 
+The pre-parsed input failed validation with the following error(s): 
+
+	MissingRequiredFieldError: Template is missing required field "tosca_definitions_version".
+		File /home/sadimer/Downloads/pycharm-2022.1.2/plugins/python/helpers/pydev/_pydev_bundle/pydev_monkey.py, line 795, in __call__
+			ret = self.original_func(*self.args, **self.kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 884, in _bootstrap
+			self._bootstrap_inner()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 916, in _bootstrap_inner
+			self.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/threading.py, line 864, in run
+			self._target(*self._args, **self._kwargs)
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
+			work_item.run()
+		File /home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/concurrent/futures/thread.py, line 56, in run
+			result = self.fn(*self.args, **self.kwargs)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
+			argument, request_deserializer)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
+			response_or_iterator = behavior(argument, context)
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 84, in ClouniConfigurationTool
+			response.content = TranslatorServer(args).output
+		File /home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py, line 64, in __init__
+			log_level=self.log_level, debug=self.debug)
+		File /home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py, line 94, in translate
+			tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 99, in __init__
+			self._validate_field()
+		File /home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/toscaparser/tosca_template.py, line 264, in _validate_field
+			required=DEFINITION_VERSION))
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 84, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 97, in translate
+    raise Exception("Got exception from OpenStack tosca-parser")
+Exception: Got exception from OpenStack tosca-parser
+2022-08-24 18:37:12,186 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-24 18:37:12,186 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 18:40:12,242 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 18:40:12,243 - INFO - ThreadPoolExecutor-0_0 - Validate only request - status TEMPLATE_VALID
+2022-08-24 18:41:17,914 - INFO - MainThread - Server stopped
+2022-08-24 18:41:17,915 - INFO - MainThread - Exited
+2022-08-24 18:41:20,588 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 18:41:20,593 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 18:41:20,594 - INFO - MainThread - Server started
+2022-08-24 18:41:25,728 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 18:41:25,728 - INFO - ThreadPoolExecutor-0_0 - Validate only request - status TEMPLATE_VALID
+2022-08-24 18:41:25,805 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 18:42:39,003 - INFO - MainThread - Server stopped
+2022-08-24 18:42:39,003 - INFO - MainThread - Exited
+2022-08-24 18:42:40,108 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 18:42:40,113 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 18:42:40,114 - INFO - MainThread - Server started
+2022-08-24 18:42:42,868 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 18:42:42,868 - INFO - ThreadPoolExecutor-0_0 - Validate only request - status TEMPLATE_VALID
+2022-08-24 18:42:42,945 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 18:43:10,708 - INFO - MainThread - Server stopped
+2022-08-24 18:43:10,709 - INFO - MainThread - Exited
+2022-08-24 18:43:12,045 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 18:43:12,049 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 18:43:12,051 - INFO - MainThread - Server started
+2022-08-24 18:43:13,871 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 18:43:13,871 - INFO - ThreadPoolExecutor-0_0 - Validate only request - status TEMPLATE_VALID
+2022-08-24 18:43:13,949 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 18:43:18,044 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 18:43:18,044 - INFO - ThreadPoolExecutor-0_0 - Validate only request - status TEMPLATE_VALID
+2022-08-24 18:43:18,111 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 18:43:25,887 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-08-24 18:43:25,888 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-08-24 18:43:29,020 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-08-24 18:44:01,538 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 18:44:01,538 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 18:44:04,681 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 18:49:29,130 - INFO - MainThread - Server stopped
+2022-08-24 18:49:29,130 - INFO - MainThread - Exited
+2022-08-24 18:49:30,243 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 18:49:30,248 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 18:49:30,250 - INFO - MainThread - Server started
+2022-08-24 18:51:02,718 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 18:51:02,719 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 18:51:05,867 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 18:51:17,670 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 18:51:17,670 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 18:51:20,805 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 18:51:28,742 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-08-24 18:51:28,743 - INFO - ThreadPoolExecutor-0_1 - Validate only request - status TEMPLATE_VALID
+2022-08-24 18:51:28,811 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-08-24 18:51:56,037 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 18:51:56,038 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 18:51:56,047 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 85, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 65, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 54, in translate
+    provider_config = ProviderConfiguration(provider)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_configuration.py", line 42, in __init__
+    raise Exception("Configuration files were missing in possible locations: %s" % json.dumps(filename_variants_priority))
+Exception: Configuration files were missing in possible locations: ["/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/tosca.cfg", "/home/sadimer/Desktop/clouni_configuration_tool/tosca.cfg", "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/tosca/provider.cfg", "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/tosca/tosca.cfg"]
+2022-08-24 18:51:56,049 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-24 18:51:56,049 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 18:52:08,986 - INFO - ThreadPoolExecutor-0_2 - Request received
+2022-08-24 18:52:08,986 - INFO - ThreadPoolExecutor-0_2 - Request - status OK
+2022-08-24 18:52:08,997 - ERROR - ThreadPoolExecutor-0_2 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 85, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 65, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 54, in translate
+    provider_config = ProviderConfiguration(provider)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_configuration.py", line 42, in __init__
+    raise Exception("Configuration files were missing in possible locations: %s" % json.dumps(filename_variants_priority))
+Exception: Configuration files were missing in possible locations: ["/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/tosca.cfg", "/home/sadimer/Desktop/clouni_configuration_tool/tosca.cfg", "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/tosca/provider.cfg", "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/tosca/tosca.cfg"]
+2022-08-24 18:52:08,997 - INFO - ThreadPoolExecutor-0_2 - Request - status ERROR
+2022-08-24 18:52:08,997 - INFO - ThreadPoolExecutor-0_2 - Response send
+2022-08-24 18:52:28,558 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-08-24 18:52:28,558 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-08-24 18:52:31,706 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-08-24 18:52:39,391 - INFO - ThreadPoolExecutor-0_6 - Request received
+2022-08-24 18:52:39,391 - INFO - ThreadPoolExecutor-0_6 - Request - status OK
+2022-08-24 18:52:42,529 - INFO - ThreadPoolExecutor-0_6 - Response send
+2022-08-24 18:53:40,916 - INFO - MainThread - Server stopped
+2022-08-24 18:53:40,916 - INFO - MainThread - Exited

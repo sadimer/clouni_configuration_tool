@@ -24,6 +24,7 @@ message ClouniProviderToolRequest {
     string host_parameter = 10;
     string public_key_path = 11;
     string configuration_tool_endpoint = 12;
+    string database_api_endpoint = 13;
 }
 
 // ClouniProviderTool response
@@ -52,17 +53,21 @@ message ClouniProviderToolResponse {
 message ClouniConfigurationToolRequest {
     string provider_template = 1;
     string cluster_name = 2;
-    bool delete = 3;
-    string configuration_tool = 4;
-    string extra = 5;
-    string log_level = 6;
-    bool debug = 7;
+    bool validate_only = 3;
+    bool delete = 4;
+    string configuration_tool = 5;
+    string extra = 6;
+    string log_level = 7;
+    bool debug = 8;
+    string database_api_endpoint = 9;
 }
 
 message ClouniConfigurationToolResponse {
     enum Status {
-        OK = 0;
-        ERROR = 1;
+        TEMPLATE_VALID = 0;
+        TEMPLATE_INVALID = 1;
+        OK = 2;
+        ERROR = 3;
     }
     Status status = 1;
     string error = 2;

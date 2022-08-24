@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\tapi.proto\"\xac\x02\n\x19\x43louniProviderToolRequest\x12\x1d\n\x15template_file_content\x18\x01 \x01(\t\x12\x14\n\x0c\x63luster_name\x18\x02 \x01(\t\x12\x15\n\rvalidate_only\x18\x03 \x01(\x08\x12\x0e\n\x06\x64\x65lete\x18\x04 \x01(\x08\x12\x10\n\x08provider\x18\x05 \x01(\t\x12\x1a\n\x12\x63onfiguration_tool\x18\x06 \x01(\t\x12\r\n\x05\x65xtra\x18\x07 \x01(\t\x12\x11\n\tlog_level\x18\x08 \x01(\t\x12\r\n\x05\x64\x65\x62ug\x18\t \x01(\x08\x12\x16\n\x0ehost_parameter\x18\n \x01(\t\x12\x17\n\x0fpublic_key_path\x18\x0b \x01(\t\x12#\n\x1b\x63onfiguration_tool_endpoint\x18\x0c \x01(\t\"\xb7\x01\n\x1a\x43louniProviderToolResponse\x12\x32\n\x06status\x18\x01 \x01(\x0e\x32\".ClouniProviderToolResponse.Status\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x03 \x01(\t\"E\n\x06Status\x12\x12\n\x0eTEMPLATE_VALID\x10\x00\x12\x14\n\x10TEMPLATE_INVALID\x10\x01\x12\x06\n\x02OK\x10\x02\x12\t\n\x05\x45RROR\x10\x03\"\xae\x01\n\x1e\x43louniConfigurationToolRequest\x12\x19\n\x11provider_template\x18\x01 \x01(\t\x12\x14\n\x0c\x63luster_name\x18\x02 \x01(\t\x12\x0e\n\x06\x64\x65lete\x18\x03 \x01(\x08\x12\x1a\n\x12\x63onfiguration_tool\x18\x04 \x01(\t\x12\r\n\x05\x65xtra\x18\x05 \x01(\t\x12\x11\n\tlog_level\x18\x06 \x01(\t\x12\r\n\x05\x64\x65\x62ug\x18\x07 \x01(\x08\"\x97\x01\n\x1f\x43louniConfigurationToolResponse\x12\x37\n\x06status\x18\x01 \x01(\x0e\x32\'.ClouniConfigurationToolResponse.Status\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x03 \x01(\t\"\x1b\n\x06Status\x12\x06\n\x02OK\x10\x00\x12\t\n\x05\x45RROR\x10\x01\x32\x65\n\x12\x43louniProviderTool\x12O\n\x12\x43louniProviderTool\x12\x1a.ClouniProviderToolRequest\x1a\x1b.ClouniProviderToolResponse\"\x00\x32y\n\x17\x43louniConfigurationTool\x12^\n\x17\x43louniConfigurationTool\x12\x1f.ClouniConfigurationToolRequest\x1a .ClouniConfigurationToolResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\tapi.proto\"\xcb\x02\n\x19\x43louniProviderToolRequest\x12\x1d\n\x15template_file_content\x18\x01 \x01(\t\x12\x14\n\x0c\x63luster_name\x18\x02 \x01(\t\x12\x15\n\rvalidate_only\x18\x03 \x01(\x08\x12\x0e\n\x06\x64\x65lete\x18\x04 \x01(\x08\x12\x10\n\x08provider\x18\x05 \x01(\t\x12\x1a\n\x12\x63onfiguration_tool\x18\x06 \x01(\t\x12\r\n\x05\x65xtra\x18\x07 \x01(\t\x12\x11\n\tlog_level\x18\x08 \x01(\t\x12\r\n\x05\x64\x65\x62ug\x18\t \x01(\x08\x12\x16\n\x0ehost_parameter\x18\n \x01(\t\x12\x17\n\x0fpublic_key_path\x18\x0b \x01(\t\x12#\n\x1b\x63onfiguration_tool_endpoint\x18\x0c \x01(\t\x12\x1d\n\x15\x64\x61tabase_api_endpoint\x18\r \x01(\t\"\xb7\x01\n\x1a\x43louniProviderToolResponse\x12\x32\n\x06status\x18\x01 \x01(\x0e\x32\".ClouniProviderToolResponse.Status\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x03 \x01(\t\"E\n\x06Status\x12\x12\n\x0eTEMPLATE_VALID\x10\x00\x12\x14\n\x10TEMPLATE_INVALID\x10\x01\x12\x06\n\x02OK\x10\x02\x12\t\n\x05\x45RROR\x10\x03\"\xe4\x01\n\x1e\x43louniConfigurationToolRequest\x12\x19\n\x11provider_template\x18\x01 \x01(\t\x12\x14\n\x0c\x63luster_name\x18\x02 \x01(\t\x12\x15\n\rvalidate_only\x18\x03 \x01(\x08\x12\x0e\n\x06\x64\x65lete\x18\x04 \x01(\x08\x12\x1a\n\x12\x63onfiguration_tool\x18\x05 \x01(\t\x12\r\n\x05\x65xtra\x18\x06 \x01(\t\x12\x11\n\tlog_level\x18\x07 \x01(\t\x12\r\n\x05\x64\x65\x62ug\x18\x08 \x01(\x08\x12\x1d\n\x15\x64\x61tabase_api_endpoint\x18\t \x01(\t\"\xc1\x01\n\x1f\x43louniConfigurationToolResponse\x12\x37\n\x06status\x18\x01 \x01(\x0e\x32\'.ClouniConfigurationToolResponse.Status\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x03 \x01(\t\"E\n\x06Status\x12\x12\n\x0eTEMPLATE_VALID\x10\x00\x12\x14\n\x10TEMPLATE_INVALID\x10\x01\x12\x06\n\x02OK\x10\x02\x12\t\n\x05\x45RROR\x10\x03\x32\x65\n\x12\x43louniProviderTool\x12O\n\x12\x43louniProviderTool\x12\x1a.ClouniProviderToolRequest\x1a\x1b.ClouniProviderToolResponse\"\x00\x32y\n\x17\x43louniConfigurationTool\x12^\n\x17\x43louniConfigurationTool\x12\x1f.ClouniConfigurationToolRequest\x1a .ClouniConfigurationToolResponse\"\x00\x62\x06proto3'
 )
 
 
@@ -54,8 +54,8 @@ _CLOUNIPROVIDERTOOLRESPONSE_STATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=431,
-  serialized_end=500,
+  serialized_start=462,
+  serialized_end=531,
 )
 _sym_db.RegisterEnumDescriptor(_CLOUNIPROVIDERTOOLRESPONSE_STATUS)
 
@@ -67,20 +67,30 @@ _CLOUNICONFIGURATIONTOOLRESPONSE_STATUS = _descriptor.EnumDescriptor(
   create_key=_descriptor._internal_create_key,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='OK', index=0, number=0,
+      name='TEMPLATE_VALID', index=0, number=0,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='ERROR', index=1, number=1,
+      name='TEMPLATE_INVALID', index=1, number=1,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OK', index=2, number=2,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='ERROR', index=3, number=3,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=804,
-  serialized_end=831,
+  serialized_start=462,
+  serialized_end=531,
 )
 _sym_db.RegisterEnumDescriptor(_CLOUNICONFIGURATIONTOOLRESPONSE_STATUS)
 
@@ -177,6 +187,13 @@ _CLOUNIPROVIDERTOOLREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='database_api_endpoint', full_name='ClouniProviderToolRequest.database_api_endpoint', index=12,
+      number=13, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -190,7 +207,7 @@ _CLOUNIPROVIDERTOOLREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=14,
-  serialized_end=314,
+  serialized_end=345,
 )
 
 
@@ -236,8 +253,8 @@ _CLOUNIPROVIDERTOOLRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=317,
-  serialized_end=500,
+  serialized_start=348,
+  serialized_end=531,
 )
 
 
@@ -264,37 +281,51 @@ _CLOUNICONFIGURATIONTOOLREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='delete', full_name='ClouniConfigurationToolRequest.delete', index=2,
+      name='validate_only', full_name='ClouniConfigurationToolRequest.validate_only', index=2,
       number=3, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='configuration_tool', full_name='ClouniConfigurationToolRequest.configuration_tool', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      name='delete', full_name='ClouniConfigurationToolRequest.delete', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='extra', full_name='ClouniConfigurationToolRequest.extra', index=4,
+      name='configuration_tool', full_name='ClouniConfigurationToolRequest.configuration_tool', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='log_level', full_name='ClouniConfigurationToolRequest.log_level', index=5,
+      name='extra', full_name='ClouniConfigurationToolRequest.extra', index=5,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='debug', full_name='ClouniConfigurationToolRequest.debug', index=6,
-      number=7, type=8, cpp_type=7, label=1,
+      name='log_level', full_name='ClouniConfigurationToolRequest.log_level', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='debug', full_name='ClouniConfigurationToolRequest.debug', index=7,
+      number=8, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='database_api_endpoint', full_name='ClouniConfigurationToolRequest.database_api_endpoint', index=8,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -310,8 +341,8 @@ _CLOUNICONFIGURATIONTOOLREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=503,
-  serialized_end=677,
+  serialized_start=534,
+  serialized_end=762,
 )
 
 
@@ -357,8 +388,8 @@ _CLOUNICONFIGURATIONTOOLRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=680,
-  serialized_end=831,
+  serialized_start=765,
+  serialized_end=958,
 )
 
 _CLOUNIPROVIDERTOOLRESPONSE.fields_by_name['status'].enum_type = _CLOUNIPROVIDERTOOLRESPONSE_STATUS
@@ -408,8 +439,8 @@ _CLOUNIPROVIDERTOOL = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=833,
-  serialized_end=934,
+  serialized_start=960,
+  serialized_end=1061,
   methods=[
   _descriptor.MethodDescriptor(
     name='ClouniProviderTool',
@@ -434,8 +465,8 @@ _CLOUNICONFIGURATIONTOOL = _descriptor.ServiceDescriptor(
   index=1,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=936,
-  serialized_end=1057,
+  serialized_start=1063,
+  serialized_end=1184,
   methods=[
   _descriptor.MethodDescriptor(
     name='ClouniConfigurationTool',

@@ -1,4 +1,6 @@
+import six
 import yaml
+from toscaparser.common.exception import ValidationError
 from yaml import Loader
 
 from configuration_tool.common.translator_to_configuration_dsl import translate
@@ -30,8 +32,10 @@ class TranslatorServer(object):
         self.cluster_name = argv['cluster_name']
         self.is_delete = argv['delete']
         self.configuration_tool = argv['configuration_tool']
+        self.database_api_endpoint = argv['database_api_endpoint']
         self.extra = argv['extra']
         self.log_level = argv['log_level']
+        self.validate_only = argv['validate_only']
         self.debug = False
         if self.log_level == 'debug':
             self.debug = True
@@ -42,8 +46,21 @@ class TranslatorServer(object):
         if self.extra:
             self.extra = yaml.load(self.extra, Loader=Loader)
 
+        if self.extra.get('global'):
+            for k, v in self.extra.get('global').items():
+                if isinstance(v, six.string_types):
+                    if v.isnumeric():
+                        if int(v) == float(v):
+                            self.extra.get('global')[k] = int(v)
+                        else:
+                            self.extra.get('global')[k] = float(v)
+                    if v == 'true':
+                        self.extra.get('global')[k] = True
+                    if v == 'false':
+                        self.extra.get('global')[k] = False
+
         self.working_dir = os.getcwd()
-        self.output = translate(self.provider_template, self.configuration_tool,
+        self.output = translate(self.provider_template, self.validate_only, self.configuration_tool,
                                 self.cluster_name, is_delete=self.is_delete, extra=self.extra,
                                     log_level=self.log_level, debug=self.debug)
 
@@ -59,10 +76,25 @@ class ClouniConfigurationToolServicer(api_pb2_grpc.ClouniConfigurationToolServic
         args = self._RequestParse(request)
         response = ClouniConfigurationToolResponse()
         try:
-            self.logger.info("Request - status OK")
-            response.status = ClouniConfigurationToolResponse.Status.OK
+            if request.validate_only:
+                self.logger.info("Validate only request - status TEMPLATE_VALID")
+                response.status = ClouniConfigurationToolResponse.Status.TEMPLATE_VALID
+            else:
+                self.logger.info("Request - status OK")
+                response.status = ClouniConfigurationToolResponse.Status.OK
             response.content = TranslatorServer(args).output
 
+            self.logger.info("Response send")
+            return response
+        except ValidationError as err:
+            self.logger.exception("\n")
+            if request.validate_only:
+                self.logger.info("Validate only request - status TEMPLATE_INVALID")
+                response.status = ClouniConfigurationToolResponse.Status.TEMPLATE_INVALID
+            else:
+                response.status = ClouniConfigurationToolResponse.Status.ERROR
+                self.logger.info("Request - status ERROR")
+            response.error = str(err)
             self.logger.info("Response send")
             return response
         except Exception as err:
@@ -88,10 +120,18 @@ class ClouniConfigurationToolServicer(api_pb2_grpc.ClouniConfigurationToolServic
             args['delete'] = True
         else:
             args['delete'] = False
+        if request.validate_only:
+            args['validate_only'] = True
+        else:
+            args['validate_only'] = False
         if request.configuration_tool != "":
             args['configuration_tool'] = request.configuration_tool
         else:
             args['configuration_tool'] = 'ansible'
+        if request.database_api_endpoint != "":
+            args['database_api_endpoint'] = request.database_api_endpoint
+        else:
+            args['database_api_endpoint'] = None
         if request.extra != "":
             args['extra'] = request.extra
         else:
