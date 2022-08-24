@@ -37,7 +37,7 @@ def translate(provider_template, configuration_tool, cluster_name, is_delete=Fal
     for sec in REQUIRED_CONFIGURATION_PARAMS:
         if sec not in config.get_section(config.MAIN_SECTION).keys():
             logging.error('Provider configuration parameter "%s" is missing in configuration file' % sec)
-            sys.exit(1)
+            raise Exception('Provider configuration parameter "%s" is missing in configuration file' % sec)
 
     provider_template = yaml.load(provider_template, Loader=Loader)
     provider_template = provider_template.get(TOPOLOGY_TEMPLATE)

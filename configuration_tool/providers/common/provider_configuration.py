@@ -39,6 +39,6 @@ class ProviderConfiguration (Configuration):
                 break
         if self.config_filename is None:
             logging.error("Configuration files were missing in possible locations: %s" % json.dumps(filename_variants_priority))
-            sys.exit(1)
+            raise Exception("Configuration files were missing in possible locations: %s" % json.dumps(filename_variants_priority))
 
         super(ProviderConfiguration, self).__init__(self.config_filename)

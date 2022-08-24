@@ -2,5 +2,4 @@ six
 grpcio==1.37.1
 grpcio-tools==1.37.1
 pyyaml
-six
 graphlib_backport

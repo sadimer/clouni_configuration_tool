@@ -40,6 +40,7 @@ class ConfigurationToolConfiguration (Configuration):
         if self.config_filename is None:
             logging.error("Configuration file was not found. It must be one of the variants: %s"
                           % json.dumps(filename_variants_priority))
-            sys.exit(1)
+            raise Exception("Configuration file was not found. It must be one of the variants: %s"
+                          % json.dumps(filename_variants_priority))
 
         super(ConfigurationToolConfiguration, self).__init__(self.config_filename)

@@ -28,7 +28,7 @@ def generate_artifacts(executor, new_artifacts, directory, store=True):
     """
     if not executor:
         logging.error('Failed to generate artifact with executor <None>')
-        sys.exit(1)
+        raise Exception('Failed to generate artifact with executor <None>')
     tasks = []
     filename = os.path.join(directory, '_'.join(['tasks', str(utils.get_random_int(1000, 9999))]) + get_artifact_extension(executor))
     for art in new_artifacts:

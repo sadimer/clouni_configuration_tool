@@ -63,7 +63,7 @@ class ProviderRequirements (object):
             req_key = self._node_name_by_requirement_name.get(req_name)
             if not req_key:
                 logging.error("Requirement \'%s\' is not supported." % req_name)
-                sys.exit(1)
+                raise Exception("Requirement \'%s\' is not supported." % req_name)
             requirement = ProviderRequirement(self.provider, req_name, req_key, req[req_name],
                                               self.requirement_definitions[req_name], node_filter_key=req_key)
             if req_name in self.requirement_names_of_type_list:

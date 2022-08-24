@@ -31,7 +31,7 @@ class ProviderToscaTemplate(object):
             if not self.provider_config.config[self.provider_config.MAIN_SECTION].get(sec):
                 logging.error("Provider configuration parameter \'%s\' has missing value" % sec)
                 logging.error("Translating failed")
-                sys.exit(1)
+                raise Exception("Provider configuration parameter \'%s\' has missing value" % sec)
 
         self.definitions = {}
         import_definition_file = ImportsLoader([self.definition_file()], None, list(SERVICE_TEMPLATE_KEYS),
@@ -129,7 +129,7 @@ class ProviderToscaTemplate(object):
 
             if not os.path.isfile(file_definition):
                 logging.error("TOSCA definition file not found: %s" % file_definition)
-                sys.exit(1)
+                raise Exception("TOSCA definition file not found: %s" % file_definition)
 
         return def_list
 
@@ -140,7 +140,7 @@ class ProviderToscaTemplate(object):
 
         if not os.path.isfile(file_definition):
             logging.error("TOSCA definition file not found: %s" % file_definition)
-            sys.exit(1)
+            raise Exception("TOSCA definition file not found: %s" % file_definition)
 
         return file_definition
 
@@ -355,7 +355,7 @@ class ProviderToscaTemplate(object):
         if parent_def_name is not None:
             if def_type == parent_def_name:
                 logging.critical("Invalid type \'%s\' is derived from itself" % def_type)
-                sys.exit(1)
+                raise Exception("Invalid type \'%s\' is derived from itself" % def_type)
             if parent_def_name in ready_set:
                 parent_definition = self.definitions[parent_def_name]
                 is_software_parent = parent_def_name in self.software_types

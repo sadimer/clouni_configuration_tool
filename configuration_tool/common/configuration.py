@@ -33,7 +33,7 @@ class Configuration:
                 self.config_filename = file
             else:
                 logging.error("Configuration file \'%s\' not found" % file)
-                sys.exit(1)
+                raise Exception("Configuration file \'%s\' not found" % file)
         else:
             cwd_config_filename = os.path.join(os.getcwd(), file)
             root_clouni_config_filename = os.path.join(utils.get_project_root_path(),
@@ -52,7 +52,7 @@ class Configuration:
 
             if self.config_filename is None:
                 logging.error("Configuration files were missing in possible locations: %s" % json.dumps(filename_variants_priority))
-                sys.exit(1)
+                raise Exception("Configuration files were missing in possible locations: %s" % json.dumps(filename_variants_priority))
 
             logging.info("Configuration file \'%s\' is used" % self.config_filename)
 
@@ -64,7 +64,7 @@ class Configuration:
 
         if not self.MAIN_SECTION in self.config.sections():
             logging.error("Main section is missing in configuration file")
-            sys.exit(1)
+            raise Exception("Main section is missing in configuration file")
 
     def parse_param(self, param):
         r = param

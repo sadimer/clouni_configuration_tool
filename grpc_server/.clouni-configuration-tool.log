@@ -134,3 +134,342 @@ AttributeError: 'NoneType' object has no attribute 'keys'
 2022-08-23 19:52:11,586 - INFO - ThreadPoolExecutor-0_0 - Response send
 2022-08-23 19:52:29,306 - INFO - MainThread - Server stopped
 2022-08-23 19:52:29,307 - INFO - MainThread - Exited
+2022-08-24 13:14:03,613 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 13:14:03,624 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 13:14:03,625 - INFO - MainThread - Server started
+2022-08-24 13:14:28,620 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 13:14:28,621 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 13:14:32,734 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 13:46:43,806 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 13:46:43,806 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 13:46:47,926 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 13:49:25,369 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-08-24 13:49:25,369 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-08-24 13:49:29,484 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-08-24 13:50:37,624 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 13:50:37,624 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 13:50:41,736 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 13:51:35,046 - INFO - ThreadPoolExecutor-0_2 - Request received
+2022-08-24 13:51:35,046 - INFO - ThreadPoolExecutor-0_2 - Request - status OK
+2022-08-24 13:51:39,158 - INFO - ThreadPoolExecutor-0_2 - Response send
+2022-08-24 13:59:32,781 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-08-24 13:59:32,781 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-08-24 13:59:36,893 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-08-24 14:03:36,999 - INFO - ThreadPoolExecutor-0_3 - Request received
+2022-08-24 14:03:36,999 - INFO - ThreadPoolExecutor-0_3 - Request - status OK
+2022-08-24 14:03:37,001 - ERROR - ThreadPoolExecutor-0_3 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 43, in translate
+    provider_template = provider_template.get(TOPOLOGY_TEMPLATE)
+AttributeError: 'str' object has no attribute 'get'
+2022-08-24 14:03:37,001 - INFO - ThreadPoolExecutor-0_3 - Request - status ERROR
+2022-08-24 14:03:37,001 - INFO - ThreadPoolExecutor-0_3 - Response send
+2022-08-24 14:03:44,306 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 14:03:44,306 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 14:03:44,308 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 43, in translate
+    provider_template = provider_template.get(TOPOLOGY_TEMPLATE)
+AttributeError: 'str' object has no attribute 'get'
+2022-08-24 14:03:44,308 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-24 14:03:44,308 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 14:12:25,877 - INFO - ThreadPoolExecutor-0_4 - Request received
+2022-08-24 14:12:25,878 - INFO - ThreadPoolExecutor-0_4 - Request - status OK
+2022-08-24 14:12:29,991 - INFO - ThreadPoolExecutor-0_4 - Response send
+2022-08-24 14:12:44,441 - INFO - ThreadPoolExecutor-0_2 - Request received
+2022-08-24 14:12:44,441 - INFO - ThreadPoolExecutor-0_2 - Request - status OK
+2022-08-24 14:12:48,554 - INFO - ThreadPoolExecutor-0_2 - Response send
+2022-08-24 14:13:27,334 - INFO - ThreadPoolExecutor-0_5 - Request received
+2022-08-24 14:13:27,334 - INFO - ThreadPoolExecutor-0_5 - Request - status OK
+2022-08-24 14:13:31,454 - INFO - ThreadPoolExecutor-0_5 - Response send
+2022-08-24 14:15:54,162 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-08-24 14:15:54,162 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-08-24 14:15:55,225 - ERROR - ThreadPoolExecutor-0_1 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 63, in translate
+    inputs=tosca.inputs, outputs=tosca.outputs, extra=extra, debug=debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 101, in to_dsl
+    if v['operation'] == 'create':
+TypeError: 'ProviderResource' object is not subscriptable
+2022-08-24 14:15:55,226 - INFO - ThreadPoolExecutor-0_1 - Request - status ERROR
+2022-08-24 14:15:55,226 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-08-24 14:16:12,536 - INFO - ThreadPoolExecutor-0_6 - Request received
+2022-08-24 14:16:12,536 - INFO - ThreadPoolExecutor-0_6 - Request - status OK
+2022-08-24 14:16:13,600 - ERROR - ThreadPoolExecutor-0_6 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 63, in translate
+    inputs=tosca.inputs, outputs=tosca.outputs, extra=extra, debug=debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 101, in to_dsl
+    if v['operation'] == 'create':
+TypeError: 'ProviderResource' object is not subscriptable
+2022-08-24 14:16:13,601 - INFO - ThreadPoolExecutor-0_6 - Request - status ERROR
+2022-08-24 14:16:13,601 - INFO - ThreadPoolExecutor-0_6 - Response send
+2022-08-24 14:16:44,391 - INFO - ThreadPoolExecutor-0_3 - Request received
+2022-08-24 14:16:44,391 - INFO - ThreadPoolExecutor-0_3 - Request - status OK
+2022-08-24 14:16:45,440 - ERROR - ThreadPoolExecutor-0_3 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 63, in translate
+    inputs=tosca.inputs, outputs=tosca.outputs, extra=extra, debug=debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 101, in to_dsl
+    if v['operation'] == 'create':
+TypeError: 'ProviderResource' object is not subscriptable
+2022-08-24 14:16:45,441 - INFO - ThreadPoolExecutor-0_3 - Request - status ERROR
+2022-08-24 14:16:45,441 - INFO - ThreadPoolExecutor-0_3 - Response send
+2022-08-24 14:16:48,544 - INFO - ThreadPoolExecutor-0_7 - Request received
+2022-08-24 14:16:48,544 - INFO - ThreadPoolExecutor-0_7 - Request - status OK
+2022-08-24 14:16:51,622 - INFO - ThreadPoolExecutor-0_7 - Response send
+2022-08-24 14:17:35,765 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 14:17:35,765 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 14:17:38,849 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 14:21:17,949 - INFO - ThreadPoolExecutor-0_8 - Request received
+2022-08-24 14:21:17,950 - INFO - ThreadPoolExecutor-0_8 - Request - status OK
+2022-08-24 14:21:19,000 - ERROR - ThreadPoolExecutor-0_8 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 63, in translate
+    inputs=tosca.inputs, outputs=tosca.outputs, extra=extra, debug=debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 101, in to_dsl
+    if v['operation'] == 'create':
+TypeError: 'ProviderResource' object is not subscriptable
+2022-08-24 14:21:19,000 - INFO - ThreadPoolExecutor-0_8 - Request - status ERROR
+2022-08-24 14:21:19,000 - INFO - ThreadPoolExecutor-0_8 - Response send
+2022-08-24 14:22:06,437 - INFO - ThreadPoolExecutor-0_4 - Request received
+2022-08-24 14:22:06,437 - INFO - ThreadPoolExecutor-0_4 - Request - status OK
+2022-08-24 14:22:07,497 - ERROR - ThreadPoolExecutor-0_4 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 63, in translate
+    inputs=tosca.inputs, outputs=tosca.outputs, extra=extra, debug=debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 101, in to_dsl
+    if v['operation'] == 'create':
+TypeError: 'ProviderResource' object is not subscriptable
+2022-08-24 14:22:07,497 - INFO - ThreadPoolExecutor-0_4 - Request - status ERROR
+2022-08-24 14:22:07,497 - INFO - ThreadPoolExecutor-0_4 - Response send
+2022-08-24 14:23:21,961 - INFO - MainThread - Server stopped
+2022-08-24 14:23:21,961 - INFO - MainThread - Exited
+2022-08-24 14:23:24,104 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 14:23:24,113 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 14:23:24,115 - INFO - MainThread - Server started
+2022-08-24 14:23:27,709 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 14:23:27,710 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 14:24:47,894 - INFO - MainThread - Server stopped
+2022-08-24 14:24:47,895 - INFO - MainThread - Exited
+2022-08-24 14:24:51,229 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 14:24:51,238 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 14:24:51,242 - INFO - MainThread - Server started
+2022-08-24 14:24:53,278 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 14:24:53,278 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 14:25:00,455 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 63, in translate
+    inputs=tosca.inputs, outputs=tosca.outputs, extra=extra, debug=debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 101, in to_dsl
+    if v['operation'] == 'create':
+TypeError: 'ProviderResource' object is not subscriptable
+2022-08-24 14:25:00,457 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-24 14:25:00,457 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 14:27:34,450 - INFO - MainThread - Server stopped
+2022-08-24 14:27:34,452 - INFO - MainThread - Exited
+2022-08-24 14:27:35,934 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 14:27:35,939 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 14:27:35,940 - INFO - MainThread - Server started
+2022-08-24 14:27:38,699 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 14:27:38,699 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 14:27:41,767 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 14:33:23,440 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 14:33:23,440 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 14:33:26,505 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 14:54:51,236 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-08-24 14:54:51,236 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-08-24 14:54:54,322 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-08-24 14:58:55,244 - INFO - MainThread - Server stopped
+2022-08-24 14:58:55,245 - INFO - MainThread - Exited
+2022-08-24 14:58:56,783 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 14:58:56,788 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 14:58:56,789 - INFO - MainThread - Server started
+2022-08-24 14:58:59,836 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 14:58:59,836 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 15:00:22,132 - INFO - MainThread - Server stopped
+2022-08-24 15:00:22,132 - INFO - MainThread - Exited
+2022-08-24 15:00:23,833 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 15:00:23,840 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 15:00:23,842 - INFO - MainThread - Server started
+2022-08-24 15:00:27,543 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 15:00:27,543 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 15:00:27,599 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 57, in translate
+    tool = get_configuration_tool_class(configuration_tool)(provider)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 47, in __init__
+    raise Exception("Configuration parameter \'%s\' is missing in Ansible configuration" % param)
+Exception: Configuration parameter 'initial_artifacts_directory' is missing in Ansible configuration
+2022-08-24 15:00:27,600 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-24 15:00:27,600 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 15:00:33,232 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 15:00:33,232 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 15:00:33,288 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 57, in translate
+    tool = get_configuration_tool_class(configuration_tool)(provider)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 47, in __init__
+    raise Exception("Configuration parameter \'%s\' is missing in Ansible configuration" % param)
+Exception: Configuration parameter 'initial_artifacts_directory' is missing in Ansible configuration
+2022-08-24 15:00:33,288 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-24 15:00:33,288 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 15:00:44,771 - INFO - MainThread - Server stopped
+2022-08-24 15:00:44,771 - INFO - MainThread - Exited
+2022-08-24 15:00:46,695 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 15:00:46,699 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 15:00:46,700 - INFO - MainThread - Server started
+2022-08-24 15:00:49,083 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 15:00:49,084 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 15:01:56,237 - INFO - MainThread - Server stopped
+2022-08-24 15:01:56,237 - INFO - MainThread - Exited
+2022-08-24 15:01:57,894 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 15:01:57,898 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 15:01:57,900 - INFO - MainThread - Server started
+2022-08-24 15:02:00,915 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 15:02:00,915 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 15:02:04,636 - INFO - MainThread - Server stopped
+2022-08-24 15:02:04,636 - INFO - MainThread - Exited
+2022-08-24 15:02:16,669 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 15:02:16,674 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 15:02:16,676 - INFO - MainThread - Server started
+2022-08-24 15:02:18,646 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 15:02:18,646 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 15:02:18,703 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 57, in translate
+    tool = get_configuration_tool_class(configuration_tool)(provider)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 46, in __init__
+    raise Exception("Configuration parameter \'%s\' is missing in Ansible configuration" % param)
+Exception: Configuration parameter 'initial_artifacts_directory' is missing in Ansible configuration
+2022-08-24 15:02:18,703 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-24 15:02:18,704 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 15:45:38,977 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 15:45:38,977 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 15:45:39,031 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 57, in translate
+    tool = get_configuration_tool_class(configuration_tool)(provider)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 46, in __init__
+    raise Exception("Configuration parameter \'%s\' is missing in Ansible configuration" % param)
+Exception: Configuration parameter 'initial_artifacts_directory' is missing in Ansible configuration
+2022-08-24 15:45:39,031 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-24 15:45:39,031 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 15:46:46,170 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-08-24 15:46:46,171 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-08-24 15:46:46,235 - ERROR - ThreadPoolExecutor-0_1 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 57, in translate
+    tool = get_configuration_tool_class(configuration_tool)(provider)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 46, in __init__
+    raise Exception("Configuration parameter \'%s\' is missing in Ansible configuration" % param)
+Exception: Configuration parameter 'initial_artifacts_directory' is missing in Ansible configuration
+2022-08-24 15:46:46,236 - INFO - ThreadPoolExecutor-0_1 - Request - status ERROR
+2022-08-24 15:46:46,236 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-08-24 15:56:15,560 - INFO - MainThread - Server stopped
+2022-08-24 15:56:15,560 - INFO - MainThread - Exited
+2022-08-24 15:56:46,906 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-24 15:56:46,911 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-24 15:56:46,917 - INFO - MainThread - Server started
+2022-08-24 15:56:50,277 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 15:56:50,277 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 15:56:50,335 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 57, in translate
+    tool = get_configuration_tool_class(configuration_tool)(provider)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 46, in __init__
+    raise Exception("Configuration parameter \'%s\' is missing in Ansible configuration" % param)
+Exception: Configuration parameter 'initial_artifacts_directory' is missing in Ansible configuration
+2022-08-24 15:56:50,336 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-24 15:56:50,336 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 15:56:56,668 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 15:56:56,668 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 15:56:59,749 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 15:58:26,303 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-08-24 15:58:26,304 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-08-24 15:58:29,390 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-08-24 16:13:39,448 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 16:13:39,449 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 16:13:42,525 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-24 16:14:18,614 - INFO - ThreadPoolExecutor-0_2 - Request received
+2022-08-24 16:14:18,614 - INFO - ThreadPoolExecutor-0_2 - Request - status OK
+2022-08-24 16:14:21,695 - INFO - ThreadPoolExecutor-0_2 - Response send
+2022-08-24 16:16:26,525 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-08-24 16:16:26,525 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-08-24 16:16:26,534 - ERROR - ThreadPoolExecutor-0_1 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 64, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 48, in __init__
+    log_level=self.log_level, debug=self.debug)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 55, in translate
+    host_ip_parameter, is_delete)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 25, in __init__
+    self.provider_config = ProviderConfiguration(self.provider)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_configuration.py", line 42, in __init__
+    raise Exception("Configuration files were missing in possible locations: %s" % json.dumps(filename_variants_priority))
+Exception: Configuration files were missing in possible locations: ["/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/tosca.cfg", "/home/sadimer/Desktop/clouni_configuration_tool/tosca.cfg", "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/tosca/provider.cfg", "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/tosca/tosca.cfg"]
+2022-08-24 16:16:26,534 - INFO - ThreadPoolExecutor-0_1 - Request - status ERROR
+2022-08-24 16:16:26,534 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-08-24 16:23:58,025 - INFO - ThreadPoolExecutor-0_3 - Request received
+2022-08-24 16:23:58,025 - INFO - ThreadPoolExecutor-0_3 - Request - status OK
+2022-08-24 16:24:01,101 - INFO - ThreadPoolExecutor-0_3 - Response send
+2022-08-24 16:24:15,525 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-24 16:24:15,526 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-24 16:24:18,603 - INFO - ThreadPoolExecutor-0_0 - Response send

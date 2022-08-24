@@ -41,16 +41,17 @@ class ProviderRequirement (object):
         if data is None:
             logging.error("The \'%s\' requirement support only \'node_filter\' parameter "
                           "but only \'%s\' is present" % (self.name, self.data))
-            sys.exit(1)
+            raise Exception("The \'%s\' requirement support only \'node_filter\' parameter "
+                          "but only \'%s\' is present" % (self.name, self.data))
         capabilities = data.get(CAPABILITIES, []) # is the list as the requirements
         properties = data.get(PROPERTIES, [])
 
         if not isinstance(capabilities, list):
             logging.error("The value \'%s\' must be of type list" % (json.dumps(capabilities)))
-            sys.exit(1)
+            raise Exception("The value \'%s\' must be of type list" % (json.dumps(capabilities)))
         if not isinstance(properties, list):
             logging.error("The value \'%s\' must be of type list" % (json.dumps(properties)))
-            sys.exit(1)
+            raise Exception("The value \'%s\' must be of type list" % (json.dumps(properties)))
         if node_data is not None: # TODO: change it later with get_attribute
             (_, _, typename) = utils.tosca_type_parse(self.definition.get(NODE))
             typename = utils.snake_case(typename)

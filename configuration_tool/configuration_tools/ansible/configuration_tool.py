@@ -12,8 +12,7 @@ from configuration_tool.providers.common.provider_configuration import ProviderC
 from configuration_tool.configuration_tools.common.configuration_tool import ConfigurationTool, \
     OUTPUT_IDS, OUTPUT_ID_RANGE_START, OUTPUT_ID_RANGE_END
 
-from configuration_tool.configuration_tools.ansible.runner import run_ansible, parallel_run_ansible, prepare_for_run
-from multiprocessing.connection import Listener
+from configuration_tool.configuration_tools.ansible.runner import parallel_run_ansible, prepare_for_run
 
 import copy, sys, yaml, os, itertools, six, logging
 from shutil import copyfile, rmtree
@@ -44,7 +43,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
         for param in REQUIRED_CONFIG_PARAMS:
             if not param in main_config.keys():
                 logging.error("Configuration parameter \'%s\' is missing in Ansible configuration" % param)
-                sys.exit(1)
+                raise Exception("Configuration parameter \'%s\' is missing in Ansible configuration" % param)
 
         for param in REQUIRED_CONFIG_PARAMS:
             setattr(self, param, main_config[param])
@@ -98,8 +97,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
             for v in elements.get_ready():
                 # in delete mode we skip all operations exept delete and create operation transforms to delete
                 if is_delete:
-                    if v['operation'] == 'create':
-                        v['operation'] = 'delete'
+                    if v.operation == 'create':
+                        v.operation = 'delete'
                     else:
                         elements.done(v)
                         continue
@@ -178,10 +177,10 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                     break
                         else:
                             logging.error("Unsupported operation for relationship in operation graph")
-                            sys.exit(1)
+                            raise Exception("Unsupported operation for relationship in operation graph")
                     else:
                         logging.error("Unsupported element type in operation graph")
-                        sys.exit(1)
+                        raise Exception("Unsupported element type in operation graph")
                     ansible_play_for_elem['tasks'].extend(copy.deepcopy(
                         self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation, cluster_name,
                                                               additional_args=extra)))
@@ -211,7 +210,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 done = q.get()
                 if done != 'Done':
                     logging.error("Something wrong with multiprocessing queue")
-                    sys.exit(1)
+                    raise Exception("Something wrong with multiprocessing queue")
             ansible_playbook.append(last_play)
         # delete dir with cluster_name in tmp clouni dir
         if not debug:

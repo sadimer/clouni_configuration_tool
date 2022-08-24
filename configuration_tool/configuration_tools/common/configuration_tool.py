@@ -113,7 +113,7 @@ class ConfigurationTool(object):
 
         if len(operations) > 0:
             logging.critical("Resolving dependencies in template failed on element \'%s\'" % element_template_name)
-            sys.exit(1)
+            raise Exception("Resolving dependencies in template failed on element \'%s\'" % element_template_name)
 
     def get_interfaces_from_node(self, node):
         """

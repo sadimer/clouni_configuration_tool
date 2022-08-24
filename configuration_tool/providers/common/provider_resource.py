@@ -87,7 +87,7 @@ class ProviderResource(object):
                     if type_name == 'HostedOn':
                         if self.host is not None:
                             logging.critical("Node \'\' can be hosted only on one node" % self.name)
-                            sys.exit(1)
+                            raise Exception("Node \'\' can be hosted only on one node" % self.name)
                         if host_ip_parameter not in ('public_address', 'private_address'):
                             host_ip_parameter = 'private_address'
                         self.host = req.data['node'] + '_' + host_ip_parameter
@@ -114,7 +114,9 @@ class ProviderResource(object):
                         logging.error("Provider configuration parameter "
                                       "\'ansible.node_filter: node_filter_inner_value\' is missing "
                                       "or has unsupported value \'%s\'" % node_filter_inner_value)
-                        sys.exit(1)
+                        raise Exception("Provider configuration parameter "
+                                      "\'ansible.node_filter: node_filter_inner_value\' is missing "
+                                      "or has unsupported value \'%s\'" % node_filter_inner_value)
                     else:
                         for elem in node_filter_inner_value:
                             if elem in self.configuration_args:
@@ -147,7 +149,9 @@ class ProviderResource(object):
                                     logging.error("Provider configuration parameter "
                                                   "\'ansible.node_filter: node_filter_inner_variable\' is missing "
                                                   "or has unsupported value \'%s\'" % node_filter_inner_variable)
-                                    sys.exit(1)
+                                    raise Exception("Provider configuration parameter "
+                                                  "\'ansible.node_filter: node_filter_inner_variable\' is missing "
+                                                  "or has unsupported value \'%s\'" % node_filter_inner_variable)
 
                             tmp_ansible_tasks = [
                                 {
