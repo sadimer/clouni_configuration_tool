@@ -62,7 +62,8 @@ class TranslatorServer(object):
         self.working_dir = os.getcwd()
         self.output = translate(self.provider_template, self.validate_only, self.configuration_tool,
                                 self.cluster_name, is_delete=self.is_delete, extra=self.extra,
-                                    log_level=self.log_level, debug=self.debug)
+                                log_level=self.log_level, debug=self.debug,
+                                database_api_endpoint=self.database_api_endpoint)
 
 
 class ClouniConfigurationToolServicer(api_pb2_grpc.ClouniConfigurationToolServicer):

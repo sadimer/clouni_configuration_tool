@@ -24,7 +24,7 @@ REQUIRED_CONFIGURATION_PARAMS = (TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFAC
 
 
 def translate(provider_template, validate_only, configuration_tool, cluster_name, is_delete=False,
-              extra=None, log_level='info', debug=False, host_ip_parameter='public_address'):
+              extra=None, log_level='info', debug=False, host_ip_parameter='public_address', database_api_endpoint = None):
     log_map = dict(
         debug=logging.DEBUG,
         info=logging.INFO,
@@ -104,6 +104,11 @@ def translate(provider_template, validate_only, configuration_tool, cluster_name
 
     tosca = ProviderToscaTemplate(topology_template, provider, configuration_tool, cluster_name,
                                   host_ip_parameter, is_delete)
+
+    if database_api_endpoint:
+        template = utils.deep_update_dict(template, tosca.used_definitions)
+        del template[IMPORTS]
+        print(yaml.dump(template))
 
     tool = get_configuration_tool_class(configuration_tool)(provider)
 
