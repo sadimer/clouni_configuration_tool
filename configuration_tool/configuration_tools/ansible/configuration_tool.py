@@ -12,7 +12,7 @@ from configuration_tool.providers.common.provider_configuration import ProviderC
 from configuration_tool.configuration_tools.common.configuration_tool import ConfigurationTool, \
     OUTPUT_IDS, OUTPUT_ID_RANGE_START, OUTPUT_ID_RANGE_END
 
-from configuration_tool.configuration_tools.ansible.runner import parallel_run_ansible, prepare_for_run
+from configuration_tool.configuration_tools.ansible.runner import grpc_cotea_run_ansible
 
 import copy, sys, yaml, os, itertools, six, logging
 from shutil import copyfile, rmtree
@@ -49,7 +49,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
             setattr(self, param, main_config[param])
 
     def to_dsl(self, provider, operations_graph, reversed_operations_graph, cluster_name, is_delete,
-               target_directory=None, inputs=None, outputs=None, extra=None, debug=False):
+               target_directory=None, inputs=None, outputs=None, extra=None, debug=False, grpc_cotea_endpoint=None):
 
         provider_config = ProviderConfiguration(self.provider)
         ansible_config = provider_config.get_section(ANSIBLE)
@@ -71,9 +71,6 @@ class AnsibleConfigurationTool(ConfigurationTool):
         # first operations from on top of the graph in state 'ready'
 
         ansible_playbook = []
-        if not debug:
-            self.prepare_for_run()
-        # function for initializing tmp clouni directory
         q = Queue()
         # queue for node names + operations
         active = []
@@ -189,7 +186,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 # run playbooks
                 if not debug:
                     if len(ansible_play_for_elem['tasks']) > 0:
-                        self.parallel_run([ansible_play_for_elem], v.name, v.operation, q, cluster_name)
+                        self.parallel_run([ansible_play_for_elem], v.name, v.operation, q, grpc_cotea_endpoint)
                     else:
                         elements.done(v)
                     # add element to active list
@@ -206,7 +203,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 PATH: ids_file_path,
                 STATE: 'absent'}}))
             if not debug:
-                self.parallel_run([last_play], None, None, q, cluster_name)
+                self.parallel_run([last_play], None, None, q, grpc_cotea_endpoint)
                 done = q.get()
                 if done != 'Done':
                     logging.error("Something wrong with multiprocessing queue")
@@ -555,14 +552,11 @@ class AnsibleConfigurationTool(ConfigurationTool):
             })
         return ansible_tasks
 
-    def prepare_for_run(self):
-        prepare_for_run()
-
-    def parallel_run(self, ansible_play, name, op, q, cluster_name):
+    def parallel_run(self, ansible_play, name, op, q, grpc_cotea_endpoint):
         if self.provider == 'amazon':
             amazon_plugins_path = os.path.join(utils.get_project_root_path(), '.ansible/plugins/modules/cloud/amazon')
             if "ANSIBLE_LIBRARY" not in os.environ:
                 os.environ["ANSIBLE_LIBRARY"] = amazon_plugins_path
             elif amazon_plugins_path not in os.environ["ANSIBLE_LIBRARY"]:
                 os.environ["ANSIBLE_LIBRARY"] += os.pathsep + amazon_plugins_path
-        parallel_run_ansible(ansible_play, name, op, q, cluster_name)
+        grpc_cotea_run_ansible(ansible_play, name, op, q, grpc_cotea_endpoint)

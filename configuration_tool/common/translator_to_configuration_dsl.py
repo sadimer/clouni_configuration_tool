@@ -24,7 +24,8 @@ REQUIRED_CONFIGURATION_PARAMS = (TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFAC
 
 
 def translate(provider_template, validate_only, configuration_tool, cluster_name, is_delete=False,
-              extra=None, log_level='info', debug=False, host_ip_parameter='public_address', database_api_endpoint = None):
+              extra=None, log_level='info', debug=False, host_ip_parameter='public_address',
+              database_api_endpoint=None, grpc_cotea_endpoint=None):
     log_map = dict(
         debug=logging.DEBUG,
         info=logging.INFO,
@@ -116,7 +117,8 @@ def translate(provider_template, validate_only, configuration_tool, cluster_name
 
     configuration_content = tool.to_dsl(provider, tosca.provider_operations, tosca.reversed_provider_operations,
                                         tosca.cluster_name, is_delete, target_directory=default_artifacts_directory,
-                                        inputs=tosca.inputs, outputs=tosca.outputs, extra=extra, debug=debug)
+                                        inputs=tosca.inputs, outputs=tosca.outputs, extra=extra, debug=debug,
+                                        grpc_cotea_endpoint=grpc_cotea_endpoint)
     return configuration_content
 
 

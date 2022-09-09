@@ -24,7 +24,8 @@ message ClouniProviderToolRequest {
     string host_parameter = 10;
     string public_key_path = 11;
     string configuration_tool_endpoint = 12;
-    string database_api_endpoint = 13;
+    string grpc_cotea_endpoint = 13;
+    string database_api_endpoint = 14;
 }
 
 // ClouniProviderTool response
@@ -60,6 +61,7 @@ message ClouniConfigurationToolRequest {
     string log_level = 7;
     bool debug = 8;
     string database_api_endpoint = 9;
+    string grpc_cotea_endpoint = 10;
 }
 
 message ClouniConfigurationToolResponse {

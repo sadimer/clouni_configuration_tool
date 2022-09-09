@@ -33,6 +33,7 @@ class TranslatorServer(object):
         self.is_delete = argv['delete']
         self.configuration_tool = argv['configuration_tool']
         self.database_api_endpoint = argv['database_api_endpoint']
+        self.grpc_cotea_endpoint = argv['grpc_cotea_endpoint']
         self.extra = argv['extra']
         self.log_level = argv['log_level']
         self.validate_only = argv['validate_only']
@@ -63,7 +64,7 @@ class TranslatorServer(object):
         self.output = translate(self.provider_template, self.validate_only, self.configuration_tool,
                                 self.cluster_name, is_delete=self.is_delete, extra=self.extra,
                                 log_level=self.log_level, debug=self.debug,
-                                database_api_endpoint=self.database_api_endpoint)
+                                database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
 
 
 class ClouniConfigurationToolServicer(api_pb2_grpc.ClouniConfigurationToolServicer):
@@ -133,6 +134,10 @@ class ClouniConfigurationToolServicer(api_pb2_grpc.ClouniConfigurationToolServic
             args['database_api_endpoint'] = request.database_api_endpoint
         else:
             args['database_api_endpoint'] = None
+        if request.grpc_cotea_endpoint != "":
+            args['grpc_cotea_endpoint'] = request.grpc_cotea_endpoint
+        else:
+            args['grpc_cotea_endpoint'] = None
         if request.extra != "":
             args['extra'] = request.extra
         else:
