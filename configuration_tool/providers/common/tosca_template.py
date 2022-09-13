@@ -71,25 +71,24 @@ class ProviderToscaTemplate(object):
         self.provider_relations = self._provider_relations()
 
         self.used_definitions = {}
-        node_types = self.get_used_definitions(self.node_templates)
-        if len(node_types) > 0:
-            self.used_definitions[NODE_TYPES] = node_types
-        relationships_types = self.get_used_definitions(self.relationship_templates)
-        if len(relationships_types) > 0:
-            self.used_definitions[RELATIONSHIP_TYPES] = relationships_types
-
+        self.used_definitions[NODE_TYPES] = {}
+        self.used_definitions[DATA_TYPES] = {}
+        self.used_definitions[RELATIONSHIP_TYPES] = {}
+        self.used_definitions[CAPABILITY_TYPES] = {}
+        self.used_definitions[INTERFACE_TYPES] = {}
+        for key, value in self.definitions.items():
+            (_, type, _) = utils.tosca_type_parse(key)
+            if type == NODES:
+                self.used_definitions[NODE_TYPES][key] = value
+            if type == DATATYPES:
+                self.used_definitions[DATA_TYPES][key] = value
+            if type == RELATIONSHIPS:
+                self.used_definitions[RELATIONSHIP_TYPES][key] = value
+            if type == CAPABILITIES:
+                self.used_definitions[CAPABILITY_TYPES][key] = value
+            if type == INTERFACES:
+                self.used_definitions[INTERFACE_TYPES][key] = value
         self.provider_operations, self.reversed_provider_operations = self.sort_nodes_and_operations_by_graph_dependency()
-
-    def get_used_definitions(self, templates):
-        result = {}
-        for key, value in templates.items():
-            type = value.get(TYPE)
-            if type in self.definitions:
-                result[type] = self.definitions[type]
-            else:
-                logging.error("TOSCA definition type not found: %s" % type)
-                raise Exception("TOSCA definition type not found: %s" % type)
-        return result
 
     def resolve_in_template_dependencies(self):
         """

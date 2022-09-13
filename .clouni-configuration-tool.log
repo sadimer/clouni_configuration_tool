@@ -1,0 +1,374 @@
+2022-08-29 12:37:21,609 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 12:37:21,610 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 12:37:21,630 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 12:37:21,633 - INFO - MainThread - Server started
+2022-08-29 12:45:13,936 - INFO - MainThread - Server stopped
+2022-08-29 12:45:13,937 - INFO - MainThread - Exited
+2022-08-29 12:45:17,760 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 12:45:17,777 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 12:45:17,843 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 12:45:17,854 - INFO - MainThread - Server started
+2022-08-29 12:45:51,187 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 12:45:51,189 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_server\n      - dependency:\n          node: testing_tosca_security_group\n      - dependency:\n          node: testing_tosca_keypair\n      - dependency:\n          node: testing_tosca_server\n      - dependency:\n          node: testing_tosca_floating_ip\n      - dependency:\n          node: testing_tosca_security_group_rule\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_floating_ip:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_server_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_floating_ip.results[item | int - 1].floating_ip.floating_ip_address\n                ]] }}\'\n      properties:\n        floating_ip_address: 10.10.10.10\n      requirements:\n      - server:\n          node: testing_tosca_server\n      - network:\n          node_filter:\n            properties:\n            - name: not implemented yet\n      type: openstack.nodes.FloatingIp\n    testing_tosca_keypair:\n      properties:\n        name: testing_tosca_keypair\n        public_key: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n      type: openstack.nodes.Keypair\n    testing_tosca_security_group:\n      properties:\n        name: testing_tosca_security_group\n      type: openstack.nodes.SecurityGroup\n    testing_tosca_security_group_rule:\n      properties:\n        direction: \'{{ initiator[item | int] | default(omit) }}\'\n        port_range_max: \'{{ port[item | int] | default(omit) }}\'\n        port_range_min: \'{{ port[item | int] | default(omit) }}\'\n        protocol: \'{{ protocol[item | int] | default(omit) }}\'\n        remote_ip_prefix: 0.0.0.0\n      requirements:\n      - security_group:\n          node: testing_tosca_security_group\n      type: openstack.nodes.SecurityGroupRule\n    testing_tosca_server:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_server_private_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_private_address_\"\n                + item, testing_tosca_server.results[item | int - 1].server.public_v4\n                ]] }}\'\n      properties:\n        auto_ip: false\n        meta: cube_master=true\n        name: testing_tosca_{{ item }}\n        nics:\n        - net-name: test-two-routers\n      requirements:\n      - key_name:\n          node: testing_tosca_keypair\n      - flavor:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - disk: 5.0\n            - ram: 1024.0\n      - security_groups:\n          node: testing_tosca_security_group\n      - image:\n          node_filter:\n            properties:\n            - name: not implemented yet\n      type: openstack.nodes.Server\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_floating_ip:\n  with_sequence: start=1 end=2 format=%d\ntesting_tosca_security_group_rule:\n  vars:\n    initiator:\n    - ingress\n    port:\n    - 22\n    protocol:\n    - tcp\n  with_sequence: start=0 end={{ [protocol | length, port | length, initiator | length]\n    | max - 1 }} format=%d\ntesting_tosca_server:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "info"
+
+2022-08-29 12:45:51,190 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 12:46:02,395 - INFO - MainThread - Server stopped
+2022-08-29 12:46:02,396 - INFO - MainThread - Exited
+2022-08-29 12:46:09,965 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 12:46:09,966 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 12:46:09,978 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 12:46:09,980 - INFO - MainThread - Server started
+2022-08-29 12:46:16,432 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 12:46:16,434 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_server\n      - dependency:\n          node: testing_tosca_security_group\n      - dependency:\n          node: testing_tosca_keypair\n      - dependency:\n          node: testing_tosca_server\n      - dependency:\n          node: testing_tosca_floating_ip\n      - dependency:\n          node: testing_tosca_security_group_rule\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_floating_ip:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_server_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_floating_ip.results[item | int - 1].floating_ip.floating_ip_address\n                ]] }}\'\n      properties:\n        floating_ip_address: 10.10.10.10\n      requirements:\n      - server:\n          node: testing_tosca_server\n      - network:\n          node_filter:\n            properties:\n            - name: not implemented yet\n      type: openstack.nodes.FloatingIp\n    testing_tosca_keypair:\n      properties:\n        name: testing_tosca_keypair\n        public_key: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n      type: openstack.nodes.Keypair\n    testing_tosca_security_group:\n      properties:\n        name: testing_tosca_security_group\n      type: openstack.nodes.SecurityGroup\n    testing_tosca_security_group_rule:\n      properties:\n        direction: \'{{ initiator[item | int] | default(omit) }}\'\n        port_range_max: \'{{ port[item | int] | default(omit) }}\'\n        port_range_min: \'{{ port[item | int] | default(omit) }}\'\n        protocol: \'{{ protocol[item | int] | default(omit) }}\'\n        remote_ip_prefix: 0.0.0.0\n      requirements:\n      - security_group:\n          node: testing_tosca_security_group\n      type: openstack.nodes.SecurityGroupRule\n    testing_tosca_server:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_server_private_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_private_address_\"\n                + item, testing_tosca_server.results[item | int - 1].server.public_v4\n                ]] }}\'\n      properties:\n        auto_ip: false\n        meta: cube_master=true\n        name: testing_tosca_{{ item }}\n        nics:\n        - net-name: test-two-routers\n      requirements:\n      - key_name:\n          node: testing_tosca_keypair\n      - flavor:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - disk: 5.0\n            - ram: 1024.0\n      - security_groups:\n          node: testing_tosca_security_group\n      - image:\n          node_filter:\n            properties:\n            - name: not implemented yet\n      type: openstack.nodes.Server\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_floating_ip:\n  with_sequence: start=1 end=2 format=%d\ntesting_tosca_security_group_rule:\n  vars:\n    initiator:\n    - ingress\n    port:\n    - 22\n    protocol:\n    - tcp\n  with_sequence: start=0 end={{ [protocol | length, port | length, initiator | length]\n    | max - 1 }} format=%d\ntesting_tosca_server:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+
+2022-08-29 12:46:16,435 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 12:46:23,186 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-29 12:46:32,235 - INFO - MainThread - Server stopped
+2022-08-29 12:46:32,236 - INFO - MainThread - Exited
+2022-08-29 12:46:37,013 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 12:46:37,013 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 12:46:37,029 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 12:46:37,033 - INFO - MainThread - Server started
+2022-08-29 12:46:43,262 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 12:46:43,324 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_server\n      - dependency:\n          node: testing_tosca_security_group\n      - dependency:\n          node: testing_tosca_keypair\n      - dependency:\n          node: testing_tosca_server\n      - dependency:\n          node: testing_tosca_floating_ip\n      - dependency:\n          node: testing_tosca_security_group_rule\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_floating_ip:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_server_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_floating_ip.results[item | int - 1].floating_ip.floating_ip_address\n                ]] }}\'\n      properties:\n        floating_ip_address: 10.10.10.10\n      requirements:\n      - server:\n          node: testing_tosca_server\n      - network:\n          node_filter:\n            properties:\n            - name: not implemented yet\n      type: openstack.nodes.FloatingIp\n    testing_tosca_keypair:\n      properties:\n        name: testing_tosca_keypair\n        public_key: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n      type: openstack.nodes.Keypair\n    testing_tosca_security_group:\n      properties:\n        name: testing_tosca_security_group\n      type: openstack.nodes.SecurityGroup\n    testing_tosca_security_group_rule:\n      properties:\n        direction: \'{{ initiator[item | int] | default(omit) }}\'\n        port_range_max: \'{{ port[item | int] | default(omit) }}\'\n        port_range_min: \'{{ port[item | int] | default(omit) }}\'\n        protocol: \'{{ protocol[item | int] | default(omit) }}\'\n        remote_ip_prefix: 0.0.0.0\n      requirements:\n      - security_group:\n          node: testing_tosca_security_group\n      type: openstack.nodes.SecurityGroupRule\n    testing_tosca_server:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_server_private_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_private_address_\"\n                + item, testing_tosca_server.results[item | int - 1].server.public_v4\n                ]] }}\'\n      properties:\n        auto_ip: false\n        meta: cube_master=true\n        name: testing_tosca_{{ item }}\n        nics:\n        - net-name: test-two-routers\n      requirements:\n      - key_name:\n          node: testing_tosca_keypair\n      - flavor:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - disk: 5.0\n            - ram: 1024.0\n      - security_groups:\n          node: testing_tosca_security_group\n      - image:\n          node_filter:\n            properties:\n            - name: not implemented yet\n      type: openstack.nodes.Server\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_floating_ip:\n  with_sequence: start=1 end=2 format=%d\ntesting_tosca_security_group_rule:\n  vars:\n    initiator:\n    - ingress\n    port:\n    - 22\n    protocol:\n    - tcp\n  with_sequence: start=0 end={{ [protocol | length, port | length, initiator | length]\n    | max - 1 }} format=%d\ntesting_tosca_server:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+
+2022-08-29 12:46:43,326 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 12:49:08,816 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-08-29 12:49:08,873 - DEBUG - ThreadPoolExecutor-0_1 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_group\n      - dependency:\n          node: testing_tosca_key\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+
+2022-08-29 12:49:08,875 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-08-29 12:59:03,418 - INFO - ThreadPoolExecutor-0_2 - Request received
+2022-08-29 12:59:03,453 - DEBUG - ThreadPoolExecutor-0_2 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_group\n      - dependency:\n          node: testing_tosca_key\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+
+2022-08-29 12:59:03,454 - INFO - ThreadPoolExecutor-0_2 - Request - status OK
+2022-08-29 13:08:29,777 - INFO - MainThread - Server stopped
+2022-08-29 13:08:29,780 - INFO - MainThread - Exited
+2022-08-29 13:08:36,914 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 13:08:36,915 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 13:08:36,931 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 13:08:36,935 - INFO - MainThread - Server started
+2022-08-29 13:08:37,257 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 13:08:37,298 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_group\n      - dependency:\n          node: testing_tosca_key\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+
+2022-08-29 13:08:37,300 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 13:08:43,990 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 86, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 66, in __init__
+    database_api_endpoint=self.database_api_endpoint)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 106, in translate
+    host_ip_parameter, is_delete)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 74, in __init__
+    node_types = self.get_used_definitions(self.node_templates)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 88, in get_used_definitions
+    types = self.get_used_definitions(value)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 88, in get_used_definitions
+    types = self.get_used_definitions(value)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 88, in get_used_definitions
+    types = self.get_used_definitions(value)
+  [Previous line repeated 1 more time]
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 92, in get_used_definitions
+    type = value.get(TYPE)
+AttributeError: 'str' object has no attribute 'get'
+2022-08-29 13:08:43,998 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-29 13:08:43,999 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-29 13:10:02,390 - INFO - MainThread - Server stopped
+2022-08-29 13:10:02,392 - INFO - MainThread - Exited
+2022-08-29 13:10:07,043 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 13:10:07,044 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 13:10:07,060 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 13:10:07,063 - INFO - MainThread - Server started
+2022-08-29 13:10:14,638 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 13:10:14,678 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_group\n      - dependency:\n          node: testing_tosca_key\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+
+2022-08-29 13:10:14,681 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 13:10:20,529 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 86, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 66, in __init__
+    database_api_endpoint=self.database_api_endpoint)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 106, in translate
+    host_ip_parameter, is_delete)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 74, in __init__
+    node_types = self.get_used_definitions(self.node_templates)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 88, in get_used_definitions
+    types = self.get_used_definitions(value)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 88, in get_used_definitions
+    types = self.get_used_definitions(value)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 88, in get_used_definitions
+    types = self.get_used_definitions(value)
+  [Previous line repeated 1 more time]
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 91, in get_used_definitions
+    type = value.get(TYPE)
+AttributeError: 'str' object has no attribute 'get'
+2022-08-29 13:10:20,533 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-29 13:10:20,534 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-29 13:10:24,880 - INFO - MainThread - Server stopped
+2022-08-29 13:10:24,881 - INFO - MainThread - Exited
+2022-08-29 13:10:48,062 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 13:10:48,063 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 13:10:48,079 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 13:10:48,082 - INFO - MainThread - Server started
+2022-08-29 13:10:55,472 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 13:10:55,510 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_key\n      - dependency:\n          node: testing_tosca_group\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+
+2022-08-29 13:10:55,513 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 13:11:02,264 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 86, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 66, in __init__
+    database_api_endpoint=self.database_api_endpoint)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 106, in translate
+    host_ip_parameter, is_delete)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 74, in __init__
+    node_types = self.get_used_definitions(self.node_templates)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 88, in get_used_definitions
+    types = self.get_used_definitions(value)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 88, in get_used_definitions
+    types = self.get_used_definitions(value)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 88, in get_used_definitions
+    types = self.get_used_definitions(value)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 94, in get_used_definitions
+    raise Exception("TOSCA definition type not found: %s" % type)
+Exception: TOSCA definition type not found: None
+2022-08-29 13:11:02,268 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-29 13:11:02,268 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-29 13:21:47,332 - INFO - MainThread - Server stopped
+2022-08-29 13:21:47,334 - INFO - MainThread - Exited
+2022-08-29 13:21:56,499 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 13:21:56,500 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 13:21:56,517 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 13:21:56,521 - INFO - MainThread - Server started
+2022-08-29 13:21:57,391 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 13:21:57,450 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_group\n      - dependency:\n          node: testing_tosca_key\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+
+2022-08-29 13:21:57,454 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 13:24:30,656 - INFO - MainThread - Server stopped
+2022-08-29 13:24:30,658 - INFO - MainThread - Exited
+2022-08-29 13:24:36,539 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 13:24:36,540 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 13:24:36,556 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 13:24:36,559 - INFO - MainThread - Server started
+2022-08-29 13:24:43,568 - INFO - MainThread - Server stopped
+2022-08-29 13:24:43,570 - INFO - MainThread - Exited
+2022-08-29 13:24:49,758 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 13:24:49,759 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 13:24:49,775 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 13:24:49,778 - INFO - MainThread - Server started
+2022-08-29 13:24:50,057 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 13:24:50,094 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_group\n      - dependency:\n          node: testing_tosca_key\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+
+2022-08-29 13:24:50,097 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 13:24:59,917 - INFO - MainThread - Server stopped
+2022-08-29 13:24:59,919 - INFO - MainThread - Exited
+2022-08-29 13:59:10,045 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 13:59:10,046 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 13:59:10,060 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 13:59:10,062 - INFO - MainThread - Server started
+2022-08-29 13:59:24,252 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 13:59:24,254 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_key\n      - dependency:\n          node: testing_tosca_group\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+
+2022-08-29 13:59:24,255 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 13:59:29,321 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-29 13:59:53,199 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 13:59:53,200 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_group\n      - dependency:\n          node: testing_tosca_key\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+
+2022-08-29 13:59:53,201 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 14:00:00,525 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-29 14:01:08,576 - INFO - MainThread - Server stopped
+2022-08-29 14:01:08,577 - INFO - MainThread - Exited
+2022-08-29 14:01:10,694 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 14:01:10,695 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 14:01:10,705 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 14:01:10,707 - INFO - MainThread - Server started
+2022-08-29 14:01:30,263 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 14:01:30,266 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_group\n      - dependency:\n          node: testing_tosca_key\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+database_api_endpoint: "127.0.0.1:1000"
+
+2022-08-29 14:01:30,268 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 14:01:35,995 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-29 14:03:12,679 - INFO - MainThread - Server stopped
+2022-08-29 14:03:12,679 - INFO - MainThread - Exited
+2022-08-29 14:03:15,290 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 14:03:15,291 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 14:03:15,301 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 14:03:15,302 - INFO - MainThread - Server started
+2022-08-29 14:04:40,040 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 14:04:40,043 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_group\n      - dependency:\n          node: testing_tosca_key\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+database_api_endpoint: "127.0.0.1:1000"
+
+2022-08-29 14:04:40,045 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 14:04:46,677 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-29 14:07:16,563 - INFO - MainThread - Server stopped
+2022-08-29 14:07:16,564 - INFO - MainThread - Exited
+2022-08-29 14:07:18,874 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 14:07:18,875 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 14:07:18,888 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 14:07:18,890 - INFO - MainThread - Server started
+2022-08-29 14:07:27,387 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 14:07:27,389 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_key\n      - dependency:\n          node: testing_tosca_group\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+database_api_endpoint: "127.0.0.1:1000"
+
+2022-08-29 14:07:27,390 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 14:07:29,954 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 86, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 66, in __init__
+    database_api_endpoint=self.database_api_endpoint)
+  File "/home/sadimer/ISPRAS/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 111, in translate
+    with open('gigadb.yaml') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'gigadb.yaml'
+2022-08-29 14:07:29,955 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-08-29 14:07:29,955 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-29 14:07:43,306 - INFO - MainThread - Server stopped
+2022-08-29 14:07:43,307 - INFO - MainThread - Exited
+2022-08-29 14:07:46,034 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 14:07:46,035 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 14:07:46,054 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 14:07:46,057 - INFO - MainThread - Server started
+2022-08-29 14:07:50,042 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 14:07:50,046 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_group\n      - dependency:\n          node: testing_tosca_key\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+database_api_endpoint: "127.0.0.1:1000"
+
+2022-08-29 14:07:50,047 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 14:07:55,531 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-29 14:16:14,127 - INFO - MainThread - Server stopped
+2022-08-29 14:16:14,128 - INFO - MainThread - Exited
+2022-08-29 14:56:55,861 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 14:56:55,862 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 14:56:55,895 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 14:56:55,911 - INFO - MainThread - Server started
+2022-08-29 14:57:04,339 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 14:57:04,341 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_group\n      - dependency:\n          node: testing_tosca_key\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+database_api_endpoint: "127.0.0.1:1000"
+
+2022-08-29 14:57:04,342 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 14:57:09,974 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-29 15:00:03,979 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 15:00:03,981 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_key\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_group\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+database_api_endpoint: "127.0.0.1:1000"
+
+2022-08-29 15:00:03,981 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 15:00:10,804 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-29 15:00:40,776 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-08-29 15:00:40,778 - DEBUG - ThreadPoolExecutor-0_1 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_group\n      - dependency:\n          node: testing_tosca_key\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+database_api_endpoint: "127.0.0.1:1000"
+
+2022-08-29 15:00:40,778 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-08-29 15:00:40,994 - INFO - MainThread - Server stopped
+2022-08-29 15:00:40,994 - INFO - MainThread - Exited
+2022-08-29 15:00:44,956 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-08-29 15:00:44,957 - DEBUG - MainThread - Arguments successfully parsed: max_workers 10, port 50052, host ['127.0.0.1']
+2022-08-29 15:00:44,968 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-08-29 15:00:44,970 - INFO - MainThread - Server started
+2022-08-29 15:00:49,462 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-08-29 15:00:49,463 - DEBUG - ThreadPoolExecutor-0_0 - Request content: provider_template: "topology_template:\n  node_templates:\n    software_for_cumulus_software_component:\n      interfaces:\n        Standard:\n          create:\n            implementation: ansible-operation-example.yaml\n      requirements:\n      - host:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_instance\n      - dependency:\n          node: testing_tosca_group\n      - dependency:\n          node: testing_tosca_key\n      type: tosca.nodes.SoftwareComponent\n    testing_tosca_group:\n      properties:\n        description: testing_tosca_group\n        name: testing_tosca_group\n        rules:\n        - cidr_ip: 0.0.0.0\n          ports:\n          - 22\n          proto: tcp\n        - cidr_ip: 0.0.0.0\n        rules_egress:\n        - cidr_ip: 0.0.0.0\n      type: amazon.nodes.Group\n    testing_tosca_instance:\n      interfaces:\n        Standard:\n          create:\n            implementation: add_host.yaml\n            inputs:\n              ansible_user: xenial\n              group: testing_tosca_instance_public_address\n              host_ip: \'{{ host_ip | default([]) + [[ \"testing_tosca_public_address_\"\n                + item, testing_tosca_instance.results[item | int - 1].instances[0].public_ip_address\n                ]] }}\'\n      properties:\n        name: testing_tosca_{{ item }}\n        network:\n          assign_public_ip: true\n        tags:\n          metadata: cube_master=true\n      requirements:\n      - key_name:\n          node: testing_tosca_key\n      - vpc_subnet_id:\n          node_filter:\n            properties:\n            - id: not implemented yet\n      - instance_type:\n          node_filter:\n            properties:\n            - vcpus: 1\n            - storage: 5.0\n            - memory: 1.0\n      - security_groups:\n          node: testing_tosca_group\n      - image_id:\n          node_filter:\n            properties:\n            - image_id: not implemented yet\n      type: amazon.nodes.Instance\n    testing_tosca_key:\n      properties:\n        key_material: \'{{ lookup(\'\'file\'\', \'\'~/.ssh/id_rsa.pub\'\') }}\'\n        name: testing_tosca_key\n      type: amazon.nodes.Key\ntosca_definitions_version: tosca_simple_yaml_1_0\n"
+cluster_name: "example"
+configuration_tool: "ansible"
+extra: "global: {}\ntesting_tosca_instance:\n  with_sequence: start=1 end=2 format=%d\n"
+log_level: "debug"
+debug: true
+database_api_endpoint: "127.0.0.1:1000"
+
+2022-08-29 15:00:49,465 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-08-29 15:00:55,070 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-08-29 15:01:34,080 - INFO - MainThread - Server stopped
+2022-08-29 15:01:34,081 - INFO - MainThread - Exited

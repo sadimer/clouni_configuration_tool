@@ -23,6 +23,10 @@ REQUIRED_CONFIGURATION_PARAMS = (TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFAC
 REQUIRED_CONFIGURATION_PARAMS = (TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFACTS_DIRECTORY, TOSCA_ELEMENTS_MAP_FILE)
 
 
+
+class NoAliasDumper(yaml.SafeDumper):
+    def ignore_aliases(self, data):
+        return True
 def translate(provider_template, validate_only, configuration_tool, cluster_name, is_delete=False,
               extra=None, log_level='info', debug=False, host_ip_parameter='public_address',
               database_api_endpoint=None, grpc_cotea_endpoint=None):
@@ -109,7 +113,9 @@ def translate(provider_template, validate_only, configuration_tool, cluster_name
     if database_api_endpoint:
         template = utils.deep_update_dict(template, tosca.used_definitions)
         del template[IMPORTS]
-        print(yaml.dump(template))
+        # for testing
+        with open('gigadb.yaml', 'w+') as f:
+            print(yaml.dump(template, Dumper=NoAliasDumper), file=f)
 
     tool = get_configuration_tool_class(configuration_tool)(provider)
 
