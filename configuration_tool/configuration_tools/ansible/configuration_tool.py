@@ -1,4 +1,3 @@
-
 import time
 from multiprocessing import Queue
 
@@ -59,6 +58,9 @@ class AnsibleConfigurationTool(ConfigurationTool):
 
         self.init_global_variables(inputs)
 
+        if not grpc_cotea_endpoint:
+            logging.warning("No grpc cotea endpoint provided! Use debug mode")
+            debug = True
         # the graph of operations at the moment is a dictionary of copies of ProviderTemplatre objects,
         # of the form Node/Relationship: {the set of opers of Nodes/Relationships on which it depends}
         elements = TopologicalSorter(operations_graph)
@@ -105,37 +107,34 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 description_prefix, module_prefix = self.get_module_prefixes(is_delete, ansible_config)
                 description_by_type = self.ansible_description_by_type(v.type_name, description_prefix)
                 module_by_type = self.ansible_module_by_type(v.type_name, module_prefix)
-                ansible_play_for_elem = dict(
-                    name=description_prefix + ' ' + self.provider + ' cluster: ' + v.name + ':' + v.operation,
-                    hosts=self.default_host,
-                    tasks=[]
-                )
+                ansible_tasks = []
+                host = self.default_host
                 # reload id_vars file
                 if not is_delete and first:
                     first = False
-                    ansible_play_for_elem['tasks'].append(copy.deepcopy({FILE: {
+                    ansible_tasks.append(copy.deepcopy({FILE: {
                         PATH: ids_file_path,
                         STATE: 'absent'}}))
-                    ansible_play_for_elem['tasks'].append(copy.deepcopy({FILE: {
+                    ansible_tasks.append(copy.deepcopy({FILE: {
                         PATH: ids_file_path,
                         STATE: 'touch'}}))
                 # create playbook for every operation
                 if v.operation == 'delete':
                     if not v.is_software_component:
-                        ansible_tasks = [copy.deepcopy({'include_vars': ids_file_path})]
-                        ansible_tasks.extend(self.get_ansible_tasks_for_delete(v, description_by_type, module_by_type,
-                                                                               additional_args=extra))
-                        ansible_tasks.extend(
+                        tasks = [copy.deepcopy({'include_vars': ids_file_path})]
+                        tasks.extend(self.get_ansible_tasks_for_delete(v, description_by_type, module_by_type,
+                                                                       additional_args=extra))
+                        tasks.extend(
                             self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
                                                                   additional_args=extra))
                         if not any(item == module_by_type for item in
                                    ansible_config.get('modules_skipping_delete', [])):
-                            ansible_play_for_elem['tasks'].extend(copy.deepcopy(ansible_tasks))
+                            ansible_tasks.extend(copy.deepcopy(tasks))
                 elif v.operation == 'create':
                     if not v.is_software_component:
-                        ansible_play_for_elem['tasks'].append(copy.deepcopy({'include_vars': ids_file_path}))
-                        ansible_play_for_elem['tasks'].extend(copy.deepcopy(self.get_ansible_tasks_for_inputs(inputs)))
+                        ansible_tasks.append(copy.deepcopy({'include_vars': ids_file_path}))
+                        ansible_tasks.extend(copy.deepcopy(self.get_ansible_tasks_for_inputs(inputs)))
                         ansible_tasks = self.get_ansible_tasks_for_create(v, target_directory, node_filter_config,
                                                                           description_by_type, module_by_type,
                                                                           additional_args=extra)
@@ -143,13 +142,11 @@ class AnsibleConfigurationTool(ConfigurationTool):
                             self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
                                                                   additional_args=extra))
-
-                        ansible_play_for_elem['tasks'].extend(copy.deepcopy(ansible_tasks))
-                        ansible_play_for_elem['tasks'].extend(copy.deepcopy(extra_tasks_for_delete))
+                        ansible_tasks.extend(copy.deepcopy(extra_tasks_for_delete))
 
                     else:
-                        ansible_play_for_elem['hosts'] = v.host
-                        ansible_play_for_elem['tasks'].extend(copy.deepcopy(
+                        host = v.host
+                        ansible_tasks.extend(copy.deepcopy(
                             self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
                                                                   additional_args=extra)))
@@ -157,20 +154,20 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     (_, element_type, _) = utils.tosca_type_parse(v.type)
                     if element_type == NODES:
                         if v.is_software_component:
-                            ansible_play_for_elem['hosts'] = v.host
+                            host = v.host
                     # operations for relationships executes on target/source host depends on operation
                     elif element_type == RELATIONSHIPS:
                         if v.operation == 'pre_configure_target' or v.operation == 'post_configure_target' or v.operation == 'add_source':
                             for elem in operations_graph:
                                 if elem.name == v.target:
                                     if elem.is_software_component:
-                                        ansible_play_for_elem['hosts'] = elem.host
+                                        host = v.host
                                     break
                         elif v.operation == 'pre_configure_source' or v.operation == 'post_configure_source':
                             for elem in operations_graph:
                                 if elem.name == v.source:
                                     if elem.is_software_component:
-                                        ansible_play_for_elem['hosts'] = elem.host
+                                        host = elem.host
                                     break
                         else:
                             logging.error("Unsupported operation for relationship in operation graph")
@@ -178,37 +175,38 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     else:
                         logging.error("Unsupported element type in operation graph")
                         raise Exception("Unsupported element type in operation graph")
-                    ansible_play_for_elem['tasks'].extend(copy.deepcopy(
+                    ansible_tasks.extend(copy.deepcopy(
                         self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation, cluster_name,
                                                               additional_args=extra)))
-                if len(ansible_play_for_elem['tasks']) > 0:
-                    ansible_playbook.append(ansible_play_for_elem)
-                # run playbooks
-                if not debug:
-                    if len(ansible_play_for_elem['tasks']) > 0:
-                        self.parallel_run([ansible_play_for_elem], v.name, v.operation, q, grpc_cotea_endpoint)
+                if debug:
+                    elements.done(v)
+                    if len(ansible_tasks) > 0:
+                        ansible_play_for_elem = {'tasks': ansible_tasks,
+                                                 'hosts': host,
+                                                 'name': description_prefix + ' ' + self.provider + ' cluster: ' +
+                                                         v.name + ':' + v.operation}
+                        ansible_playbook.append(ansible_play_for_elem)
+                else:
+                    if len(ansible_tasks) > 0:
+                        self.run(ansible_tasks, grpc_cotea_endpoint)
                     else:
                         elements.done(v)
-                    # add element to active list
                     active.append(v)
-                else:
-                    elements.done(v)
         if is_delete:
-            last_play = dict(
-                name='Renew id_vars_example.yaml',
-                hosts=self.default_host,
-                tasks=[]
-            )
-            last_play['tasks'].append(copy.deepcopy({FILE: {
+            ansible_tasks = [{FILE: {
                 PATH: ids_file_path,
-                STATE: 'absent'}}))
-            if not debug:
-                self.parallel_run([last_play], None, None, q, grpc_cotea_endpoint)
+                STATE: 'absent'}}]
+            if debug:
+                ansible_play_for_elem = {'tasks': ansible_tasks,
+                                         'hosts': self.default_host,
+                                         'name': 'Renew id_vars_example.yaml'}
+                ansible_playbook.append(ansible_play_for_elem)
+            else:
+                self.run(ansible_tasks, grpc_cotea_endpoint)
                 done = q.get()
                 if done != 'Done':
                     logging.error("Something wrong with multiprocessing queue")
                     raise Exception("Something wrong with multiprocessing queue")
-            ansible_playbook.append(last_play)
         # delete dir with cluster_name in tmp clouni dir
         if not debug:
             rmtree(os.path.join(utils.get_tmp_clouni_dir(), cluster_name))
@@ -356,7 +354,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     else:
                         logging.error(
                             "Artifact filename %s was not found in %s or %s" % (
-                            script, script_filename_1, script_filename_2))
+                                script, script_filename_1, script_filename_2))
                     if not primary and interface_operation.get(INPUTS) is not None:
                         for input_name, input_value in interface_operation[INPUTS].items():
                             ansible_tasks.append({
@@ -436,7 +434,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
         (_, _, node_type) = utils.tosca_type_parse(type)
         node_type = utils.snake_case(node_type)
         # TODO: fix this chaos
-        if type == 'openstack.nodes.FloatingIp': # temporary solutions
+        if type == 'openstack.nodes.FloatingIp':  # temporary solutions
             ansible_tasks_for_create.append({
                 'set_fact': {task_name + '_dict': {'floating_ip_address': self.rap_ansible_variable(
                     'item.floating_ip.floating_ip_address'),
@@ -461,7 +459,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     'line': task_name + '_dicts:\n' + self.rap_ansible_variable(task_name + '_dicts | to_nice_yaml')},
                 'when': task_name + '_dicts' + IS_DEFINED,
             })
-        elif type == 'amazon.nodes.Key': # temporary solutions
+        elif type == 'amazon.nodes.Key':  # temporary solutions
             # amazon ec2 has very BAD return values - there is no id in return value for ec2_key module
             ansible_tasks_for_create.append({
                 LINEINFILE: {
@@ -478,7 +476,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 'loop': self.rap_ansible_variable(task_name + '.results | flatten(levels=1) '),
                 'when': 'item.id ' + IS_DEFINED
             })
-            ansible_tasks_for_create.append({ # temporary solutions
+            ansible_tasks_for_create.append({  # temporary solutions
                 'set_fact': {
                     task_name + '_list': self.rap_ansible_variable(
                         task_name + '_list' + " | default([])") + " + [ \"{{ item." + node_type + "_ids[0] }}\" ]"},
@@ -504,7 +502,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                         task_name + '.' + node_type + '_id')},
                 'when': task_name + '.' + node_type + '_id' + IS_DEFINED
             })
-            for elem in node_type.split('_'): # temporary solutions
+            for elem in node_type.split('_'):  # temporary solutions
                 ansible_tasks_for_create.append({
                     LINEINFILE: {
                         PATH: path,
@@ -552,11 +550,13 @@ class AnsibleConfigurationTool(ConfigurationTool):
             })
         return ansible_tasks
 
-    def parallel_run(self, ansible_play, name, op, q, grpc_cotea_endpoint):
+    def run(self, ansible_tasks, grpc_cotea_endpoint):
+        extra_env = {}
+        extra_vars = {}
         if self.provider == 'amazon':
             amazon_plugins_path = os.path.join(utils.get_project_root_path(), '.ansible/plugins/modules/cloud/amazon')
             if "ANSIBLE_LIBRARY" not in os.environ:
-                os.environ["ANSIBLE_LIBRARY"] = amazon_plugins_path
+                extra_env["ANSIBLE_LIBRARY"] = amazon_plugins_path
             elif amazon_plugins_path not in os.environ["ANSIBLE_LIBRARY"]:
-                os.environ["ANSIBLE_LIBRARY"] += os.pathsep + amazon_plugins_path
-        grpc_cotea_run_ansible(ansible_play, name, op, q, grpc_cotea_endpoint)
+                extra_env["ANSIBLE_LIBRARY"] += os.pathsep + amazon_plugins_path
+        grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars)
