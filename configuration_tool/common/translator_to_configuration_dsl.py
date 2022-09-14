@@ -108,7 +108,7 @@ def translate(provider_template, validate_only, configuration_tool, cluster_name
         return msg
 
     tosca = ProviderToscaTemplate(topology_template, provider, configuration_tool, cluster_name,
-                                  host_ip_parameter, is_delete)
+                                  host_ip_parameter, is_delete, grpc_cotea_endpoint)
 
     if database_api_endpoint:
         template = utils.deep_update_dict(template, tosca.used_definitions)

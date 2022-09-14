@@ -11,10 +11,10 @@ from configuration_tool.providers.common.provider_configuration import ProviderC
 from configuration_tool.configuration_tools.common.configuration_tool import ConfigurationTool, \
     OUTPUT_IDS, OUTPUT_ID_RANGE_START, OUTPUT_ID_RANGE_END
 
-from configuration_tool.configuration_tools.ansible.runner import grpc_cotea_run_ansible
+from configuration_tool.configuration_tools.ansible.runner.runner import grpc_cotea_run_ansible
 
-import copy, sys, yaml, os, itertools, six, logging
-from shutil import copyfile, rmtree
+import copy, yaml, os, itertools, six, logging
+from shutil import copyfile
 
 SEPARATOR = '.'
 
@@ -58,8 +58,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
 
         self.init_global_variables(inputs)
 
-        if not grpc_cotea_endpoint:
-            logging.warning("No grpc cotea endpoint provided! Use debug mode")
+        if not debug and not grpc_cotea_endpoint:
+            logging.warning("No grpc cotea endpoint provided! Use debug mode!")
             debug = True
         # the graph of operations at the moment is a dictionary of copies of ProviderTemplatre objects,
         # of the form Node/Relationship: {the set of opers of Nodes/Relationships on which it depends}

@@ -3,16 +3,11 @@ import os
 from threading import Thread
 
 import grpc
-import yaml
 
 from configuration_tool.common import utils
-from configuration_tool.common.utils import get_random_int
 
-
-import ast
-
-from configuration_tool.configuration_tools.ansible import cotea_pb2_grpc
-from configuration_tool.configuration_tools.ansible.cotea_pb2 import StartSessionMSG, EmptyMsg, Config, MapFieldEntry, \
+from configuration_tool.configuration_tools.ansible.runner import cotea_pb2_grpc
+from configuration_tool.configuration_tools.ansible.runner.cotea_pb2 import EmptyMsg, Config, MapFieldEntry, \
     Task, SessionID
 
 SEPARATOR = '.'
