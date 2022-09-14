@@ -188,7 +188,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                         ansible_playbook.append(ansible_play_for_elem)
                 else:
                     if len(ansible_tasks) > 0:
-                        self.run(ansible_tasks, grpc_cotea_endpoint)
+                        self.run(ansible_tasks, grpc_cotea_endpoint, v.name, v.operation, q)
                     else:
                         elements.done(v)
                     active.append(v)
@@ -202,14 +202,11 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                          'name': 'Renew id_vars_example.yaml'}
                 ansible_playbook.append(ansible_play_for_elem)
             else:
-                self.run(ansible_tasks, grpc_cotea_endpoint)
+                self.run(ansible_tasks, grpc_cotea_endpoint, None, None, q)
                 done = q.get()
                 if done != 'Done':
                     logging.error("Something wrong with multiprocessing queue")
                     raise Exception("Something wrong with multiprocessing queue")
-        # delete dir with cluster_name in tmp clouni dir
-        if not debug:
-            rmtree(os.path.join(utils.get_tmp_clouni_dir(), cluster_name))
         return yaml.dump(ansible_playbook, default_flow_style=False, sort_keys=False)
 
     def replace_all_get_functions(self, data):
@@ -550,7 +547,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
             })
         return ansible_tasks
 
-    def run(self, ansible_tasks, grpc_cotea_endpoint):
+    def run(self, ansible_tasks, grpc_cotea_endpoint, name, op, q):
         extra_env = {}
         extra_vars = {}
         if self.provider == 'amazon':
@@ -559,4 +556,4 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 extra_env["ANSIBLE_LIBRARY"] = amazon_plugins_path
             elif amazon_plugins_path not in os.environ["ANSIBLE_LIBRARY"]:
                 extra_env["ANSIBLE_LIBRARY"] += os.pathsep + amazon_plugins_path
-        grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars)
+        grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, name, op, q)

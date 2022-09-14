@@ -21,9 +21,5 @@ tosca-server-example-output*
 tosca-network-and-port-example-output*
 
 venv
-my_definitions
-my_examples
-my_templates
 
 test
-artifacts

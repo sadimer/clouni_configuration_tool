@@ -1510,3 +1510,36 @@ KeyError: 'software_for_cumulus_software_component'
 2022-08-25 15:11:35,667 - INFO - ThreadPoolExecutor-0_0 - Response send
 2022-08-25 16:46:13,528 - INFO - MainThread - Server stopped
 2022-08-25 16:46:13,528 - INFO - MainThread - Exited
+2022-09-14 17:26:31,423 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-14 17:26:32,145 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-14 17:26:32,163 - INFO - MainThread - Server started
+2022-09-14 17:26:54,858 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-14 17:26:54,858 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-14 17:26:58,063 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-14 17:27:46,576 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-09-14 17:27:46,576 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-09-14 17:27:49,699 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-09-14 17:29:30,168 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-14 17:29:30,168 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-14 17:29:30,176 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 59, in translate
+    provider_config = ProviderConfiguration(provider)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_configuration.py", line 42, in __init__
+    raise Exception("Configuration files were missing in possible locations: %s" % json.dumps(filename_variants_priority))
+Exception: Configuration files were missing in possible locations: ["/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/tosca.cfg", "/home/sadimer/Desktop/clouni_configuration_tool/tosca.cfg", "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/tosca/provider.cfg", "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/tosca/tosca.cfg"]
+2022-09-14 17:29:30,183 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-14 17:29:30,183 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-14 17:29:44,675 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-09-14 17:29:44,676 - INFO - ThreadPoolExecutor-0_1 - Validate only request - status TEMPLATE_VALID
+2022-09-14 17:29:44,739 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-09-14 17:29:52,081 - INFO - ThreadPoolExecutor-0_2 - Request received
+2022-09-14 17:29:52,081 - INFO - ThreadPoolExecutor-0_2 - Request - status OK
+2022-09-14 17:29:55,220 - INFO - ThreadPoolExecutor-0_2 - Response send
+2022-09-14 17:31:15,593 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-14 17:31:15,593 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-14 17:31:18,711 - INFO - ThreadPoolExecutor-0_0 - Response send
