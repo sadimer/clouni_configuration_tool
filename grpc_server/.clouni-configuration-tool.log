@@ -1599,3 +1599,1228 @@ TypeError: execute() takes from 2 to 4 positional arguments but 5 were given
 2022-09-14 18:57:40,462 - INFO - ThreadPoolExecutor-0_0 - Request received
 2022-09-14 18:57:40,462 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
 2022-09-14 18:57:43,837 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-14 19:03:21,854 - INFO - MainThread - Server stopped
+2022-09-14 19:03:21,855 - INFO - MainThread - Exited
+2022-09-20 17:48:01,138 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 17:48:01,497 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 17:48:01,501 - INFO - MainThread - Server started
+2022-09-20 17:48:26,782 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 17:48:26,783 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 18:03:44,135 - INFO - MainThread - Server stopped
+2022-09-20 18:03:44,136 - INFO - MainThread - Exited
+2022-09-20 18:03:49,644 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 18:03:49,648 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 18:03:49,654 - INFO - MainThread - Server started
+2022-09-20 18:03:59,744 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 18:03:59,744 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 18:03:59,878 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 116, in translate
+    all_templates.udpate(tosca.relationship_templates)
+AttributeError: 'dict' object has no attribute 'udpate'
+2022-09-20 18:03:59,879 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-20 18:03:59,879 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-20 18:04:40,722 - INFO - MainThread - Server stopped
+2022-09-20 18:04:40,722 - INFO - MainThread - Exited
+2022-09-20 18:04:42,069 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 18:04:42,074 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 18:04:42,077 - INFO - MainThread - Server started
+2022-09-20 18:04:49,106 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 18:04:49,106 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 18:04:49,249 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 118, in translate
+    for key, value in all_templates:
+ValueError: too many values to unpack (expected 2)
+2022-09-20 18:04:49,250 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-20 18:04:49,250 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-20 18:05:27,518 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 18:05:27,518 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 18:05:27,635 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 118, in translate
+    for key, value in all_templates:
+ValueError: too many values to unpack (expected 2)
+2022-09-20 18:05:27,635 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-20 18:05:27,635 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-20 18:06:08,121 - INFO - MainThread - Server stopped
+2022-09-20 18:06:08,121 - INFO - MainThread - Exited
+2022-09-20 18:06:09,422 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 18:06:09,426 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 18:06:09,427 - INFO - MainThread - Server started
+2022-09-20 18:06:16,648 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 18:06:16,648 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 18:06:16,780 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 118, in translate
+    for key, value in all_templates:
+ValueError: too many values to unpack (expected 2)
+2022-09-20 18:06:16,780 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-20 18:06:16,780 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-20 18:06:28,219 - INFO - MainThread - Server stopped
+2022-09-20 18:06:28,219 - INFO - MainThread - Exited
+2022-09-20 18:06:29,568 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 18:06:29,574 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 18:06:29,576 - INFO - MainThread - Server started
+2022-09-20 18:06:35,055 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 18:06:35,055 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 18:06:51,639 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-20 18:08:25,763 - INFO - MainThread - Server stopped
+2022-09-20 18:08:25,763 - INFO - MainThread - Exited
+2022-09-20 18:08:58,675 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 18:08:58,683 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 18:08:58,685 - INFO - MainThread - Server started
+2022-09-20 18:09:02,315 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 18:09:02,315 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 18:25:03,861 - INFO - MainThread - Server stopped
+2022-09-20 18:25:03,861 - INFO - MainThread - Exited
+2022-09-20 18:25:07,043 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 18:25:07,048 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 18:25:07,050 - INFO - MainThread - Server started
+2022-09-20 18:25:10,203 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 18:25:10,203 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 18:25:15,862 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 127, in translate
+    definitions = utils.deep_update_dict(definitions, json.loads(response['result']))
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/__init__.py", line 348, in loads
+    'not {!r}'.format(s.__class__.__name__))
+TypeError: the JSON object must be str, bytes or bytearray, not 'dict'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 129, in translate
+    raise Exception("Failed to parse json response from db")
+Exception: Failed to parse json response from db
+2022-09-20 18:25:15,871 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-20 18:25:15,871 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-20 18:25:39,803 - INFO - MainThread - Server stopped
+2022-09-20 18:25:39,803 - INFO - MainThread - Exited
+2022-09-20 18:26:11,775 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 18:26:11,779 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 18:26:11,781 - INFO - MainThread - Server started
+2022-09-20 18:26:15,412 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 18:26:15,413 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 18:26:20,719 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 128, in translate
+    definitions = utils.deep_update_dict(definitions, json.loads(response['result']))
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/__init__.py", line 348, in loads
+    'not {!r}'.format(s.__class__.__name__))
+TypeError: the JSON object must be str, bytes or bytearray, not 'dict'
+2022-09-20 18:26:20,719 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-20 18:26:20,720 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-20 18:26:59,155 - INFO - MainThread - Server stopped
+2022-09-20 18:26:59,155 - INFO - MainThread - Exited
+2022-09-20 18:27:00,480 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 18:27:00,484 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 18:27:00,485 - INFO - MainThread - Server started
+2022-09-20 18:27:03,678 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 18:27:03,678 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 18:27:17,616 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 129, in translate
+    with open(os.path.join(utils.get_tmp_clouni_dir(), 'template.yaml'), "rw") as f:
+ValueError: must have exactly one of create/read/write/append mode
+2022-09-20 18:27:17,617 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-20 18:27:17,617 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-20 18:28:41,837 - INFO - MainThread - Server stopped
+2022-09-20 18:28:41,838 - INFO - MainThread - Exited
+2022-09-20 18:28:43,806 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 18:28:43,811 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 18:28:43,812 - INFO - MainThread - Server started
+2022-09-20 18:28:49,238 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 18:28:49,239 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 18:29:02,203 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 129, in translate
+    with open(os.path.join(utils.get_tmp_clouni_dir(), 'template.yaml'), "r+") as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/clouni/template.yaml'
+2022-09-20 18:29:02,204 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-20 18:29:02,204 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-20 18:29:10,536 - INFO - MainThread - Server stopped
+2022-09-20 18:29:10,536 - INFO - MainThread - Exited
+2022-09-20 18:29:12,590 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 18:29:12,595 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 18:29:12,596 - INFO - MainThread - Server started
+2022-09-20 18:29:15,466 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 18:29:15,467 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 18:29:29,612 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 135, in translate
+    raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+Exception: Error in db! Status code: 400, msg: The browser (or proxy) sent a request that this server could not understand.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 137, in translate
+    raise Exception("Failed to parse json response from db on loading template")
+Exception: Failed to parse json response from db on loading template
+2022-09-20 18:29:29,613 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-20 18:29:29,613 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-20 18:33:31,734 - INFO - MainThread - Server stopped
+2022-09-20 18:33:31,734 - INFO - MainThread - Exited
+2022-09-20 18:33:33,182 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 18:33:33,186 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 18:33:33,188 - INFO - MainThread - Server started
+2022-09-20 18:33:37,594 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 18:33:37,594 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 18:33:52,197 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 138, in translate
+    raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+Exception: Error in db! Status code: 400, msg: The browser (or proxy) sent a request that this server could not understand.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 140, in translate
+    raise Exception("Failed to parse json response from db on loading template")
+Exception: Failed to parse json response from db on loading template
+2022-09-20 18:33:52,197 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-20 18:33:52,197 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-20 18:35:59,256 - INFO - MainThread - Server stopped
+2022-09-20 18:35:59,256 - INFO - MainThread - Exited
+2022-09-20 18:36:01,075 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 18:36:01,079 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 18:36:01,080 - INFO - MainThread - Server started
+2022-09-20 18:36:03,518 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 18:36:03,519 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 18:36:17,416 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 140, in translate
+    raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+Exception: Error in db! Status code: 400, msg: The browser (or proxy) sent a request that this server could not understand.
+2022-09-20 18:36:17,416 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-20 18:36:17,417 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-20 18:48:29,728 - INFO - MainThread - Server stopped
+2022-09-20 18:48:29,728 - INFO - MainThread - Exited
+2022-09-20 18:48:32,234 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 18:48:32,241 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 18:48:32,243 - INFO - MainThread - Server started
+2022-09-20 18:48:33,644 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 18:48:33,644 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 19:07:29,019 - INFO - MainThread - Server stopped
+2022-09-20 19:07:29,020 - INFO - MainThread - Exited
+2022-09-20 19:07:32,308 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 19:07:32,312 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 19:07:32,314 - INFO - MainThread - Server started
+2022-09-20 19:07:35,103 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 19:07:35,103 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 19:07:50,276 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 56, in load_to_db
+    raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+Exception: Error in db! Status code: 400, msg: The browser (or proxy) sent a request that this server could not understand.
+2022-09-20 19:07:50,277 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-20 19:07:50,277 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-20 19:14:54,337 - INFO - MainThread - Server stopped
+2022-09-20 19:14:54,337 - INFO - MainThread - Exited
+2022-09-20 19:14:56,088 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-20 19:14:56,092 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-20 19:14:56,094 - INFO - MainThread - Server started
+2022-09-20 19:14:59,344 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-20 19:14:59,345 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-20 19:15:14,130 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 56, in load_to_db
+    raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+Exception: Error in db! Status code: 400, msg: The browser (or proxy) sent a request that this server could not understand.
+2022-09-20 19:15:14,131 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-20 19:15:14,131 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-20 19:15:27,419 - INFO - MainThread - Server stopped
+2022-09-20 19:15:27,419 - INFO - MainThread - Exited
+2022-09-29 17:11:42,479 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 17:11:42,572 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 17:11:42,575 - INFO - MainThread - Server started
+2022-09-29 17:11:49,527 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 17:11:49,528 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 17:11:49,860 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/models.py", line 910, in json
+    return complexjson.loads(self.text, **kwargs)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 39, in load_to_db
+    response = r.json()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/models.py", line 917, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+requests.exceptions.JSONDecodeError: [Errno Expecting value] <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 41, in load_to_db
+    raise Exception("Failed to parse json response from db")
+Exception: Failed to parse json response from db
+2022-09-29 17:11:49,896 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 17:11:49,896 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 17:11:54,522 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 17:11:54,522 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 17:11:54,728 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/models.py", line 910, in json
+    return complexjson.loads(self.text, **kwargs)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 39, in load_to_db
+    response = r.json()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/models.py", line 917, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+requests.exceptions.JSONDecodeError: [Errno Expecting value] <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 41, in load_to_db
+    raise Exception("Failed to parse json response from db")
+Exception: Failed to parse json response from db
+2022-09-29 17:11:54,728 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 17:11:54,729 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 17:12:15,415 - INFO - MainThread - Server stopped
+2022-09-29 17:12:15,416 - INFO - MainThread - Exited
+2022-09-29 17:12:17,499 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 17:12:17,507 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 17:12:17,509 - INFO - MainThread - Server started
+2022-09-29 17:12:19,951 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 17:12:19,951 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 17:19:08,108 - INFO - MainThread - Server stopped
+2022-09-29 17:19:08,109 - INFO - MainThread - Exited
+2022-09-29 17:19:11,462 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 17:19:11,467 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 17:19:11,469 - INFO - MainThread - Server started
+2022-09-29 17:19:14,689 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 17:19:14,689 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 17:19:28,888 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 56, in load_to_db
+    raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+Exception: Error in db! Status code: 400, msg: The browser (or proxy) sent a request that this server could not understand.
+2022-09-29 17:19:28,888 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 17:19:28,888 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 17:22:57,964 - INFO - MainThread - Server stopped
+2022-09-29 17:22:57,964 - INFO - MainThread - Exited
+2022-09-29 17:23:00,088 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 17:23:00,097 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 17:23:00,099 - INFO - MainThread - Server started
+2022-09-29 17:23:11,878 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 17:23:11,878 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 17:26:08,419 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 56, in load_to_db
+    raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+Exception: Error in db! Status code: 400, msg: The browser (or proxy) sent a request that this server could not understand.
+2022-09-29 17:26:08,421 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 17:26:08,422 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 17:26:22,997 - INFO - MainThread - Server stopped
+2022-09-29 17:26:22,997 - INFO - MainThread - Exited
+2022-09-29 17:26:25,213 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 17:26:25,221 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 17:26:25,224 - INFO - MainThread - Server started
+2022-09-29 17:27:28,500 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 17:27:28,500 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 17:30:10,861 - INFO - MainThread - Server stopped
+2022-09-29 17:30:10,862 - INFO - MainThread - Exited
+2022-09-29 17:30:23,385 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 17:30:23,392 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 17:30:23,395 - INFO - MainThread - Server started
+2022-09-29 17:30:24,750 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 17:30:24,751 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 17:38:29,004 - INFO - MainThread - Server stopped
+2022-09-29 17:38:29,005 - INFO - MainThread - Exited
+2022-09-29 17:38:32,480 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 17:38:32,489 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 17:38:32,491 - INFO - MainThread - Server started
+2022-09-29 17:38:48,937 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 17:38:48,937 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 18:12:29,241 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 56, in load_to_db
+    raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+Exception: Error in db! Status code: 400, msg: The browser (or proxy) sent a request that this server could not understand.
+2022-09-29 18:12:29,242 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 18:12:29,242 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 18:31:04,682 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 18:31:04,682 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 18:31:05,137 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 710, in urlopen
+    chunked=chunked,
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 398, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 239, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1254, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1300, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1249, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1036, in _send_output
+    self.send(msg)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 974, in send
+    self.connect()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 187, in _new_conn
+    self, "Failed to establish a new connection: %s" % e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f0aac489390>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/adapters.py", line 450, in send
+    timeout=timeout
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='10.100.151.115', port=5000): Max retries exceeded with url: /v0.1/all_dependencies/TOSCA_DEFINITIONS/node_type/tosca.nodes.SoftwareComponent (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0aac489390>: Failed to establish a new connection: [Errno 111] Connection refused',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 37, in load_to_db
+    r = requests.get(utils.get_url_for_getting_dependencies(def_cluster, database_api_endpoint, type))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/api.py", line 75, in get
+    return request('get', url, params=params, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/sessions.py", line 529, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/sessions.py", line 645, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='10.100.151.115', port=5000): Max retries exceeded with url: /v0.1/all_dependencies/TOSCA_DEFINITIONS/node_type/tosca.nodes.SoftwareComponent (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0aac489390>: Failed to establish a new connection: [Errno 111] Connection refused',))
+2022-09-29 18:31:05,161 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 18:31:05,161 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 18:31:19,523 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 18:31:19,535 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 18:31:19,548 - INFO - MainThread - Server started
+2022-09-29 18:31:24,992 - INFO - ThreadPoolExecutor-0_2 - Request received
+2022-09-29 18:31:24,992 - INFO - ThreadPoolExecutor-0_2 - Request - status OK
+2022-09-29 18:31:25,366 - ERROR - ThreadPoolExecutor-0_2 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 710, in urlopen
+    chunked=chunked,
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 398, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 239, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1254, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1300, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1249, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1036, in _send_output
+    self.send(msg)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 974, in send
+    self.connect()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 187, in _new_conn
+    self, "Failed to establish a new connection: %s" % e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f0aac39eac8>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/adapters.py", line 450, in send
+    timeout=timeout
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='10.100.151.115', port=5000): Max retries exceeded with url: /v0.1/all_dependencies/TOSCA_DEFINITIONS/node_type/tosca.nodes.SoftwareComponent (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0aac39eac8>: Failed to establish a new connection: [Errno 111] Connection refused',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 37, in load_to_db
+    r = requests.get(utils.get_url_for_getting_dependencies(def_cluster, database_api_endpoint, type))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/api.py", line 75, in get
+    return request('get', url, params=params, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/sessions.py", line 529, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/sessions.py", line 645, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='10.100.151.115', port=5000): Max retries exceeded with url: /v0.1/all_dependencies/TOSCA_DEFINITIONS/node_type/tosca.nodes.SoftwareComponent (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0aac39eac8>: Failed to establish a new connection: [Errno 111] Connection refused',))
+2022-09-29 18:31:25,367 - INFO - ThreadPoolExecutor-0_2 - Request - status ERROR
+2022-09-29 18:31:25,368 - INFO - ThreadPoolExecutor-0_2 - Response send
+2022-09-29 18:31:28,383 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 18:31:28,383 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 18:31:28,757 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 710, in urlopen
+    chunked=chunked,
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 398, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 239, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1254, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1300, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1249, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1036, in _send_output
+    self.send(msg)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 974, in send
+    self.connect()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 187, in _new_conn
+    self, "Failed to establish a new connection: %s" % e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f0aac277e48>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/adapters.py", line 450, in send
+    timeout=timeout
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='10.100.151.115', port=5000): Max retries exceeded with url: /v0.1/all_dependencies/TOSCA_DEFINITIONS/node_type/tosca.nodes.SoftwareComponent (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0aac277e48>: Failed to establish a new connection: [Errno 111] Connection refused',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 37, in load_to_db
+    r = requests.get(utils.get_url_for_getting_dependencies(def_cluster, database_api_endpoint, type))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/api.py", line 75, in get
+    return request('get', url, params=params, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/sessions.py", line 529, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/sessions.py", line 645, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='10.100.151.115', port=5000): Max retries exceeded with url: /v0.1/all_dependencies/TOSCA_DEFINITIONS/node_type/tosca.nodes.SoftwareComponent (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0aac277e48>: Failed to establish a new connection: [Errno 111] Connection refused',))
+2022-09-29 18:31:28,758 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 18:31:28,758 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 18:31:36,281 - INFO - MainThread - Server stopped
+2022-09-29 18:31:36,281 - INFO - MainThread - Exited
+2022-09-29 18:31:41,972 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 18:31:41,976 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 18:31:41,977 - INFO - MainThread - Server started
+2022-09-29 18:31:45,458 - INFO - ThreadPoolExecutor-0_4 - Request received
+2022-09-29 18:31:45,459 - INFO - ThreadPoolExecutor-0_4 - Request - status OK
+2022-09-29 18:31:45,849 - ERROR - ThreadPoolExecutor-0_4 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 710, in urlopen
+    chunked=chunked,
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 398, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 239, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1254, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1300, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1249, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1036, in _send_output
+    self.send(msg)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 974, in send
+    self.connect()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 187, in _new_conn
+    self, "Failed to establish a new connection: %s" % e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f0aac2914a8>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/adapters.py", line 450, in send
+    timeout=timeout
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='10.100.151.115', port=5000): Max retries exceeded with url: /v0.1/all_dependencies/TOSCA_DEFINITIONS/node_type/tosca.nodes.SoftwareComponent (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0aac2914a8>: Failed to establish a new connection: [Errno 111] Connection refused',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 37, in load_to_db
+    r = requests.get(utils.get_url_for_getting_dependencies(def_cluster, database_api_endpoint, type))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/api.py", line 75, in get
+    return request('get', url, params=params, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/sessions.py", line 529, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/sessions.py", line 645, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='10.100.151.115', port=5000): Max retries exceeded with url: /v0.1/all_dependencies/TOSCA_DEFINITIONS/node_type/tosca.nodes.SoftwareComponent (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0aac2914a8>: Failed to establish a new connection: [Errno 111] Connection refused',))
+2022-09-29 18:31:45,850 - INFO - ThreadPoolExecutor-0_4 - Request - status ERROR
+2022-09-29 18:31:45,850 - INFO - ThreadPoolExecutor-0_4 - Response send
+2022-09-29 18:32:25,617 - INFO - MainThread - Server stopped
+2022-09-29 18:32:25,617 - INFO - MainThread - Exited
+2022-09-29 18:32:34,954 - INFO - MainThread - Server stopped
+2022-09-29 18:32:34,954 - INFO - MainThread - Exited
+2022-09-29 18:32:38,608 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 18:32:38,612 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 18:32:38,614 - INFO - MainThread - Server started
+2022-09-29 18:32:43,557 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 18:32:43,557 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 18:32:43,713 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 710, in urlopen
+    chunked=chunked,
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 398, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 239, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1254, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1300, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1249, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1036, in _send_output
+    self.send(msg)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 974, in send
+    self.connect()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 187, in _new_conn
+    self, "Failed to establish a new connection: %s" % e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7fb0b0346fd0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/adapters.py", line 450, in send
+    timeout=timeout
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='10.100.151.115', port=5000): Max retries exceeded with url: /v0.1/all_dependencies/TOSCA_DEFINITIONS/node_type/tosca.nodes.SoftwareComponent (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fb0b0346fd0>: Failed to establish a new connection: [Errno 111] Connection refused',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 37, in load_to_db
+    r = requests.get(utils.get_url_for_getting_dependencies(def_cluster, database_api_endpoint, type))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/api.py", line 75, in get
+    return request('get', url, params=params, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/sessions.py", line 529, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/sessions.py", line 645, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='10.100.151.115', port=5000): Max retries exceeded with url: /v0.1/all_dependencies/TOSCA_DEFINITIONS/node_type/tosca.nodes.SoftwareComponent (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fb0b0346fd0>: Failed to establish a new connection: [Errno 111] Connection refused',))
+2022-09-29 18:32:43,715 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 18:32:43,715 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 18:33:17,360 - INFO - MainThread - Server stopped
+2022-09-29 18:33:17,360 - INFO - MainThread - Exited
+2022-09-29 18:33:25,999 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 18:33:26,003 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 18:33:26,005 - INFO - MainThread - Server started
+2022-09-29 18:33:34,745 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 18:33:34,745 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 18:33:34,897 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 710, in urlopen
+    chunked=chunked,
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 398, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 239, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1254, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1300, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1249, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 1036, in _send_output
+    self.send(msg)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/http/client.py", line 974, in send
+    self.connect()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connection.py", line 187, in _new_conn
+    self, "Failed to establish a new connection: %s" % e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7fa8a027ec88>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/adapters.py", line 450, in send
+    timeout=timeout
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='10.100.151.115', port=5000): Max retries exceeded with url: /v0.1/all_dependencies/TOSCA_DEFINITIONS/node_type/tosca.nodes.SoftwareComponent (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fa8a027ec88>: Failed to establish a new connection: [Errno 111] Connection refused',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 37, in load_to_db
+    r = requests.get(utils.get_url_for_getting_dependencies(def_cluster, database_api_endpoint, type))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/api.py", line 75, in get
+    return request('get', url, params=params, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/sessions.py", line 529, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/sessions.py", line 645, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='10.100.151.115', port=5000): Max retries exceeded with url: /v0.1/all_dependencies/TOSCA_DEFINITIONS/node_type/tosca.nodes.SoftwareComponent (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fa8a027ec88>: Failed to establish a new connection: [Errno 111] Connection refused',))
+2022-09-29 18:33:34,899 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 18:33:34,899 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 18:38:44,127 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 18:38:44,127 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 18:38:47,542 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/models.py", line 910, in json
+    return complexjson.loads(self.text, **kwargs)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 39, in load_to_db
+    response = r.json()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/models.py", line 917, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+requests.exceptions.JSONDecodeError: [Errno Expecting value] <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 41, in load_to_db
+    raise Exception("Failed to parse json response from db")
+Exception: Failed to parse json response from db
+2022-09-29 18:38:47,543 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 18:38:47,543 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 18:39:21,518 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-09-29 18:39:21,518 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-09-29 18:39:24,750 - ERROR - ThreadPoolExecutor-0_1 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/models.py", line 910, in json
+    return complexjson.loads(self.text, **kwargs)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 39, in load_to_db
+    response = r.json()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/models.py", line 917, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+requests.exceptions.JSONDecodeError: [Errno Expecting value] <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 41, in load_to_db
+    raise Exception("Failed to parse json response from db")
+Exception: Failed to parse json response from db
+2022-09-29 18:39:24,751 - INFO - ThreadPoolExecutor-0_1 - Request - status ERROR
+2022-09-29 18:39:24,751 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-09-29 18:39:37,196 - INFO - MainThread - Server stopped
+2022-09-29 18:39:37,196 - INFO - MainThread - Exited
+2022-09-29 18:39:39,288 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 18:39:39,295 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 18:39:39,298 - INFO - MainThread - Server started
+2022-09-29 18:39:41,505 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 18:39:41,506 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 18:41:43,419 - INFO - MainThread - Server stopped
+2022-09-29 18:41:43,419 - INFO - MainThread - Exited
+2022-09-29 18:41:49,541 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 18:41:49,546 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 18:41:49,547 - INFO - MainThread - Server started
+2022-09-29 18:41:52,023 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 18:41:52,023 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 18:41:56,202 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/models.py", line 910, in json
+    return complexjson.loads(self.text, **kwargs)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 39, in load_to_db
+    response = r.json()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/models.py", line 917, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+requests.exceptions.JSONDecodeError: [Errno Expecting value] <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 41, in load_to_db
+    raise Exception("Failed to parse json response from db")
+Exception: Failed to parse json response from db
+2022-09-29 18:41:56,203 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 18:41:56,203 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 18:42:16,061 - INFO - MainThread - Server stopped
+2022-09-29 18:42:16,061 - INFO - MainThread - Exited
+2022-09-29 18:42:17,948 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 18:42:17,955 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 18:42:17,958 - INFO - MainThread - Server started
+2022-09-29 18:42:19,633 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 18:42:19,633 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 19:14:22,423 - INFO - MainThread - Server stopped
+2022-09-29 19:14:22,424 - INFO - MainThread - Exited
+2022-09-29 19:14:25,080 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 19:14:25,084 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 19:14:25,086 - INFO - MainThread - Server started
+2022-09-29 19:14:27,988 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 19:14:27,988 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 19:14:32,499 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/models.py", line 910, in json
+    return complexjson.loads(self.text, **kwargs)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/sadimer/.pyenv/versions/3.6.9/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 39, in load_to_db
+    response = r.json()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/requests/models.py", line 917, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+requests.exceptions.JSONDecodeError: [Errno Expecting value] <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 41, in load_to_db
+    raise Exception("Failed to parse json response from db")
+Exception: Failed to parse json response from db
+2022-09-29 19:14:32,500 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 19:14:32,500 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 19:14:44,700 - INFO - MainThread - Server stopped
+2022-09-29 19:14:44,701 - INFO - MainThread - Exited
+2022-09-29 19:14:46,810 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 19:14:46,817 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 19:14:46,820 - INFO - MainThread - Server started
+2022-09-29 19:14:51,004 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 19:14:51,004 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 19:18:12,022 - INFO - MainThread - Server stopped
+2022-09-29 19:18:12,023 - INFO - MainThread - Exited
+2022-09-29 19:18:15,926 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 19:18:15,930 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 19:18:15,932 - INFO - MainThread - Server started
+2022-09-29 19:18:21,656 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 19:18:21,656 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 19:18:50,392 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 144, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 56, in load_to_db
+    raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+Exception: Error in db! Status code: 400, msg: The browser (or proxy) sent a request that this server could not understand.
+2022-09-29 19:18:50,392 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 19:18:50,392 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 19:19:01,432 - INFO - MainThread - Server stopped
+2022-09-29 19:19:01,433 - INFO - MainThread - Exited
+2022-09-29 19:19:03,715 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 19:19:03,722 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 19:19:03,724 - INFO - MainThread - Server started
+2022-09-29 19:19:12,764 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 19:19:12,764 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 19:27:09,051 - INFO - MainThread - Server stopped
+2022-09-29 19:27:09,052 - INFO - MainThread - Exited
+2022-09-29 19:27:11,772 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 19:27:11,777 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 19:27:11,779 - INFO - MainThread - Server started
+2022-09-29 19:27:14,502 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 19:27:14,503 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 19:27:44,962 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 145, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 57, in load_to_db
+    raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+Exception: Error in db! Status code: 400, msg: The browser (or proxy) sent a request that this server could not understand.
+2022-09-29 19:27:44,963 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 19:27:44,963 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 19:29:57,401 - INFO - MainThread - Server stopped
+2022-09-29 19:29:57,401 - INFO - MainThread - Exited
+2022-09-29 19:29:59,167 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 19:29:59,172 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 19:29:59,174 - INFO - MainThread - Server started
+2022-09-29 19:30:01,450 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 19:30:01,450 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 19:30:30,699 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 145, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 57, in load_to_db
+    raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+Exception: Error in db! Status code: 400, msg: The browser (or proxy) sent a request that this server could not understand.
+2022-09-29 19:30:30,699 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 19:30:30,699 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 19:32:48,184 - INFO - MainThread - Server stopped
+2022-09-29 19:32:48,185 - INFO - MainThread - Exited
+2022-09-29 19:32:49,617 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 19:32:49,621 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 19:32:49,624 - INFO - MainThread - Server started
+2022-09-29 19:32:51,957 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 19:32:51,957 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 19:33:25,570 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 145, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 57, in load_to_db
+    raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+Exception: Error in db! Status code: 200, msg: cluster_name: example_2 was deployed
+2022-09-29 19:33:25,571 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 19:33:25,571 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 19:33:36,590 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 19:33:36,590 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 19:34:13,320 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 145, in translate
+    load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 57, in load_to_db
+    raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+Exception: Error in db! Status code: 200, msg: cluster_name: example_3 was deployed
+2022-09-29 19:34:13,320 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-09-29 19:34:13,320 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 19:35:17,160 - INFO - MainThread - Server stopped
+2022-09-29 19:35:17,160 - INFO - MainThread - Exited
+2022-09-29 19:35:18,431 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 19:35:18,436 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 19:35:18,438 - INFO - MainThread - Server started
+2022-09-29 19:35:33,186 - INFO - MainThread - Server stopped
+2022-09-29 19:35:33,186 - INFO - MainThread - Exited
+2022-09-29 19:35:34,286 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-09-29 19:35:34,291 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-09-29 19:35:34,293 - INFO - MainThread - Server started
+2022-09-29 19:35:38,970 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-09-29 19:35:38,970 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-09-29 19:36:17,440 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-09-29 19:40:49,337 - INFO - MainThread - Server stopped
+2022-09-29 19:40:49,337 - INFO - MainThread - Exited

@@ -1,15 +1,17 @@
 import json
 import logging
 import os
-import sys
+from threading import Thread
 
+import requests
 import six
 import yaml
 from toscaparser.tosca_template import ToscaTemplate
 from yaml import Loader
 
 from configuration_tool.common.tosca_reserved_keys import IMPORTS, DEFAULT_ARTIFACTS_DIRECTORY, \
-    EXECUTOR, NAME, TOSCA_ELEMENTS_MAP_FILE, TOSCA_ELEMENTS_DEFINITION_FILE, TOPOLOGY_TEMPLATE
+    EXECUTOR, NAME, TOSCA_ELEMENTS_MAP_FILE, TOSCA_ELEMENTS_DEFINITION_FILE, TOPOLOGY_TEMPLATE, TYPE, \
+    TOSCA_ELEMENTS_DEFINITION_DB_CLUSTER_NAME
 from configuration_tool.common import utils
 from configuration_tool.common.configuration import Configuration
 from configuration_tool.configuration_tools.combined.combine_configuration_tools import get_configuration_tool_class
@@ -18,15 +20,44 @@ from configuration_tool.providers.common.tosca_template import ProviderToscaTemp
 
 REQUIRED_CONFIGURATION_PARAMS = (TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFACTS_DIRECTORY, TOSCA_ELEMENTS_MAP_FILE)
 
-
-
 REQUIRED_CONFIGURATION_PARAMS = (TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFACTS_DIRECTORY, TOSCA_ELEMENTS_MAP_FILE)
-
 
 
 class NoAliasDumper(yaml.SafeDumper):
     def ignore_aliases(self, data):
         return True
+
+def load_to_db(tosca, config, database_api_endpoint, template, cluster_name):
+    definitions = {}
+    all_templates = tosca.node_templates
+    all_templates = utils.deep_update_dict(all_templates, tosca.relationship_templates)
+    def_cluster = config.get_section(config.MAIN_SECTION).get(TOSCA_ELEMENTS_DEFINITION_DB_CLUSTER_NAME)
+    for key, value in all_templates.items():
+        type = value[TYPE]
+        r = requests.get(utils.get_url_for_getting_dependencies(def_cluster, database_api_endpoint, type))
+        try:
+            response = r.json()
+        except Exception:
+            raise Exception("Failed to parse json response from db")
+        if response['status'] != 200:
+            raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+        definitions = utils.deep_update_dict(definitions, response['result'])
+    with open(os.path.join(utils.get_tmp_clouni_dir(), 'template.yaml'), "w") as f:
+        template = utils.deep_update_dict(template, definitions)
+        del template[IMPORTS]
+        print(yaml.dump(template, Dumper=NoAliasDumper), file=f)
+    with open(os.path.join(utils.get_tmp_clouni_dir(), 'template.yaml'), "r") as f:
+        files = {'file': f}
+        res = requests.post(utils.get_url_for_loading_to_db(cluster_name, database_api_endpoint), files=files)
+        try:
+            response = res.json()
+        except Exception:
+            raise Exception("Failed to parse json response from db on loading template")
+        if response['status'] != 200:
+            raise Exception("Error in db! Status code: %s, msg: %s" % (response['status'], response['message']))
+
+
+
 def translate(provider_template, validate_only, configuration_tool, cluster_name, is_delete=False,
               extra=None, log_level='info', debug=False, host_ip_parameter='public_address',
               database_api_endpoint=None, grpc_cotea_endpoint=None):
@@ -111,11 +142,7 @@ def translate(provider_template, validate_only, configuration_tool, cluster_name
                                   host_ip_parameter, is_delete, grpc_cotea_endpoint)
 
     if database_api_endpoint:
-        template = utils.deep_update_dict(template, tosca.used_definitions)
-        del template[IMPORTS]
-        # for testing
-        with open('gigadb.yaml', 'w+') as f:
-            print(yaml.dump(template, Dumper=NoAliasDumper), file=f)
+        load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
 
     tool = get_configuration_tool_class(configuration_tool)(provider)
 
@@ -126,5 +153,3 @@ def translate(provider_template, validate_only, configuration_tool, cluster_name
                                         inputs=tosca.inputs, outputs=tosca.outputs, extra=extra, debug=debug,
                                         grpc_cotea_endpoint=grpc_cotea_endpoint)
     return configuration_content
-
-

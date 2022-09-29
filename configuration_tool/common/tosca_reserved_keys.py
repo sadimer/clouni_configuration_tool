@@ -55,5 +55,5 @@ ELEMENT_TYPES = (NODES, CAPABILITIES, RELATIONSHIPS, DATATYPES, INTERFACES, ARTI
 
 (CLOUNI) = ('clouni')
 
-(TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFACTS_DIRECTORY, TOSCA_ELEMENTS_MAP_FILE) = \
-    ('tosca_elements_definition_file', 'default_artifacts_directory', 'tosca_elements_map_file')
+(TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFACTS_DIRECTORY, TOSCA_ELEMENTS_MAP_FILE, TOSCA_ELEMENTS_DEFINITION_DB_CLUSTER_NAME) = \
+    ('tosca_elements_definition_file', 'default_artifacts_directory', 'tosca_elements_map_file', 'tosca_elements_definition_db_cluster_name')

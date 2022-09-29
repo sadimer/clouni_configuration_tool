@@ -177,7 +177,7 @@ node_types:
         occurrences: [ 0, UNBOUNDED ]
     requirements:
       - security_groups: # output after create is groups, groups in facts
-          capability: amazon.capabilities.SecurityGroup
+          capability: amazon.capabilities.Node
           node: amazon.nodes.Group
           relationship: amazon.relationships.DependsOn
           occurrences: [ 0, UNBOUNDED ]
@@ -436,7 +436,7 @@ relationship_types:
 ##########################################################################
 artifact_types:
   amazon.artifacts.File:
-    derived_from: toscsa.artifacts.File
+    derived_from: tosca.artifacts.File
 
   amazon.artifacts.Deployment.Image:
     derived_from: tosca.artifacts.Deployment.Image

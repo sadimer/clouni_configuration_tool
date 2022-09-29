@@ -7,7 +7,7 @@ import logging
 import six
 import yaml
 
-from random import randint,seed
+from random import randint, seed
 from time import time
 
 
@@ -37,7 +37,7 @@ def execute_function(module_name, function_name, params):
     else:
         try:
             for p, _ in params.items():
-                exec(p + ' = params[\''+ p + '\']')
+                exec(p + ' = params[\'' + p + '\']')
             r = eval(function_name)
             return r
         except:
@@ -71,6 +71,14 @@ def get_random_int(start, end):
     seed(time())
     r = randint(start, end)
     return r
+
+
+def get_url_for_getting_dependencies(cluster_name, endpoint, type):
+    return 'http://' + endpoint + '/v0.1/all_dependencies/' + cluster_name + '/node_type/' + type
+
+
+def get_url_for_loading_to_db(cluster_name, endpoint):
+    return 'http://' + endpoint + '/v0.1/yaml_template/template?cluster_name=' + cluster_name
 
 
 def replace_brackets(data, with_splash=True):

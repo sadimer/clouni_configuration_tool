@@ -72,24 +72,6 @@ class ProviderToscaTemplate(object):
         self.provider_nodes = self._provider_nodes()
         self.provider_relations = self._provider_relations()
 
-        self.used_definitions = {}
-        self.used_definitions[NODE_TYPES] = {}
-        self.used_definitions[DATA_TYPES] = {}
-        self.used_definitions[RELATIONSHIP_TYPES] = {}
-        self.used_definitions[CAPABILITY_TYPES] = {}
-        self.used_definitions[INTERFACE_TYPES] = {}
-        for key, value in self.definitions.items():
-            (_, type, _) = utils.tosca_type_parse(key)
-            if type == NODES:
-                self.used_definitions[NODE_TYPES][key] = value
-            if type == DATATYPES:
-                self.used_definitions[DATA_TYPES][key] = value
-            if type == RELATIONSHIPS:
-                self.used_definitions[RELATIONSHIP_TYPES][key] = value
-            if type == CAPABILITIES:
-                self.used_definitions[CAPABILITY_TYPES][key] = value
-            if type == INTERFACES:
-                self.used_definitions[INTERFACE_TYPES][key] = value
         self.provider_operations, self.reversed_provider_operations = self.sort_nodes_and_operations_by_graph_dependency()
 
     def resolve_in_template_dependencies(self):

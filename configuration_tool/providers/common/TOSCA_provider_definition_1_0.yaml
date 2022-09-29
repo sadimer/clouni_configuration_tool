@@ -21,14 +21,17 @@ node_types:
         occurrences: [ 1, 1 ]
     artifacts:
       contains:
-        implementation: contains.yaml
-        description: Contain function
+        file: artifacts/contains.yaml
+        type: provider.artifacts.File
       equals:
-        implementation: equals.yaml
+        file: artifacts/equals.yaml
+        type: provider.artifacts.File
       ip_contains:
-        implementation: ip_contains.yaml
+        file: artifacts/ip_contains.yaml
+        type: provider.artifacts.File
       add_host:
-        implementation: add_host.yaml
+        file: artifacts/add_host.yaml
+        type: provider.artifacts.File
     requirements:
       - dependency:
           capability: provider.capabilities.Node
@@ -97,3 +100,11 @@ interface_types:
       description: Total objects
     choose:
       description: Choose one object, use predefined artifacts from nodes.Root
+
+capability_types:
+  provider.capabilities.Node:
+    derived_from: tosca.capabilities.Node
+
+artifact_types:
+  provider.artifacts.File:
+    derived_from: tosca.artifacts.File
