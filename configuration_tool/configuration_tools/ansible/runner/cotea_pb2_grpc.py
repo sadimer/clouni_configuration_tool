@@ -5,7 +5,7 @@ import grpc
 import configuration_tool.configuration_tools.ansible.runner.cotea_pb2 as cotea__pb2
 
 
-class AnsibleExecutorStub(object):
+class CoteaGatewayStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -15,28 +15,28 @@ class AnsibleExecutorStub(object):
             channel: A grpc.Channel.
         """
         self.StartSession = channel.unary_unary(
-                '/AnsibleExecutor/StartSession',
+                '/CoteaGateway/StartSession',
                 request_serializer=cotea__pb2.EmptyMsg.SerializeToString,
                 response_deserializer=cotea__pb2.StartSessionMSG.FromString,
                 )
         self.InitExecution = channel.unary_unary(
-                '/AnsibleExecutor/InitExecution',
+                '/CoteaGateway/InitExecution',
                 request_serializer=cotea__pb2.Config.SerializeToString,
                 response_deserializer=cotea__pb2.Status.FromString,
                 )
         self.RunTask = channel.unary_unary(
-                '/AnsibleExecutor/RunTask',
+                '/CoteaGateway/RunTask',
                 request_serializer=cotea__pb2.Task.SerializeToString,
                 response_deserializer=cotea__pb2.TaskResults.FromString,
                 )
         self.StopExecution = channel.unary_unary(
-                '/AnsibleExecutor/StopExecution',
+                '/CoteaGateway/StopExecution',
                 request_serializer=cotea__pb2.SessionID.SerializeToString,
                 response_deserializer=cotea__pb2.Status.FromString,
                 )
 
 
-class AnsibleExecutorServicer(object):
+class CoteaGatewayServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def StartSession(self, request, context):
@@ -64,7 +64,7 @@ class AnsibleExecutorServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_AnsibleExecutorServicer_to_server(servicer, server):
+def add_CoteaGatewayServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'StartSession': grpc.unary_unary_rpc_method_handler(
                     servicer.StartSession,
@@ -88,12 +88,12 @@ def add_AnsibleExecutorServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'AnsibleExecutor', rpc_method_handlers)
+            'CoteaGateway', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class AnsibleExecutor(object):
+class CoteaGateway(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -107,7 +107,7 @@ class AnsibleExecutor(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AnsibleExecutor/StartSession',
+        return grpc.experimental.unary_unary(request, target, '/CoteaGateway/StartSession',
             cotea__pb2.EmptyMsg.SerializeToString,
             cotea__pb2.StartSessionMSG.FromString,
             options, channel_credentials,
@@ -124,7 +124,7 @@ class AnsibleExecutor(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AnsibleExecutor/InitExecution',
+        return grpc.experimental.unary_unary(request, target, '/CoteaGateway/InitExecution',
             cotea__pb2.Config.SerializeToString,
             cotea__pb2.Status.FromString,
             options, channel_credentials,
@@ -141,7 +141,7 @@ class AnsibleExecutor(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AnsibleExecutor/RunTask',
+        return grpc.experimental.unary_unary(request, target, '/CoteaGateway/RunTask',
             cotea__pb2.Task.SerializeToString,
             cotea__pb2.TaskResults.FromString,
             options, channel_credentials,
@@ -158,8 +158,135 @@ class AnsibleExecutor(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AnsibleExecutor/StopExecution',
+        return grpc.experimental.unary_unary(request, target, '/CoteaGateway/StopExecution',
             cotea__pb2.SessionID.SerializeToString,
+            cotea__pb2.Status.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+
+class CoteaWorkerStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.InitExecution = channel.unary_unary(
+                '/CoteaWorker/InitExecution',
+                request_serializer=cotea__pb2.WorkerConfig.SerializeToString,
+                response_deserializer=cotea__pb2.Status.FromString,
+                )
+        self.RunTask = channel.unary_unary(
+                '/CoteaWorker/RunTask',
+                request_serializer=cotea__pb2.WorkerTask.SerializeToString,
+                response_deserializer=cotea__pb2.TaskResults.FromString,
+                )
+        self.StopExecution = channel.unary_unary(
+                '/CoteaWorker/StopExecution',
+                request_serializer=cotea__pb2.EmptyMsg.SerializeToString,
+                response_deserializer=cotea__pb2.Status.FromString,
+                )
+
+
+class CoteaWorkerServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def InitExecution(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RunTask(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def StopExecution(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_CoteaWorkerServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'InitExecution': grpc.unary_unary_rpc_method_handler(
+                    servicer.InitExecution,
+                    request_deserializer=cotea__pb2.WorkerConfig.FromString,
+                    response_serializer=cotea__pb2.Status.SerializeToString,
+            ),
+            'RunTask': grpc.unary_unary_rpc_method_handler(
+                    servicer.RunTask,
+                    request_deserializer=cotea__pb2.WorkerTask.FromString,
+                    response_serializer=cotea__pb2.TaskResults.SerializeToString,
+            ),
+            'StopExecution': grpc.unary_unary_rpc_method_handler(
+                    servicer.StopExecution,
+                    request_deserializer=cotea__pb2.EmptyMsg.FromString,
+                    response_serializer=cotea__pb2.Status.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'CoteaWorker', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class CoteaWorker(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def InitExecution(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/CoteaWorker/InitExecution',
+            cotea__pb2.WorkerConfig.SerializeToString,
+            cotea__pb2.Status.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def RunTask(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/CoteaWorker/RunTask',
+            cotea__pb2.WorkerTask.SerializeToString,
+            cotea__pb2.TaskResults.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def StopExecution(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/CoteaWorker/StopExecution',
+            cotea__pb2.EmptyMsg.SerializeToString,
             cotea__pb2.Status.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

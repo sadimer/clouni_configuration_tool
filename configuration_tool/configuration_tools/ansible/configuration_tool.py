@@ -188,7 +188,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                         ansible_playbook.append(ansible_play_for_elem)
                 else:
                     if len(ansible_tasks) > 0:
-                        self.run(ansible_tasks, grpc_cotea_endpoint, v.name, v.operation, q)
+                        self.run(ansible_tasks, grpc_cotea_endpoint, host, v.name, v.operation, q)
                     else:
                         elements.done(v)
                     active.append(v)
@@ -202,7 +202,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                          'name': 'Renew id_vars_example.yaml'}
                 ansible_playbook.append(ansible_play_for_elem)
             else:
-                self.run(ansible_tasks, grpc_cotea_endpoint, None, None, q)
+                self.run(ansible_tasks, grpc_cotea_endpoint, self.default_host, None, None, q)
                 done = q.get()
                 if done != 'Done':
                     logging.error("Something wrong with multiprocessing queue")
@@ -547,7 +547,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
             })
         return ansible_tasks
 
-    def run(self, ansible_tasks, grpc_cotea_endpoint, name, op, q):
+    def run(self, ansible_tasks, grpc_cotea_endpoint, hosts, name, op, q):
         extra_env = {}
         extra_vars = {}
         if self.provider == 'amazon':
@@ -556,4 +556,4 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 extra_env["ANSIBLE_LIBRARY"] = amazon_plugins_path
             elif amazon_plugins_path not in os.environ["ANSIBLE_LIBRARY"]:
                 extra_env["ANSIBLE_LIBRARY"] += os.pathsep + amazon_plugins_path
-        grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, name, op, q)
+        grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q)

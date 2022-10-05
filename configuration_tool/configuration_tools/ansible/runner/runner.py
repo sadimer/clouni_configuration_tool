@@ -22,9 +22,9 @@ def close_session(session_id, stub):
         raise Exception(response.error_msg)
 
 
-def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars):
+def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts):
     channel = grpc.insecure_channel(grpc_cotea_endpoint)
-    stub = cotea_pb2_grpc.AnsibleExecutorStub(channel)
+    stub = cotea_pb2_grpc.CoteaGatewayStub(channel)
     request = EmptyMsg()
     response = stub.StartSession(request)
     if not response.ok:
@@ -35,9 +35,8 @@ def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars):
     request = Config()
     request.session_ID = session_id
     tmp_current_dir = utils.get_tmp_clouni_dir()
-    request.pb_path = tmp_current_dir
+    request.hosts = hosts
     request.inv_path = os.path.join(tmp_current_dir, 'hosts.ini')
-    request.emty_task_name = 'Init'
     for key, val in extra_vars.items():
         obj = MapFieldEntry()
         obj.key = key
@@ -68,16 +67,12 @@ def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars):
     return session_id
 
 
-def run_and_finish(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, name, op, q):
-    results = run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars)
-    if name is not None and op is not None:
-        q.put(results)
-    else:
-        q.put(name + SEPARATOR + op)
+def run_and_finish(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q):
+    run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts)
+    q.put(name + SEPARATOR + op)
 
-
-def grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, name, op, q):
-    Thread(target=run_and_finish, args=(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, name, op, q)).start()
+def grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q):
+    Thread(target=run_and_finish, args=(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q)).start()
 
 
 

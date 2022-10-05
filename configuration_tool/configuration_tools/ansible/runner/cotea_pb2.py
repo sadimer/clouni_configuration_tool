@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0b\x63otea.proto\"<\n\x0fStartSessionMSG\x12\n\n\x02ok\x18\x01 \x01(\x08\x12\n\n\x02ID\x18\x02 \x01(\t\x12\x11\n\terror_msg\x18\x03 \x01(\t\"\x1f\n\tSessionID\x12\x12\n\nsession_ID\x18\x01 \x01(\t\"\n\n\x08\x45mptyMsg\"+\n\rMapFieldEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\x9d\x01\n\x06\x43onfig\x12\x12\n\nsession_ID\x18\x01 \x01(\t\x12\x0f\n\x07pb_path\x18\x02 \x01(\t\x12\x10\n\x08inv_path\x18\x03 \x01(\t\x12\x16\n\x0e\x65mty_task_name\x18\x04 \x01(\t\x12\"\n\nextra_vars\x18\x05 \x03(\x0b\x32\x0e.MapFieldEntry\x12 \n\x08\x65nv_vars\x18\x06 \x03(\x0b\x32\x0e.MapFieldEntry\",\n\x04Task\x12\x12\n\nsession_ID\x18\x01 \x01(\t\x12\x10\n\x08task_str\x18\x02 \x01(\t\"\x80\x02\n\nTaskResult\x12\n\n\x02ok\x18\x01 \x01(\x08\x12\x18\n\x10results_dict_str\x18\x02 \x01(\t\x12\x11\n\ttask_name\x18\x03 \x01(\t\x12\x12\n\nis_changed\x18\x04 \x01(\x08\x12\x11\n\tis_failed\x18\x05 \x01(\x08\x12\x12\n\nis_skipped\x18\x06 \x01(\x08\x12\x16\n\x0eis_unreachable\x18\x07 \x01(\x08\x12\x19\n\x11is_ignored_errors\x18\x08 \x01(\x08\x12\x1e\n\x16is_ignored_unreachable\x18\t \x01(\x08\x12\x0e\n\x06stdout\x18\n \x01(\t\x12\x0e\n\x06stderr\x18\x0b \x01(\t\x12\x0b\n\x03msg\x18\x0c \x01(\t\"c\n\x0bTaskResults\x12\x16\n\x0etask_adding_ok\x18\x01 \x01(\x08\x12\x19\n\x11task_adding_error\x18\x02 \x01(\t\x12!\n\x0ctask_results\x18\x03 \x03(\x0b\x32\x0b.TaskResult\"\'\n\x06Status\x12\n\n\x02ok\x18\x01 \x01(\x08\x12\x11\n\terror_msg\x18\x02 \x01(\t2\xaf\x01\n\x0f\x41nsibleExecutor\x12-\n\x0cStartSession\x12\t.EmptyMsg\x1a\x10.StartSessionMSG\"\x00\x12#\n\rInitExecution\x12\x07.Config\x1a\x07.Status\"\x00\x12 \n\x07RunTask\x12\x05.Task\x1a\x0c.TaskResults\"\x00\x12&\n\rStopExecution\x12\n.SessionID\x1a\x07.Status\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x0b\x63otea.proto\"<\n\x0fStartSessionMSG\x12\n\n\x02ok\x18\x01 \x01(\x08\x12\n\n\x02ID\x18\x02 \x01(\t\x12\x11\n\terror_msg\x18\x03 \x01(\t\"\x1f\n\tSessionID\x12\x12\n\nsession_ID\x18\x01 \x01(\t\"\n\n\x08\x45mptyMsg\"+\n\rMapFieldEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\x83\x01\n\x06\x43onfig\x12\x12\n\nsession_ID\x18\x01 \x01(\t\x12\r\n\x05hosts\x18\x02 \x01(\t\x12\x10\n\x08inv_path\x18\x03 \x01(\t\x12\"\n\nextra_vars\x18\x04 \x03(\x0b\x32\x0e.MapFieldEntry\x12 \n\x08\x65nv_vars\x18\x05 \x03(\x0b\x32\x0e.MapFieldEntry\"u\n\x0cWorkerConfig\x12\r\n\x05hosts\x18\x01 \x01(\t\x12\x10\n\x08inv_path\x18\x02 \x01(\t\x12\"\n\nextra_vars\x18\x03 \x03(\x0b\x32\x0e.MapFieldEntry\x12 \n\x08\x65nv_vars\x18\x04 \x03(\x0b\x32\x0e.MapFieldEntry\"=\n\x04Task\x12\x12\n\nsession_ID\x18\x01 \x01(\t\x12\x10\n\x08task_str\x18\x02 \x01(\t\x12\x0f\n\x07is_dict\x18\x03 \x01(\x08\"/\n\nWorkerTask\x12\x10\n\x08task_str\x18\x01 \x01(\t\x12\x0f\n\x07is_dict\x18\x03 \x01(\x08\"\x80\x02\n\nTaskResult\x12\n\n\x02ok\x18\x01 \x01(\x08\x12\x18\n\x10results_dict_str\x18\x02 \x01(\t\x12\x11\n\ttask_name\x18\x03 \x01(\t\x12\x12\n\nis_changed\x18\x04 \x01(\x08\x12\x11\n\tis_failed\x18\x05 \x01(\x08\x12\x12\n\nis_skipped\x18\x06 \x01(\x08\x12\x16\n\x0eis_unreachable\x18\x07 \x01(\x08\x12\x19\n\x11is_ignored_errors\x18\x08 \x01(\x08\x12\x1e\n\x16is_ignored_unreachable\x18\t \x01(\x08\x12\x0e\n\x06stdout\x18\n \x01(\t\x12\x0e\n\x06stderr\x18\x0b \x01(\t\x12\x0b\n\x03msg\x18\x0c \x01(\t\"c\n\x0bTaskResults\x12\x16\n\x0etask_adding_ok\x18\x01 \x01(\x08\x12\x19\n\x11task_adding_error\x18\x02 \x01(\t\x12!\n\x0ctask_results\x18\x03 \x03(\x0b\x32\x0b.TaskResult\"\'\n\x06Status\x12\n\n\x02ok\x18\x01 \x01(\x08\x12\x11\n\terror_msg\x18\x02 \x01(\t2\xac\x01\n\x0c\x43oteaGateway\x12-\n\x0cStartSession\x12\t.EmptyMsg\x1a\x10.StartSessionMSG\"\x00\x12#\n\rInitExecution\x12\x07.Config\x1a\x07.Status\"\x00\x12 \n\x07RunTask\x12\x05.Task\x1a\x0c.TaskResults\"\x00\x12&\n\rStopExecution\x12\n.SessionID\x1a\x07.Status\"\x00\x32\x87\x01\n\x0b\x43oteaWorker\x12)\n\rInitExecution\x12\r.WorkerConfig\x1a\x07.Status\"\x00\x12&\n\x07RunTask\x12\x0b.WorkerTask\x1a\x0c.TaskResults\"\x00\x12%\n\rStopExecution\x12\t.EmptyMsg\x1a\x07.Status\"\x00\x62\x06proto3'
 )
 
 
@@ -183,7 +183,7 @@ _CONFIG = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='pb_path', full_name='Config.pb_path', index=1,
+      name='hosts', full_name='Config.hosts', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -197,22 +197,15 @@ _CONFIG = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='emty_task_name', full_name='Config.emty_task_name', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='extra_vars', full_name='Config.extra_vars', index=4,
-      number=5, type=11, cpp_type=10, label=3,
+      name='extra_vars', full_name='Config.extra_vars', index=3,
+      number=4, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='env_vars', full_name='Config.env_vars', index=5,
-      number=6, type=11, cpp_type=10, label=3,
+      name='env_vars', full_name='Config.env_vars', index=4,
+      number=5, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -230,7 +223,60 @@ _CONFIG = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=168,
-  serialized_end=325,
+  serialized_end=299,
+)
+
+
+_WORKERCONFIG = _descriptor.Descriptor(
+  name='WorkerConfig',
+  full_name='WorkerConfig',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='hosts', full_name='WorkerConfig.hosts', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='inv_path', full_name='WorkerConfig.inv_path', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='extra_vars', full_name='WorkerConfig.extra_vars', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='env_vars', full_name='WorkerConfig.env_vars', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=301,
+  serialized_end=418,
 )
 
 
@@ -256,6 +302,13 @@ _TASK = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='is_dict', full_name='Task.is_dict', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -268,8 +321,47 @@ _TASK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=327,
-  serialized_end=371,
+  serialized_start=420,
+  serialized_end=481,
+)
+
+
+_WORKERTASK = _descriptor.Descriptor(
+  name='WorkerTask',
+  full_name='WorkerTask',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='task_str', full_name='WorkerTask.task_str', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='is_dict', full_name='WorkerTask.is_dict', index=1,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=483,
+  serialized_end=530,
 )
 
 
@@ -377,8 +469,8 @@ _TASKRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=374,
-  serialized_end=630,
+  serialized_start=533,
+  serialized_end=789,
 )
 
 
@@ -423,8 +515,8 @@ _TASKRESULTS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=632,
-  serialized_end=731,
+  serialized_start=791,
+  serialized_end=890,
 )
 
 
@@ -462,19 +554,23 @@ _STATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=733,
-  serialized_end=772,
+  serialized_start=892,
+  serialized_end=931,
 )
 
 _CONFIG.fields_by_name['extra_vars'].message_type = _MAPFIELDENTRY
 _CONFIG.fields_by_name['env_vars'].message_type = _MAPFIELDENTRY
+_WORKERCONFIG.fields_by_name['extra_vars'].message_type = _MAPFIELDENTRY
+_WORKERCONFIG.fields_by_name['env_vars'].message_type = _MAPFIELDENTRY
 _TASKRESULTS.fields_by_name['task_results'].message_type = _TASKRESULT
 DESCRIPTOR.message_types_by_name['StartSessionMSG'] = _STARTSESSIONMSG
 DESCRIPTOR.message_types_by_name['SessionID'] = _SESSIONID
 DESCRIPTOR.message_types_by_name['EmptyMsg'] = _EMPTYMSG
 DESCRIPTOR.message_types_by_name['MapFieldEntry'] = _MAPFIELDENTRY
 DESCRIPTOR.message_types_by_name['Config'] = _CONFIG
+DESCRIPTOR.message_types_by_name['WorkerConfig'] = _WORKERCONFIG
 DESCRIPTOR.message_types_by_name['Task'] = _TASK
+DESCRIPTOR.message_types_by_name['WorkerTask'] = _WORKERTASK
 DESCRIPTOR.message_types_by_name['TaskResult'] = _TASKRESULT
 DESCRIPTOR.message_types_by_name['TaskResults'] = _TASKRESULTS
 DESCRIPTOR.message_types_by_name['Status'] = _STATUS
@@ -515,12 +611,26 @@ Config = _reflection.GeneratedProtocolMessageType('Config', (_message.Message,),
   })
 _sym_db.RegisterMessage(Config)
 
+WorkerConfig = _reflection.GeneratedProtocolMessageType('WorkerConfig', (_message.Message,), {
+  'DESCRIPTOR' : _WORKERCONFIG,
+  '__module__' : 'cotea_pb2'
+  # @@protoc_insertion_point(class_scope:WorkerConfig)
+  })
+_sym_db.RegisterMessage(WorkerConfig)
+
 Task = _reflection.GeneratedProtocolMessageType('Task', (_message.Message,), {
   'DESCRIPTOR' : _TASK,
   '__module__' : 'cotea_pb2'
   # @@protoc_insertion_point(class_scope:Task)
   })
 _sym_db.RegisterMessage(Task)
+
+WorkerTask = _reflection.GeneratedProtocolMessageType('WorkerTask', (_message.Message,), {
+  'DESCRIPTOR' : _WORKERTASK,
+  '__module__' : 'cotea_pb2'
+  # @@protoc_insertion_point(class_scope:WorkerTask)
+  })
+_sym_db.RegisterMessage(WorkerTask)
 
 TaskResult = _reflection.GeneratedProtocolMessageType('TaskResult', (_message.Message,), {
   'DESCRIPTOR' : _TASKRESULT,
@@ -545,19 +655,19 @@ _sym_db.RegisterMessage(Status)
 
 
 
-_ANSIBLEEXECUTOR = _descriptor.ServiceDescriptor(
-  name='AnsibleExecutor',
-  full_name='AnsibleExecutor',
+_COTEAGATEWAY = _descriptor.ServiceDescriptor(
+  name='CoteaGateway',
+  full_name='CoteaGateway',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=775,
-  serialized_end=950,
+  serialized_start=934,
+  serialized_end=1106,
   methods=[
   _descriptor.MethodDescriptor(
     name='StartSession',
-    full_name='AnsibleExecutor.StartSession',
+    full_name='CoteaGateway.StartSession',
     index=0,
     containing_service=None,
     input_type=_EMPTYMSG,
@@ -567,7 +677,7 @@ _ANSIBLEEXECUTOR = _descriptor.ServiceDescriptor(
   ),
   _descriptor.MethodDescriptor(
     name='InitExecution',
-    full_name='AnsibleExecutor.InitExecution',
+    full_name='CoteaGateway.InitExecution',
     index=1,
     containing_service=None,
     input_type=_CONFIG,
@@ -577,7 +687,7 @@ _ANSIBLEEXECUTOR = _descriptor.ServiceDescriptor(
   ),
   _descriptor.MethodDescriptor(
     name='RunTask',
-    full_name='AnsibleExecutor.RunTask',
+    full_name='CoteaGateway.RunTask',
     index=2,
     containing_service=None,
     input_type=_TASK,
@@ -587,7 +697,7 @@ _ANSIBLEEXECUTOR = _descriptor.ServiceDescriptor(
   ),
   _descriptor.MethodDescriptor(
     name='StopExecution',
-    full_name='AnsibleExecutor.StopExecution',
+    full_name='CoteaGateway.StopExecution',
     index=3,
     containing_service=None,
     input_type=_SESSIONID,
@@ -596,8 +706,54 @@ _ANSIBLEEXECUTOR = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
 ])
-_sym_db.RegisterServiceDescriptor(_ANSIBLEEXECUTOR)
+_sym_db.RegisterServiceDescriptor(_COTEAGATEWAY)
 
-DESCRIPTOR.services_by_name['AnsibleExecutor'] = _ANSIBLEEXECUTOR
+DESCRIPTOR.services_by_name['CoteaGateway'] = _COTEAGATEWAY
+
+
+_COTEAWORKER = _descriptor.ServiceDescriptor(
+  name='CoteaWorker',
+  full_name='CoteaWorker',
+  file=DESCRIPTOR,
+  index=1,
+  serialized_options=None,
+  create_key=_descriptor._internal_create_key,
+  serialized_start=1109,
+  serialized_end=1244,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='InitExecution',
+    full_name='CoteaWorker.InitExecution',
+    index=0,
+    containing_service=None,
+    input_type=_WORKERCONFIG,
+    output_type=_STATUS,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='RunTask',
+    full_name='CoteaWorker.RunTask',
+    index=1,
+    containing_service=None,
+    input_type=_WORKERTASK,
+    output_type=_TASKRESULTS,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='StopExecution',
+    full_name='CoteaWorker.StopExecution',
+    index=2,
+    containing_service=None,
+    input_type=_EMPTYMSG,
+    output_type=_STATUS,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_COTEAWORKER)
+
+DESCRIPTOR.services_by_name['CoteaWorker'] = _COTEAWORKER
 
 # @@protoc_insertion_point(module_scope)

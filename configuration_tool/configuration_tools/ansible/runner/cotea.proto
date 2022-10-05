@@ -1,11 +1,18 @@
 syntax = "proto3";
 
-service AnsibleExecutor {
+service CoteaGateway {
    rpc StartSession(EmptyMsg) returns (StartSessionMSG) {}
    rpc InitExecution(Config) returns (Status) {}
    rpc RunTask(Task) returns (TaskResults) {}
    rpc StopExecution(SessionID) returns (Status) {}
    // rpc RestartExecution(SessionID) returns (Status) {}
+}
+
+service CoteaWorker {
+   rpc InitExecution(WorkerConfig) returns (Status) {}
+   rpc RunTask(WorkerTask) returns (TaskResults) {}
+   rpc StopExecution(EmptyMsg) returns (Status) {}
+   // rpc RestartExecution() returns (Status) {}
 }
 
 message StartSessionMSG {
@@ -27,16 +34,28 @@ message MapFieldEntry {
 
 message Config {
    string session_ID = 1;
-   string pb_path = 2;
+   string hosts = 2;
    string inv_path = 3;
-   string emty_task_name = 4;
-   repeated MapFieldEntry extra_vars = 5;
-   repeated MapFieldEntry env_vars = 6;
+   repeated MapFieldEntry extra_vars = 4;
+   repeated MapFieldEntry env_vars = 5;
+}
+
+message WorkerConfig {
+   string hosts = 1;
+   string inv_path = 2;
+   repeated MapFieldEntry extra_vars = 3;
+   repeated MapFieldEntry env_vars = 4;
 }
 
 message Task {
    string session_ID = 1;
    string task_str = 2;
+   bool is_dict = 3;
+}
+
+message WorkerTask {
+   string task_str = 1;
+   bool is_dict = 3;
 }
 
 message TaskResult {
