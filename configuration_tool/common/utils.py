@@ -64,7 +64,7 @@ def get_project_root_path():
 
 
 def get_tmp_clouni_dir():
-    return '/tmp/clouni'
+    return '/home/sadimer/Desktop/ISPRAS/grpc-cotea'
 
 
 def get_random_int(start, end):
@@ -98,4 +98,4 @@ def replace_brackets(data, with_splash=True):
         for i in data:
             r.append(replace_brackets(i, with_splash))
         return r
-    return
+    return data

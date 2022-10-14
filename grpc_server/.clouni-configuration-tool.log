@@ -2824,3 +2824,1072 @@ Exception: Error in db! Status code: 200, msg: cluster_name: example_3 was deplo
 2022-09-29 19:36:17,440 - INFO - ThreadPoolExecutor-0_0 - Response send
 2022-09-29 19:40:49,337 - INFO - MainThread - Server stopped
 2022-09-29 19:40:49,337 - INFO - MainThread - Exited
+2022-10-12 17:34:51,390 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 17:34:51,394 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 17:34:51,415 - INFO - MainThread - Server started
+2022-10-12 17:35:19,196 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 17:35:19,196 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 17:35:21,049 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    results = run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost') # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 57, in run_ansible
+    request.task_str = task
+TypeError: {'os_flavor_facts': {}, 'register': 'node_filter_facts_raw'} has type dict, but expected one of: bytes, unicode
+2022-10-12 17:35:21,080 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 17:35:21,080 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 17:36:44,325 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 17:36:44,325 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 17:36:46,388 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    results = run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost') # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 57, in run_ansible
+    request.session_ID = session_id
+TypeError: {'os_flavor_facts': {}, 'register': 'node_filter_facts_raw'} has type dict, but expected one of: bytes, unicode
+2022-10-12 17:36:46,388 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 17:36:46,388 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 17:36:58,464 - INFO - MainThread - Server stopped
+2022-10-12 17:36:58,464 - INFO - MainThread - Exited
+2022-10-12 17:36:59,578 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 17:36:59,583 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 17:36:59,585 - INFO - MainThread - Server started
+2022-10-12 17:37:02,237 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 17:37:02,237 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 17:37:08,973 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    results = run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost') # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 67, in run_ansible
+    raise Exception('Task with name %s failed with exception: %s' % (result.task_name, result.stderr))
+Exception: Task with name fail failed with exception: 
+2022-10-12 17:37:08,974 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 17:37:08,974 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 17:37:44,568 - INFO - MainThread - Server stopped
+2022-10-12 17:37:44,568 - INFO - MainThread - Exited
+2022-10-12 17:37:45,912 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 17:37:45,917 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 17:37:45,919 - INFO - MainThread - Server started
+2022-10-12 17:37:48,190 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 17:37:48,190 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 17:37:54,585 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    results = run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost') # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 67, in run_ansible
+    raise Exception('Task with name %s failed with exception: %s' % (result.task_name, result.msg))
+Exception: Task with name fail failed with exception: There are no matchable objects
+2022-10-12 17:37:54,586 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 17:37:54,586 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 17:39:42,187 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 17:39:42,187 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 17:39:48,527 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    results = run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost') # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 67, in run_ansible
+    raise Exception('Task with name %s failed with exception: %s' % (result.task_name, result.msg))
+Exception: Task with name fail failed with exception: There are no matchable objects
+2022-10-12 17:39:48,527 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 17:39:48,527 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 17:40:18,444 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-10-12 17:40:18,445 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-10-12 17:40:25,098 - ERROR - ThreadPoolExecutor-0_1 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    results = run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost') # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 67, in run_ansible
+    raise Exception('Task with name %s failed with exception: %s' % (result.task_name, result.msg))
+Exception: Task with name fail failed with exception: There are no matchable objects
+2022-10-12 17:40:25,098 - INFO - ThreadPoolExecutor-0_1 - Request - status ERROR
+2022-10-12 17:40:25,098 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-10-12 17:40:37,702 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 17:40:37,702 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 17:40:43,825 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    results = run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost') # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 60, in run_ansible
+    response = stub.RunTask(request)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_channel.py", line 946, in __call__
+    return _end_unary_response_blocking(state, call, False, None)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_channel.py", line 849, in _end_unary_response_blocking
+    raise _InactiveRpcError(state)
+grpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "Socket closed"
+	debug_error_string = "UNKNOWN:Error received from peer ipv6:%5B::1%5D:50156 {created_time:"2022-10-12T17:40:43.821982341+03:00", grpc_status:14, grpc_message:"Socket closed"}"
+>"
+	debug_error_string = "{"created":"@1665585643.824938030","description":"Error received from peer ipv4:127.0.0.1:50151","file":"src/core/lib/surface/call.cc","file_line":1067,"grpc_message":"Exception calling application: <_InactiveRpcError of RPC that terminated with:\n\tstatus = StatusCode.UNAVAILABLE\n\tdetails = "Socket closed"\n\tdebug_error_string = "UNKNOWN:Error received from peer ipv6:%5B::1%5D:50156 {created_time:"2022-10-12T17:40:43.821982341+03:00", grpc_status:14, grpc_message:"Socket closed"}"\n>","grpc_status":2}"
+>
+2022-10-12 17:40:43,834 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 17:40:43,834 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 17:45:07,128 - INFO - MainThread - Server stopped
+2022-10-12 17:45:07,129 - INFO - MainThread - Exited
+2022-10-12 17:45:08,602 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 17:45:08,606 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 17:45:08,608 - INFO - MainThread - Server started
+2022-10-12 17:45:16,271 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 17:45:16,271 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 17:45:16,413 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter) # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 31, in run_ansible
+    response = stub.StartSession(request)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_channel.py", line 946, in __call__
+    return _end_unary_response_blocking(state, call, False, None)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_channel.py", line 849, in _end_unary_response_blocking
+    raise _InactiveRpcError(state)
+grpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1665585916.413180234","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":5419,"referenced_errors":[{"created":"@1665585916.413177904","description":"failed to connect to all addresses","file":"src/core/ext/filters/client_channel/lb_policy/pick_first/pick_first.cc","file_line":397,"grpc_status":14}]}"
+>
+2022-10-12 17:45:16,414 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 17:45:16,414 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 17:45:22,147 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 17:45:22,147 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 17:45:28,936 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter) # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 69, in run_ansible
+    raise Exception('Task with name %s failed with exception: %s' % (result.task_name, result.msg))
+Exception: Task with name fail failed with exception: There are no matchable objects
+2022-10-12 17:45:28,936 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 17:45:28,937 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 17:47:36,548 - INFO - ThreadPoolExecutor-0_2 - Request received
+2022-10-12 17:47:36,549 - INFO - ThreadPoolExecutor-0_2 - Request - status OK
+2022-10-12 17:47:42,973 - ERROR - ThreadPoolExecutor-0_2 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter) # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 62, in run_ansible
+    response = stub.RunTask(request)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_channel.py", line 946, in __call__
+    return _end_unary_response_blocking(state, call, False, None)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_channel.py", line 849, in _end_unary_response_blocking
+    raise _InactiveRpcError(state)
+grpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "Socket closed"
+	debug_error_string = "UNKNOWN:Error received from peer ipv6:%5B::1%5D:50156 {grpc_message:"Socket closed", grpc_status:14, created_time:"2022-10-12T17:47:42.971310788+03:00"}"
+>"
+	debug_error_string = "{"created":"@1665586062.973310398","description":"Error received from peer ipv4:127.0.0.1:50151","file":"src/core/lib/surface/call.cc","file_line":1067,"grpc_message":"Exception calling application: <_InactiveRpcError of RPC that terminated with:\n\tstatus = StatusCode.UNAVAILABLE\n\tdetails = "Socket closed"\n\tdebug_error_string = "UNKNOWN:Error received from peer ipv6:%5B::1%5D:50156 {grpc_message:"Socket closed", grpc_status:14, created_time:"2022-10-12T17:47:42.971310788+03:00"}"\n>","grpc_status":2}"
+>
+2022-10-12 17:47:42,973 - INFO - ThreadPoolExecutor-0_2 - Request - status ERROR
+2022-10-12 17:47:42,974 - INFO - ThreadPoolExecutor-0_2 - Response send
+2022-10-12 17:50:17,674 - INFO - MainThread - Server stopped
+2022-10-12 17:50:17,674 - INFO - MainThread - Exited
+2022-10-12 17:50:22,372 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 17:50:22,379 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 17:50:22,382 - INFO - MainThread - Server started
+2022-10-12 17:50:36,036 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 17:50:36,036 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 17:51:17,409 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter) # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 31, in run_ansible
+    response = stub.StartSession(request)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_channel.py", line 946, in __call__
+    return _end_unary_response_blocking(state, call, False, None)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_channel.py", line 849, in _end_unary_response_blocking
+    raise _InactiveRpcError(state)
+grpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1665586277.408624636","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":5419,"referenced_errors":[{"created":"@1665586277.408621836","description":"failed to connect to all addresses","file":"src/core/ext/filters/client_channel/lb_policy/pick_first/pick_first.cc","file_line":397,"grpc_status":14}]}"
+>
+2022-10-12 17:51:17,413 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 17:51:17,413 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 17:51:38,077 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 17:51:38,078 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 17:51:48,250 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter) # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 69, in run_ansible
+    raise Exception('Task with name %s failed with exception: %s' % (result.task_name, result.msg))
+Exception: Task with name fail failed with exception: There are no matchable objects
+2022-10-12 17:51:48,251 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 17:51:48,251 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 17:52:23,737 - INFO - MainThread - Server stopped
+2022-10-12 17:52:23,738 - INFO - MainThread - Exited
+2022-10-12 17:52:25,661 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 17:52:25,668 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 17:52:25,671 - INFO - MainThread - Server started
+2022-10-12 17:52:28,561 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 17:52:28,562 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 17:53:14,348 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter) # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 69, in run_ansible
+    raise Exception('Task with name %s failed with exception: %s' % (result.task_name, result.msg))
+Exception: Task with name fail failed with exception: There are no matchable objects
+2022-10-12 17:53:14,351 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 17:53:14,351 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 17:55:10,638 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 17:55:10,639 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 17:55:13,249 - INFO - MainThread - Server stopped
+2022-10-12 17:55:13,250 - INFO - MainThread - Exited
+2022-10-12 17:55:14,790 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 17:55:14,794 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 17:55:14,796 - INFO - MainThread - Server started
+2022-10-12 17:55:16,869 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 17:55:16,870 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 17:55:23,286 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter) # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 69, in run_ansible
+    raise Exception('Task with name %s failed with exception: %s' % (result.task_name, result.msg))
+Exception: Task with name fail failed with exception: There are no matchable objects
+2022-10-12 17:55:23,287 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 17:55:23,287 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 18:02:02,113 - INFO - MainThread - Server stopped
+2022-10-12 18:02:02,114 - INFO - MainThread - Exited
+2022-10-12 18:02:04,638 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 18:02:04,645 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 18:02:04,648 - INFO - MainThread - Server started
+2022-10-12 18:05:30,755 - INFO - MainThread - Server stopped
+2022-10-12 18:05:30,756 - INFO - MainThread - Exited
+2022-10-12 18:05:32,720 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 18:05:32,728 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 18:05:32,731 - INFO - MainThread - Server started
+2022-10-12 18:05:38,116 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 18:05:38,117 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 18:09:11,285 - INFO - MainThread - Server stopped
+2022-10-12 18:09:11,285 - INFO - MainThread - Exited
+2022-10-12 18:09:14,853 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 18:09:14,861 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 18:09:14,863 - INFO - MainThread - Server started
+2022-10-12 18:09:23,656 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 18:09:23,657 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 18:11:26,107 - INFO - MainThread - Server stopped
+2022-10-12 18:11:26,108 - INFO - MainThread - Exited
+2022-10-12 18:11:29,042 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 18:11:29,052 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 18:11:29,054 - INFO - MainThread - Server started
+2022-10-12 18:11:32,442 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 18:11:32,443 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 18:11:44,072 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-10-12 18:11:44,073 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-10-12 18:13:32,890 - INFO - ThreadPoolExecutor-0_2 - Request received
+2022-10-12 18:13:32,890 - INFO - ThreadPoolExecutor-0_2 - Request - status OK
+2022-10-12 18:13:41,691 - ERROR - ThreadPoolExecutor-0_1 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter) # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 69, in run_ansible
+    raise Exception('Task with name %s failed with exception: %s' % (result.task_name, result.msg))
+Exception: Task with name fail failed with exception: There are no matchable objects
+2022-10-12 18:13:41,694 - INFO - ThreadPoolExecutor-0_1 - Request - status ERROR
+2022-10-12 18:13:41,694 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-10-12 18:17:27,966 - INFO - MainThread - Server stopped
+2022-10-12 18:17:27,967 - INFO - MainThread - Exited
+2022-10-12 18:17:31,808 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 18:17:31,816 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 18:17:31,819 - INFO - MainThread - Server started
+2022-10-12 18:17:34,662 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 18:17:34,663 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 18:24:09,367 - INFO - MainThread - Server stopped
+2022-10-12 18:24:09,368 - INFO - MainThread - Exited
+2022-10-12 18:24:12,565 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 18:24:12,574 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 18:24:12,576 - INFO - MainThread - Server started
+2022-10-12 18:24:15,747 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 18:24:15,747 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 18:25:04,244 - INFO - MainThread - Server stopped
+2022-10-12 18:25:04,245 - INFO - MainThread - Exited
+2022-10-12 18:25:06,832 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 18:25:06,840 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 18:25:06,842 - INFO - MainThread - Server started
+2022-10-12 18:25:08,758 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 18:25:08,758 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 18:27:11,844 - INFO - MainThread - Server stopped
+2022-10-12 18:27:11,845 - INFO - MainThread - Exited
+2022-10-12 18:27:22,524 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 18:27:22,531 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 18:27:22,533 - INFO - MainThread - Server started
+2022-10-12 18:27:23,349 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 18:27:23,349 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 18:38:26,191 - INFO - MainThread - Server stopped
+2022-10-12 18:38:26,192 - INFO - MainThread - Exited
+2022-10-12 18:38:28,710 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 18:38:28,717 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 18:38:28,720 - INFO - MainThread - Server started
+2022-10-12 18:38:40,237 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 18:38:40,237 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 18:40:05,862 - INFO - MainThread - Server stopped
+2022-10-12 18:40:05,862 - INFO - MainThread - Exited
+2022-10-12 18:40:08,464 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 18:40:08,468 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 18:40:08,469 - INFO - MainThread - Server started
+2022-10-12 18:40:24,308 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 18:40:24,309 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 18:40:35,107 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 18:41:13,546 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 18:41:13,547 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 18:43:55,801 - INFO - ThreadPoolExecutor-0_2 - Request received
+2022-10-12 18:43:55,801 - INFO - ThreadPoolExecutor-0_2 - Request - status OK
+2022-10-12 18:51:56,359 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-10-12 18:51:56,360 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-10-12 18:51:59,839 - ERROR - ThreadPoolExecutor-0_1 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter) # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 62, in run_ansible
+    response = stub.RunTask(request)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_channel.py", line 946, in __call__
+    return _end_unary_response_blocking(state, call, False, None)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_channel.py", line 849, in _end_unary_response_blocking
+    raise _InactiveRpcError(state)
+grpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "Socket closed"
+	debug_error_string = "UNKNOWN:Error received from peer ipv6:%5B::1%5D:50156 {grpc_message:"Socket closed", grpc_status:14, created_time:"2022-10-12T18:51:59.837413334+03:00"}"
+>"
+	debug_error_string = "{"created":"@1665589919.839183428","description":"Error received from peer ipv4:127.0.0.1:50151","file":"src/core/lib/surface/call.cc","file_line":1067,"grpc_message":"Exception calling application: <_InactiveRpcError of RPC that terminated with:\n\tstatus = StatusCode.UNAVAILABLE\n\tdetails = "Socket closed"\n\tdebug_error_string = "UNKNOWN:Error received from peer ipv6:%5B::1%5D:50156 {grpc_message:"Socket closed", grpc_status:14, created_time:"2022-10-12T18:51:59.837413334+03:00"}"\n>","grpc_status":2}"
+>
+2022-10-12 18:51:59,840 - INFO - ThreadPoolExecutor-0_1 - Request - status ERROR
+2022-10-12 18:51:59,840 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-10-12 18:52:21,300 - INFO - ThreadPoolExecutor-0_4 - Request received
+2022-10-12 18:52:21,300 - INFO - ThreadPoolExecutor-0_4 - Request - status OK
+2022-10-12 18:52:21,422 - ERROR - ThreadPoolExecutor-0_4 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 142, in translate
+    host_ip_parameter, is_delete, grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 72, in __init__
+    self.provider_nodes = self._provider_nodes()
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/tosca_template.py", line 194, in _provider_nodes
+    is_software_component=is_software_component)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_resource.py", line 211, in __init__
+    grpc_cotea_endpoint=self.grpc_cotea_endpoint))
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/providers/common/provider_artifacts.py", line 104, in execute
+    return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter) # добавить переменную для дефолт хоста
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/runner/runner.py", line 31, in run_ansible
+    response = stub.StartSession(request)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_channel.py", line 946, in __call__
+    return _end_unary_response_blocking(state, call, False, None)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/venv/lib/python3.6/site-packages/grpc/_channel.py", line 849, in _end_unary_response_blocking
+    raise _InactiveRpcError(state)
+grpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1665589941.422370973","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":5419,"referenced_errors":[{"created":"@1665589941.422368688","description":"failed to connect to all addresses","file":"src/core/ext/filters/client_channel/lb_policy/pick_first/pick_first.cc","file_line":397,"grpc_status":14}]}"
+>
+2022-10-12 18:52:21,422 - INFO - ThreadPoolExecutor-0_4 - Request - status ERROR
+2022-10-12 18:52:21,422 - INFO - ThreadPoolExecutor-0_4 - Response send
+2022-10-12 18:52:28,335 - INFO - ThreadPoolExecutor-0_5 - Request received
+2022-10-12 18:52:28,335 - INFO - ThreadPoolExecutor-0_5 - Request - status OK
+2022-10-12 18:52:39,142 - INFO - ThreadPoolExecutor-0_5 - Response send
+2022-10-12 18:53:31,206 - INFO - ThreadPoolExecutor-0_3 - Request received
+2022-10-12 18:53:31,206 - INFO - ThreadPoolExecutor-0_3 - Request - status OK
+2022-10-12 18:56:54,814 - INFO - ThreadPoolExecutor-0_4 - Request received
+2022-10-12 18:56:54,815 - INFO - ThreadPoolExecutor-0_4 - Request - status OK
+2022-10-12 19:00:30,891 - INFO - MainThread - Server stopped
+2022-10-12 19:00:30,891 - INFO - MainThread - Exited
+2022-10-12 19:00:34,267 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 19:00:34,275 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 19:00:34,278 - INFO - MainThread - Server started
+2022-10-12 19:02:46,388 - INFO - MainThread - Server stopped
+2022-10-12 19:02:46,389 - INFO - MainThread - Exited
+2022-10-12 19:02:49,750 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 19:02:49,760 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 19:02:49,763 - INFO - MainThread - Server started
+2022-10-12 19:06:09,339 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 19:06:09,340 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 19:09:01,191 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 19:11:18,029 - INFO - MainThread - Server stopped
+2022-10-12 19:11:18,030 - INFO - MainThread - Exited
+2022-10-12 19:11:19,890 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 19:11:19,894 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 19:11:19,896 - INFO - MainThread - Server started
+2022-10-12 19:16:58,939 - INFO - MainThread - Server stopped
+2022-10-12 19:16:58,939 - INFO - MainThread - Exited
+2022-10-12 19:18:56,768 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 19:18:56,772 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 19:18:56,774 - INFO - MainThread - Server started
+2022-10-12 19:20:55,921 - INFO - MainThread - Server stopped
+2022-10-12 19:20:55,922 - INFO - MainThread - Exited
+2022-10-12 19:20:57,263 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 19:20:57,272 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 19:20:57,286 - INFO - MainThread - Server started
+2022-10-12 19:26:43,488 - INFO - MainThread - Server stopped
+2022-10-12 19:26:43,489 - INFO - MainThread - Exited
+2022-10-12 19:26:45,594 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 19:26:45,598 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 19:26:45,600 - INFO - MainThread - Server started
+2022-10-12 19:31:10,358 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 19:31:10,359 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 19:36:03,587 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-10-12 19:36:03,587 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-10-12 19:47:54,784 - INFO - MainThread - Server stopped
+2022-10-12 19:47:54,784 - INFO - MainThread - Exited
+2022-10-12 19:47:56,990 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 19:47:56,994 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 19:47:56,995 - INFO - MainThread - Server started
+2022-10-12 19:48:50,724 - INFO - MainThread - Server stopped
+2022-10-12 19:48:50,724 - INFO - MainThread - Exited
+2022-10-12 19:48:52,555 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 19:48:52,559 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 19:48:52,561 - INFO - MainThread - Server started
+2022-10-12 19:50:13,671 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 19:50:13,671 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 19:53:09,289 - INFO - MainThread - Server stopped
+2022-10-12 19:53:09,290 - INFO - MainThread - Exited
+2022-10-12 19:53:13,883 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-12 19:53:13,887 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-12 19:53:13,889 - INFO - MainThread - Server started
+2022-10-12 19:56:36,887 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 19:56:36,888 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 19:56:56,124 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name Create OpenStack component security group rule failed with exception: All items completed
+2022-10-12 19:56:56,126 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 19:56:56,126 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 20:08:31,695 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 20:08:31,695 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 20:08:51,047 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name Create OpenStack component security group rule failed with exception: All items completed
+2022-10-12 20:08:51,047 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 20:08:51,048 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 20:17:43,915 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-10-12 20:17:43,915 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-10-12 20:18:04,540 - ERROR - ThreadPoolExecutor-0_1 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name lineinfile failed with exception: The conditional check 'testing_tosca_security_group_rule.id is defined' failed. The error was: error while evaluating conditional (testing_tosca_security_group_rule.id is defined): {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-12 20:18:04,541 - INFO - ThreadPoolExecutor-0_1 - Request - status ERROR
+2022-10-12 20:18:04,541 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-10-12 20:20:40,130 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-12 20:20:40,130 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-12 20:21:00,464 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name Create OpenStack component security group rule failed with exception: All items completed
+2022-10-12 20:21:00,464 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-12 20:21:00,464 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-12 20:21:47,147 - INFO - MainThread - Server stopped
+2022-10-12 20:21:47,148 - INFO - MainThread - Exited
+2022-10-13 14:36:23,558 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-13 14:36:23,562 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-13 14:36:23,563 - INFO - MainThread - Server started
+2022-10-13 14:39:17,672 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 14:39:17,673 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 14:39:36,970 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name Create OpenStack component security group rule failed with exception: All items completed
+2022-10-13 14:39:36,972 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-13 14:39:36,972 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 18:21:40,285 - INFO - MainThread - Server stopped
+2022-10-13 18:21:40,285 - INFO - MainThread - Exited
+2022-10-13 18:21:41,576 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-13 18:21:41,580 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-13 18:21:41,591 - INFO - MainThread - Server started
+2022-10-13 18:22:22,122 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 18:22:22,122 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 18:22:39,273 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name lineinfile failed with exception: The conditional check 'testing_tosca_security_group_rule.id is defined' failed. The error was: error while evaluating conditional (testing_tosca_security_group_rule.id is defined): {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-13 18:22:39,275 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-13 18:22:39,275 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 18:27:59,786 - INFO - MainThread - Server stopped
+2022-10-13 18:27:59,787 - INFO - MainThread - Exited
+2022-10-13 18:28:01,342 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-13 18:28:01,347 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-13 18:28:01,352 - INFO - MainThread - Server started
+2022-10-13 18:28:42,143 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 18:28:42,143 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 18:28:59,293 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name Create OpenStack component security group rule failed with exception: All items completed
+2022-10-13 18:28:59,295 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-13 18:28:59,295 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 18:30:27,096 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 18:30:27,096 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 18:30:36,455 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 18:32:10,333 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-10-13 18:32:10,333 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-10-13 18:32:19,763 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-10-13 18:36:50,834 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 18:36:50,834 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 18:37:09,179 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name lineinfile failed with exception: The conditional check 'testing_tosca_security_group_rule.id is defined' failed. The error was: error while evaluating conditional (testing_tosca_security_group_rule.id is defined): {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-13 18:37:09,179 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-13 18:37:09,180 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 18:43:18,863 - INFO - ThreadPoolExecutor-0_2 - Request received
+2022-10-13 18:43:18,863 - INFO - ThreadPoolExecutor-0_2 - Request - status OK
+2022-10-13 18:43:38,226 - ERROR - ThreadPoolExecutor-0_2 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name lineinfile failed with exception: The conditional check 'testing_tosca_security_group_rule.id is defined' failed. The error was: error while evaluating conditional (testing_tosca_security_group_rule.id is defined): {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-13 18:43:38,227 - INFO - ThreadPoolExecutor-0_2 - Request - status ERROR
+2022-10-13 18:43:38,227 - INFO - ThreadPoolExecutor-0_2 - Response send
+2022-10-13 18:47:54,727 - INFO - MainThread - Server stopped
+2022-10-13 18:47:54,727 - INFO - MainThread - Exited
+2022-10-13 18:47:56,235 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-13 18:47:56,239 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-13 18:47:56,240 - INFO - MainThread - Server started
+2022-10-13 18:49:14,895 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 18:49:14,895 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 18:49:33,151 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name lineinfile failed with exception: The conditional check 'testing_tosca_security_group_rule.id is defined' failed. The error was: error while evaluating conditional (testing_tosca_security_group_rule.id is defined): {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-13 18:49:33,152 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-13 18:49:33,153 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 18:50:46,319 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 18:50:46,319 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 18:50:55,643 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 18:53:45,957 - INFO - MainThread - Server stopped
+2022-10-13 18:53:45,957 - INFO - MainThread - Exited
+2022-10-13 18:53:47,882 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-13 18:53:47,886 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-13 18:53:47,888 - INFO - MainThread - Server started
+2022-10-13 18:55:15,013 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 18:55:15,013 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 18:55:34,245 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name lineinfile failed with exception: The conditional check 'testing_tosca_security_group_rule.id is defined' failed. The error was: error while evaluating conditional (testing_tosca_security_group_rule.id is defined): {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-13 18:55:34,247 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-13 18:55:34,247 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 19:27:51,964 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 19:27:51,965 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 19:28:09,188 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name lineinfile failed with exception: The conditional check 'testing_tosca_security_group_rule.id is defined' failed. The error was: error while evaluating conditional (testing_tosca_security_group_rule.id is defined): {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-13 19:28:09,188 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-13 19:28:09,188 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 19:34:49,698 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-10-13 19:34:49,698 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-10-13 19:35:07,802 - ERROR - ThreadPoolExecutor-0_1 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name lineinfile failed with exception: The conditional check 'testing_tosca_security_group_rule.id is defined' failed. The error was: error while evaluating conditional (testing_tosca_security_group_rule.id is defined): {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-13 19:35:07,802 - INFO - ThreadPoolExecutor-0_1 - Request - status ERROR
+2022-10-13 19:35:07,802 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-10-13 19:43:20,219 - INFO - MainThread - Server stopped
+2022-10-13 19:43:20,220 - INFO - MainThread - Exited
+2022-10-13 19:43:21,717 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-13 19:43:21,721 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-13 19:43:21,723 - INFO - MainThread - Server started
+2022-10-13 19:44:38,171 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 19:44:38,171 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 19:44:55,345 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name debug failed with exception: The task includes an option with an undefined variable. The error was: {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-13 19:44:55,346 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-13 19:44:55,346 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 19:48:54,532 - INFO - MainThread - Server stopped
+2022-10-13 19:48:54,532 - INFO - MainThread - Exited
+2022-10-13 19:48:55,759 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-13 19:48:55,764 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-13 19:48:55,766 - INFO - MainThread - Server started
+2022-10-13 19:50:38,518 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 19:50:38,519 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 19:50:56,782 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name debug failed with exception: The task includes an option with an undefined variable. The error was: {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-13 19:50:56,783 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-13 19:50:56,784 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 19:59:18,453 - INFO - MainThread - Server stopped
+2022-10-13 19:59:18,453 - INFO - MainThread - Exited
+2022-10-13 19:59:19,900 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-13 19:59:19,904 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-13 19:59:19,906 - INFO - MainThread - Server started
+2022-10-13 20:00:29,805 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 20:00:29,805 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 20:00:48,020 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name lineinfile failed with exception: The conditional check 'testing_tosca_security_group_rule.id is defined' failed. The error was: error while evaluating conditional (testing_tosca_security_group_rule.id is defined): {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-13 20:00:48,022 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-13 20:00:48,022 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 20:04:54,397 - INFO - MainThread - Server stopped
+2022-10-13 20:04:54,397 - INFO - MainThread - Exited
+2022-10-13 20:04:56,217 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-13 20:04:56,221 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-13 20:04:56,223 - INFO - MainThread - Server started
+2022-10-13 20:06:46,235 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 20:06:46,236 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 20:07:06,504 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name debug failed with exception: The task includes an option with an undefined variable. The error was: {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-13 20:07:06,505 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-13 20:07:06,505 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 20:19:53,296 - INFO - MainThread - Server stopped
+2022-10-13 20:19:53,296 - INFO - MainThread - Exited
+2022-10-13 20:19:55,337 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-13 20:19:55,344 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-13 20:19:55,346 - INFO - MainThread - Server started
+2022-10-13 20:20:45,027 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 20:20:45,027 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 20:21:42,358 - INFO - MainThread - Server stopped
+2022-10-13 20:21:42,358 - INFO - MainThread - Exited
+2022-10-13 20:22:16,144 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-13 20:22:16,148 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-13 20:22:16,150 - INFO - MainThread - Server started
+2022-10-13 20:22:58,493 - INFO - MainThread - Server stopped
+2022-10-13 20:22:58,493 - INFO - MainThread - Exited
+2022-10-13 20:22:59,759 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-13 20:22:59,763 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-13 20:22:59,765 - INFO - MainThread - Server started
+2022-10-13 20:23:37,553 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 20:23:37,553 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 20:23:56,983 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name debug failed with exception: The task includes an option with an undefined variable. The error was: {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+
+The error appears to be in '<string>': line 1, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+2022-10-13 20:23:56,985 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-13 20:23:56,985 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 20:31:11,884 - INFO - MainThread - Server stopped
+2022-10-13 20:31:11,885 - INFO - MainThread - Exited
+2022-10-13 20:31:13,883 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-13 20:31:13,888 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-13 20:31:13,891 - INFO - MainThread - Server started
+2022-10-13 20:31:36,019 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 20:31:36,020 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 20:31:45,163 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name Delete OpenStack component floating ip failed with exception: All items completed
+2022-10-13 20:31:45,164 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-13 20:31:45,165 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 20:32:52,017 - INFO - MainThread - Server stopped
+2022-10-13 20:32:52,017 - INFO - MainThread - Exited
+2022-10-13 20:32:53,716 - INFO - MainThread - Logging clouni-configuration-tool started
+2022-10-13 20:32:53,720 - INFO - MainThread - Server is going to start on 127.0.0.1:50052
+2022-10-13 20:32:53,722 - INFO - MainThread - Server started
+2022-10-13 20:33:28,944 - INFO - ThreadPoolExecutor-0_0 - Request received
+2022-10-13 20:33:28,944 - INFO - ThreadPoolExecutor-0_0 - Request - status OK
+2022-10-13 20:33:47,199 - ERROR - ThreadPoolExecutor-0_0 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name debug failed with exception: The task includes an option with an undefined variable. The error was: {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-13 20:33:47,200 - INFO - ThreadPoolExecutor-0_0 - Request - status ERROR
+2022-10-13 20:33:47,201 - INFO - ThreadPoolExecutor-0_0 - Response send
+2022-10-13 20:39:12,513 - INFO - ThreadPoolExecutor-0_1 - Request received
+2022-10-13 20:39:12,513 - INFO - ThreadPoolExecutor-0_1 - Request - status OK
+2022-10-13 20:39:30,780 - ERROR - ThreadPoolExecutor-0_1 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name debug failed with exception: The task includes an option with an undefined variable. The error was: {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-13 20:39:30,780 - INFO - ThreadPoolExecutor-0_1 - Request - status ERROR
+2022-10-13 20:39:30,780 - INFO - ThreadPoolExecutor-0_1 - Response send
+2022-10-13 20:45:14,256 - INFO - ThreadPoolExecutor-0_2 - Request received
+2022-10-13 20:45:14,256 - INFO - ThreadPoolExecutor-0_2 - Request - status OK
+2022-10-13 20:45:32,380 - ERROR - ThreadPoolExecutor-0_2 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name debug failed with exception: The task includes an option with an undefined variable. The error was: {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-13 20:45:32,381 - INFO - ThreadPoolExecutor-0_2 - Request - status ERROR
+2022-10-13 20:45:32,381 - INFO - ThreadPoolExecutor-0_2 - Response send
+2022-10-14 16:11:55,158 - INFO - ThreadPoolExecutor-0_3 - Request received
+2022-10-14 16:11:55,159 - INFO - ThreadPoolExecutor-0_3 - Request - status OK
+2022-10-14 16:12:12,351 - ERROR - ThreadPoolExecutor-0_3 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name Create OpenStack component security group rule failed with exception: All items completed
+2022-10-14 16:12:12,351 - INFO - ThreadPoolExecutor-0_3 - Request - status ERROR
+2022-10-14 16:12:12,351 - INFO - ThreadPoolExecutor-0_3 - Response send
+2022-10-14 16:25:36,470 - INFO - ThreadPoolExecutor-0_4 - Request received
+2022-10-14 16:25:36,470 - INFO - ThreadPoolExecutor-0_4 - Request - status OK
+2022-10-14 16:25:55,700 - ERROR - ThreadPoolExecutor-0_4 - 
+Traceback (most recent call last):
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 87, in ClouniConfigurationTool
+    response.content = TranslatorServer(args).output
+  File "/home/sadimer/Desktop/clouni_configuration_tool/grpc_server/clouni_configuration_tool.py", line 67, in __init__
+    database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/common/translator_to_configuration_dsl.py", line 154, in translate
+    grpc_cotea_endpoint=grpc_cotea_endpoint)
+  File "/home/sadimer/Desktop/clouni_configuration_tool/configuration_tool/configuration_tools/ansible/configuration_tool.py", line 92, in to_dsl
+    raise Exception("Deploy failed with %s" % node_name)
+Exception: Deploy failed with Task with name debug failed with exception: The task includes an option with an undefined variable. The error was: {'vars': {'initiator': ['ingress'], 'port': [22], 'protocol': ['tcp']}, 'with_sequence': 'start=0 end={{ [protocol | length, port | length, initiator | length] | max - 1 }} format=%d'}: 'protocol' is undefined
+2022-10-14 16:25:55,700 - INFO - ThreadPoolExecutor-0_4 - Request - status ERROR
+2022-10-14 16:25:55,700 - INFO - ThreadPoolExecutor-0_4 - Response send
+2022-10-14 16:43:21,993 - INFO - MainThread - Server stopped
+2022-10-14 16:43:21,994 - INFO - MainThread - Exited

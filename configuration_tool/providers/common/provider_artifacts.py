@@ -68,7 +68,7 @@ def create_artifact_data(data, executor):
 def create_artifact(filename, data, executor):
     if executor == ANSIBLE:
         os.makedirs(os.path.dirname(filename), exist_ok=True)
-        tasks = create_artifact_data(data)
+        tasks = create_artifact_data(data, executor)
         with open(filename, "w") as f:
             filedata = yaml.dump(tasks, default_flow_style=False, sort_keys=False)
             f.write(filedata)
@@ -101,21 +101,5 @@ def execute(new_global_elements_map_total_implementation, is_delete, target_para
                                                                    store=False)
         os.remove(filename)
         if grpc_cotea_endpoint:
-            results = run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost') # добавить переменную для дефолт хоста
-            if target_parameter is not None:
-                value = None
-                if_failed = False
-                for result in results:
-                    if result.is_failed or result.is_unreachable:
-                        logging.error("Task %s has failed because of exception: \n%s" %
-                                      (result.task_name, result.result.get('exception', '(Unknown reason)')))
-                        if_failed = True
-                    if 'results' in result.result and len(result.result['results']) > 0 and 'ansible_facts' in \
-                            result.result['results'][0] and 'matched_object' in result.result['results'][0][
-                        'ansible_facts']:
-                        value = result.result['results'][0]['ansible_facts']['matched_object'][
-                            target_parameter.split('.')[-1]]
-                if if_failed:
-                    value = None
-                return value
+            return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter) # добавить переменную для дефолт хоста
     return None

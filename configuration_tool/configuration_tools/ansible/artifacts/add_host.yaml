@@ -7,7 +7,6 @@
 - lineinfile:
     path: '{{ playbook_dir }}/hosts.ini'
     line: '[{{ group }}]'
-  when: host_ip is defined and item[1] != ''
 - lineinfile:
     path: '{{ playbook_dir }}/hosts.ini'
     line: '{{ item[0] }} ansible_host={{ item[1] }} ansible_user={{ ansible_user }} ansible_pass={{ ansible_sudo_pass }}'
@@ -20,7 +19,9 @@
   with_list: "{{ host_ip }}"
 - shell: |
     check_ssh() {
-        while [ 1 = 1 ]; do
+        runtime="3 minute"
+        endtime=$(date -ud "$runtime" +%s)
+        while [ $(date -u +%s) -le $endtime ]; do
                 ssh-keyscan {{ item[1] }},`dig +short {{ item[1] }}`
                 rc=$?
                 case $rc in
@@ -45,4 +46,5 @@
     name: '{{ item.item[1] }}'
     key: '{{ item.stdout }}'
   when: host_key is defined and host_ip is defined and item.item[1] != '' and item.rc == 0
+  with_items: "{{ host_key.results }}"
   with_items: "{{ host_key.results }}"

@@ -189,6 +189,11 @@ class CoteaWorkerStub(object):
                 request_serializer=cotea__pb2.EmptyMsg.SerializeToString,
                 response_deserializer=cotea__pb2.Status.FromString,
                 )
+        self.HealthCheck = channel.unary_unary(
+                '/CoteaWorker/HealthCheck',
+                request_serializer=cotea__pb2.EmptyMsg.SerializeToString,
+                response_deserializer=cotea__pb2.WorkerHealthStatus.FromString,
+                )
 
 
 class CoteaWorkerServicer(object):
@@ -212,6 +217,12 @@ class CoteaWorkerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def HealthCheck(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_CoteaWorkerServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -229,6 +240,11 @@ def add_CoteaWorkerServicer_to_server(servicer, server):
                     servicer.StopExecution,
                     request_deserializer=cotea__pb2.EmptyMsg.FromString,
                     response_serializer=cotea__pb2.Status.SerializeToString,
+            ),
+            'HealthCheck': grpc.unary_unary_rpc_method_handler(
+                    servicer.HealthCheck,
+                    request_deserializer=cotea__pb2.EmptyMsg.FromString,
+                    response_serializer=cotea__pb2.WorkerHealthStatus.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -288,5 +304,22 @@ class CoteaWorker(object):
         return grpc.experimental.unary_unary(request, target, '/CoteaWorker/StopExecution',
             cotea__pb2.EmptyMsg.SerializeToString,
             cotea__pb2.Status.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def HealthCheck(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/CoteaWorker/HealthCheck',
+            cotea__pb2.EmptyMsg.SerializeToString,
+            cotea__pb2.WorkerHealthStatus.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

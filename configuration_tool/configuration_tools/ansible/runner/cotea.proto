@@ -12,6 +12,7 @@ service CoteaWorker {
    rpc InitExecution(WorkerConfig) returns (Status) {}
    rpc RunTask(WorkerTask) returns (TaskResults) {}
    rpc StopExecution(EmptyMsg) returns (Status) {}
+   rpc HealthCheck(EmptyMsg) returns (WorkerHealthStatus) {}
    // rpc RestartExecution() returns (Status) {}
 }
 
@@ -36,14 +37,14 @@ message Config {
    string session_ID = 1;
    string hosts = 2;
    string inv_path = 3;
-   repeated MapFieldEntry extra_vars = 4;
+   string extra_vars = 4;
    repeated MapFieldEntry env_vars = 5;
 }
 
 message WorkerConfig {
    string hosts = 1;
    string inv_path = 2;
-   repeated MapFieldEntry extra_vars = 3;
+   string extra_vars = 3;
    repeated MapFieldEntry env_vars = 4;
 }
 
@@ -55,7 +56,7 @@ message Task {
 
 message WorkerTask {
    string task_str = 1;
-   bool is_dict = 3;
+   bool is_dict = 2;
 }
 
 message TaskResult {
@@ -82,4 +83,10 @@ message TaskResults {
 message Status {
    bool ok = 1;
    string error_msg = 2;
+}
+
+message WorkerHealthStatus {
+   bool ok = 1;
+   int32 executions_count = 2;
+   int32 executed_tasks_count = 3;
 }

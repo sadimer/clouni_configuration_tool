@@ -1,5 +1,5 @@
 import time
-from multiprocessing import Queue
+from queue import Queue
 
 from graphlib import TopologicalSorter
 
@@ -88,6 +88,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 node_name = q.get_nowait()
             except:
                 time.sleep(1)
+            if isinstance(node_name, Exception):
+                raise Exception("Deploy failed with %s" % node_name)
             if node_name is not None:
                 for node in active:
                     if node.name == node_name.split(SEPARATOR)[0] and node.operation == node_name.split(SEPARATOR)[1]:
@@ -188,7 +190,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                         ansible_playbook.append(ansible_play_for_elem)
                 else:
                     if len(ansible_tasks) > 0:
-                        self.run(ansible_tasks, grpc_cotea_endpoint, host, v.name, v.operation, q)
+                        self.run(ansible_tasks, grpc_cotea_endpoint, host, v.name, v.operation, q, extra)
                     else:
                         elements.done(v)
                     active.append(v)
@@ -202,9 +204,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                          'name': 'Renew id_vars_example.yaml'}
                 ansible_playbook.append(ansible_play_for_elem)
             else:
-                self.run(ansible_tasks, grpc_cotea_endpoint, self.default_host, None, None, q)
-                done = q.get()
-                if done != 'Done':
+                self.run(ansible_tasks, grpc_cotea_endpoint, self.default_host, None, None, q, extra)
+                if isinstance(q.get(), Exception):
                     logging.error("Something wrong with multiprocessing queue")
                     raise Exception("Something wrong with multiprocessing queue")
         return yaml.dump(ansible_playbook, default_flow_style=False, sort_keys=False)
@@ -466,6 +467,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 'when': task_name + '.' + node_type + '.name' + IS_DEFINED
             })
         else:
+            ansible_tasks_for_create.append({'debug': {'msg': self.rap_ansible_variable(task_name)}})
             ansible_tasks_for_create.append({
                 'set_fact': {
                     task_name + '_list': self.rap_ansible_variable(
@@ -547,9 +549,9 @@ class AnsibleConfigurationTool(ConfigurationTool):
             })
         return ansible_tasks
 
-    def run(self, ansible_tasks, grpc_cotea_endpoint, hosts, name, op, q):
+    def run(self, ansible_tasks, grpc_cotea_endpoint, hosts, name, op, q, extra):
         extra_env = {}
-        extra_vars = {}
+        extra_vars = extra
         if self.provider == 'amazon':
             amazon_plugins_path = os.path.join(utils.get_project_root_path(), '.ansible/plugins/modules/cloud/amazon')
             if "ANSIBLE_LIBRARY" not in os.environ:
