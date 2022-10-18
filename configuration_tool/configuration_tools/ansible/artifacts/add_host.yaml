@@ -48,3 +48,4 @@
   when: host_key is defined and host_ip is defined and item.item[1] != '' and item.rc == 0
   with_items: "{{ host_key.results }}"
   with_items: "{{ host_key.results }}"
+- meta: refresh_inventory

@@ -24,3 +24,5 @@ venv
 
 test
 artifacts
+
+*.log

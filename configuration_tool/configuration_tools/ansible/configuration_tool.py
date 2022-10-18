@@ -2,6 +2,7 @@ import time
 from queue import Queue
 
 from graphlib import TopologicalSorter
+from yaml import Loader
 
 from configuration_tool.common import utils
 from configuration_tool.common.tosca_reserved_keys import PARAMETERS, VALUE, EXTRA, SOURCE, INPUTS, NODE_FILTER, NAME, \
@@ -11,7 +12,7 @@ from configuration_tool.providers.common.provider_configuration import ProviderC
 from configuration_tool.configuration_tools.common.configuration_tool import ConfigurationTool, \
     OUTPUT_IDS, OUTPUT_ID_RANGE_START, OUTPUT_ID_RANGE_END
 
-from configuration_tool.configuration_tools.ansible.runner.runner import grpc_cotea_run_ansible
+from configuration_tool.configuration_tools.ansible.runner.runner import grpc_cotea_run_ansible, run_ansible
 
 import copy, yaml, os, itertools, six, logging
 from shutil import copyfile
@@ -98,7 +99,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
             for v in elements.get_ready():
                 # in delete mode we skip all operations exept delete and create operation transforms to delete
                 if is_delete:
-                    if v.operation == 'create':
+                    if v.operation == 'create' and not v.is_software_component:
                         v.operation = 'delete'
                     else:
                         elements.done(v)
@@ -114,32 +115,33 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 # reload id_vars file
                 if not is_delete and first:
                     first = False
-                    ansible_tasks.append(copy.deepcopy({FILE: {
+                    first_tasks = []
+                    first_tasks.append(copy.deepcopy({FILE: {
                         PATH: ids_file_path,
                         STATE: 'absent'}}))
-                    ansible_tasks.append(copy.deepcopy({FILE: {
+                    first_tasks.append(copy.deepcopy({FILE: {
                         PATH: ids_file_path,
                         STATE: 'touch'}}))
+                    run_ansible(first_tasks, grpc_cotea_endpoint, {}, {}, 'localhost')
                 # create playbook for every operation
                 if v.operation == 'delete':
-                    if not v.is_software_component:
-                        tasks = [copy.deepcopy({'include_vars': ids_file_path})]
-                        tasks.extend(self.get_ansible_tasks_for_delete(v, description_by_type, module_by_type,
+                    tasks = [copy.deepcopy({'include_vars': ids_file_path})]
+                    tasks.extend(self.get_ansible_tasks_for_delete(v, description_by_type, module_by_type,
                                                                        additional_args=extra))
-                        tasks.extend(
-                            self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
+                    tasks.extend(
+                        self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
                                                                   additional_args=extra))
-                        if not any(item == module_by_type for item in
-                                   ansible_config.get('modules_skipping_delete', [])):
-                            ansible_tasks.extend(copy.deepcopy(tasks))
+                    if not any(item == module_by_type for item in
+                                ansible_config.get('modules_skipping_delete', [])):
+                        ansible_tasks.extend(copy.deepcopy(tasks))
                 elif v.operation == 'create':
                     if not v.is_software_component:
                         ansible_tasks.append(copy.deepcopy({'include_vars': ids_file_path}))
                         ansible_tasks.extend(copy.deepcopy(self.get_ansible_tasks_for_inputs(inputs)))
-                        ansible_tasks = self.get_ansible_tasks_for_create(v, target_directory, node_filter_config,
+                        ansible_tasks.extend(self.get_ansible_tasks_for_create(v, target_directory, node_filter_config,
                                                                           description_by_type, module_by_type,
-                                                                          additional_args=extra)
+                                                                          additional_args=extra))
                         ansible_tasks.extend(
                             self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
@@ -204,10 +206,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                          'name': 'Renew id_vars_example.yaml'}
                 ansible_playbook.append(ansible_play_for_elem)
             else:
-                self.run(ansible_tasks, grpc_cotea_endpoint, self.default_host, None, None, q, extra)
-                if isinstance(q.get(), Exception):
-                    logging.error("Something wrong with multiprocessing queue")
-                    raise Exception("Something wrong with multiprocessing queue")
+                run_ansible(ansible_tasks, grpc_cotea_endpoint, {}, {}, self.default_host)
         return yaml.dump(ansible_playbook, default_flow_style=False, sort_keys=False)
 
     def replace_all_get_functions(self, data):
@@ -341,17 +340,23 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     primary = True
                 scripts.extend(implementations)
                 for script in implementations:
-                    target_filename = os.path.join(utils.get_tmp_clouni_dir(), cluster_name, target_directory, script)
-                    os.makedirs(os.path.dirname(target_filename), exist_ok=True)
                     script_filename_1 = os.path.join(os.getcwd(), script)
                     script_filename_2 = os.path.join(self.get_ansible_artifacts_directory(), script)
+                    script_filename_3 = os.path.join(utils.get_tmp_clouni_dir(), script)
+                    script_filename_4 = os.path.join(os.path.join(utils.get_project_root_path(), 'examples'), script)
                     if os.path.isfile(script_filename_1):
-                        copyfile(script_filename_1, target_filename)
+                        file = script_filename_1
                     elif os.path.isfile(script_filename_2):
-                        copyfile(script_filename_2, target_filename)
+                        file = script_filename_2
+                    elif os.path.isfile(script_filename_3):
+                        file = script_filename_3
+                    elif os.path.isfile(script_filename_4):
+                        file = script_filename_4
                     else:
                         logging.error(
                             "Artifact filename %s was not found in %s or %s" % (
+                                script, script_filename_1, script_filename_2))
+                        raise Exception("Artifact filename %s was not found in %s or %s" % (
                                 script, script_filename_1, script_filename_2))
                     if not primary and interface_operation.get(INPUTS) is not None:
                         for input_name, input_value in interface_operation[INPUTS].items():
@@ -360,12 +365,11 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                     input_name: input_value
                                 }
                             })
-                    new_ansible_task = {
-                        IMPORT_TASKS_MODULE: target_filename
-                    }
+                    with open(file, 'r') as target_file:
+                        new_ansible_tasks = yaml.load(target_file, Loader=Loader)
                     for task in ansible_tasks:
                         task.update(additional_args)
-                    ansible_tasks.append(new_ansible_task)
+                    ansible_tasks.extend(new_ansible_tasks)
         return ansible_tasks
 
     def ansible_description_by_type(self, provider_source_obj_type, description_prefix):
@@ -467,7 +471,6 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 'when': task_name + '.' + node_type + '.name' + IS_DEFINED
             })
         else:
-            ansible_tasks_for_create.append({'debug': {'msg': self.rap_ansible_variable(task_name)}})
             ansible_tasks_for_create.append({
                 'set_fact': {
                     task_name + '_list': self.rap_ansible_variable(
@@ -551,7 +554,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
 
     def run(self, ansible_tasks, grpc_cotea_endpoint, hosts, name, op, q, extra):
         extra_env = {}
-        extra_vars = extra
+        extra_vars = extra.get('global')
         if self.provider == 'amazon':
             amazon_plugins_path = os.path.join(utils.get_project_root_path(), '.ansible/plugins/modules/cloud/amazon')
             if "ANSIBLE_LIBRARY" not in os.environ:

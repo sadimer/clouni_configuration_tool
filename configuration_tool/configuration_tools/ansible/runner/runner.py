@@ -2,9 +2,9 @@ import json
 import logging
 import os
 from threading import Thread
+from tqdm import tqdm
 
 import grpc
-import yaml
 
 from configuration_tool.common import utils
 
@@ -51,20 +51,27 @@ def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts
         logging.error("Can't init execution with grpc cotea because of: %s", response.error_msg)
         raise Exception(response.error_msg)
     matched_object = None
-    for task in ansible_tasks:
+    for i in tqdm(range(len(ansible_tasks))):
         request = Task()
         request.session_ID = session_id
-        # test_str = yaml.dump([task])
         request.is_dict = True
-        request.task_str = json.dumps(task)
+        request.task_str = json.dumps(ansible_tasks[i])
         response = stub.RunTask(request)
         if not response.task_adding_ok:
             raise Exception(response.task_adding_error)
         for result in response.task_results:
             if result.is_unreachable or result.is_failed:
-                logging.error('Task with name %s failed with exception: %s' % (result.task_name, result.msg))
+                if result.stderr != '':
+                    error = result.stderr
+                elif result.msg != '':
+                    error = result.msg
+                elif result.stdout != '':
+                    error = result.stdout
+                else:
+                    error = result.results_dict_str
+                logging.error('Task with name %s failed with exception: %s' % (result.task_name, error))
                 close_session(session_id, stub)
-                raise Exception('Task with name %s failed with exception: %s' % (result.task_name, result.msg))
+                raise Exception('Task with name %s failed with exception: %s' % (result.task_name, error))
             if target_parameter:
                 result = json.loads(result.results_dict_str)
                 if 'results' in result and len(result['results']) > 0 and 'ansible_facts' in \
