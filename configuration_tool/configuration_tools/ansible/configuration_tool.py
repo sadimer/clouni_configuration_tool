@@ -342,7 +342,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 for script in implementations:
                     script_filename_1 = os.path.join(os.getcwd(), script)
                     script_filename_2 = os.path.join(self.get_ansible_artifacts_directory(), script)
-                    script_filename_3 = os.path.join(utils.get_tmp_clouni_dir(), script)
+                    script_filename_3 = os.path.join(os.path.join(utils.get_tmp_clouni_dir(), 'artifacts'), script)
                     script_filename_4 = os.path.join(os.path.join(utils.get_project_root_path(), 'examples'), script)
                     if os.path.isfile(script_filename_1):
                         file = script_filename_1
