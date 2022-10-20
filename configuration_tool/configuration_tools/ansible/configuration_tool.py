@@ -344,6 +344,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     script_filename_2 = os.path.join(self.get_ansible_artifacts_directory(), script)
                     script_filename_3 = os.path.join(os.path.join(utils.get_tmp_clouni_dir(), 'artifacts'), script)
                     script_filename_4 = os.path.join(os.path.join(utils.get_project_root_path(), 'examples'), script)
+                    script_filename_5 = os.path.join(utils.get_project_root_path(), script)
                     if os.path.isfile(script_filename_1):
                         file = script_filename_1
                     elif os.path.isfile(script_filename_2):
@@ -352,11 +353,13 @@ class AnsibleConfigurationTool(ConfigurationTool):
                         file = script_filename_3
                     elif os.path.isfile(script_filename_4):
                         file = script_filename_4
+                    elif os.path.isfile(script_filename_5):
+                        file = script_filename_5
                     else:
-                        logging.error("Artifact filename %s was not found in %s or %s or %s or %s" % (
-                                script, script_filename_1, script_filename_2, script_filename_3, script_filename_4))
-                        raise Exception("Artifact filename %s was not found in %s or %s or %s or %s" % (
-                                script, script_filename_1, script_filename_2, script_filename_3, script_filename_4))
+                        logging.error("Artifact filename %s was not found in %s or %s or %s or %s or %s" % (
+                                script, script_filename_1, script_filename_2, script_filename_3, script_filename_4, script_filename_5))
+                        raise Exception("Artifact filename %s was not found in %s or %s or %s or %s or %s" % (
+                                script, script_filename_1, script_filename_2, script_filename_3, script_filename_4, script_filename_5))
                     if not primary and interface_operation.get(INPUTS) is not None:
                         for input_name, input_value in interface_operation[INPUTS].items():
                             ansible_tasks.append({
