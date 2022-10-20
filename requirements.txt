@@ -1,6 +1,6 @@
 six
-grpcio==1.37.1
-grpcio-tools==1.37.1
+grpcio
+grpcio-tools
 pyyaml
 graphlib_backport
 tqdm
