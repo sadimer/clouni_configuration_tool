@@ -113,7 +113,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 ansible_tasks = []
                 host = self.default_host
                 # reload id_vars file
-                if not is_delete and first:
+                if not is_delete and first and not debug:
                     first = False
                     first_tasks = []
                     first_tasks.append(copy.deepcopy({FILE: {
@@ -353,11 +353,10 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     elif os.path.isfile(script_filename_4):
                         file = script_filename_4
                     else:
-                        logging.error(
-                            "Artifact filename %s was not found in %s or %s" % (
-                                script, script_filename_1, script_filename_2))
-                        raise Exception("Artifact filename %s was not found in %s or %s" % (
-                                script, script_filename_1, script_filename_2))
+                        logging.error("Artifact filename %s was not found in %s or %s or %s or %s" % (
+                                script, script_filename_1, script_filename_2, script_filename_3, script_filename_4))
+                        raise Exception("Artifact filename %s was not found in %s or %s or %s or %s" % (
+                                script, script_filename_1, script_filename_2, script_filename_3, script_filename_4))
                     if not primary and interface_operation.get(INPUTS) is not None:
                         for input_name, input_value in interface_operation[INPUTS].items():
                             ansible_tasks.append({
@@ -557,8 +556,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
         extra_vars = extra.get('global')
         if self.provider == 'amazon':
             amazon_plugins_path = os.path.join(utils.get_project_root_path(), '.ansible/plugins/modules/cloud/amazon')
-            if "ANSIBLE_LIBRARY" not in os.environ:
-                extra_env["ANSIBLE_LIBRARY"] = amazon_plugins_path
-            elif amazon_plugins_path not in os.environ["ANSIBLE_LIBRARY"]:
-                extra_env["ANSIBLE_LIBRARY"] += os.pathsep + amazon_plugins_path
-        grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q)
+            grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q,
+                               ansible_library=amazon_plugins_path)
+        else:
+            grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q)

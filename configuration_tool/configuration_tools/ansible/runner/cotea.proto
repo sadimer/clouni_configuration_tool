@@ -1,3 +1,4 @@
+
 syntax = "proto3";
 
 service CoteaGateway {
@@ -39,6 +40,7 @@ message Config {
    string inv_path = 3;
    string extra_vars = 4;
    repeated MapFieldEntry env_vars = 5;
+   string ansible_library = 6;
 }
 
 message WorkerConfig {
@@ -46,6 +48,7 @@ message WorkerConfig {
    string inv_path = 2;
    string extra_vars = 3;
    repeated MapFieldEntry env_vars = 4;
+   string ansible_library = 5;
 }
 
 message Task {

@@ -152,7 +152,15 @@ class ProviderResource(object):
                                     raise Exception("Provider configuration parameter "
                                                   "\'ansible.node_filter: node_filter_inner_variable\' is missing "
                                                   "or has unsupported value \'%s\'" % node_filter_inner_variable)
-
+                            new_node_filter_params = []
+                            if isinstance(node_filter_params, dict):
+                                for k, v in node_filter_params.items():
+                                    new_node_filter_params += [k, v]
+                            elif isinstance(node_filter_params, list):
+                                new_node_filter_params = node_filter_params
+                            else:
+                                logging.error("Not supported type of node filter params")
+                                raise Exception("Not supported type of node filter params")
                             tmp_ansible_tasks = [
                                 {
                                     SOURCE: node_filter_source,
@@ -187,21 +195,24 @@ class ProviderResource(object):
                                 {
                                     SOURCE: SET_FACT_SOURCE,
                                     PARAMETERS: {
-                                        "input_args": node_filter_params
+                                        "input_args": new_node_filter_params
                                     },
                                     EXECUTOR: configuration_tool,
                                     VALUE: "tmp_value"
                                 },
                                 {
-                                    SOURCE: IMPORT_TASKS_MODULE,
-                                    PARAMETERS: "artifacts/equals.yaml",
+                                    SOURCE: 'equals',
+                                    PARAMETERS: {
+                                        "input_args": "\{\{ input_args \}\}",
+                                        "input_facts": "\{\{ target_objects \}\}"
+                                    },
                                     EXECUTOR: configuration_tool,
-                                    VALUE: "tmp_value"
+                                    VALUE: "result"
                                 },
                                 {
                                     SOURCE: SET_FACT_SOURCE,
                                     PARAMETERS: {
-                                        node_filter_value: "\{\{ matched_object[\"" + node_filter_value + "\"] \}\}"
+                                        node_filter_value: "\{\{ result.matched_object[\"" + node_filter_value + "\"] \}\}"
                                     },
                                     VALUE: "tmp_value",
                                     EXECUTOR: configuration_tool
