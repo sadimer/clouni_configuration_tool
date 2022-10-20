@@ -207,7 +207,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 ansible_playbook.append(ansible_play_for_elem)
             else:
                 run_ansible(ansible_tasks, grpc_cotea_endpoint, {}, {}, self.default_host)
-        return yaml.dump(ansible_playbook, default_flow_style=False, sort_keys=False)
+        return yaml.dump(ansible_playbook, default_flow_style=False)
 
     def replace_all_get_functions(self, data):
         if isinstance(data, dict):
@@ -426,7 +426,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         tasks = AnsibleConfigurationTool.create_artifact_data(data)
         with open(filename, "w") as f:
-            filedata = yaml.dump(tasks, default_flow_style=False, sort_keys=False)
+            filedata = yaml.dump(tasks, default_flow_style=False)
             f.write(filedata)
             logging.info("Artifact for executor %s was created: %s" % (self.TOOL_NAME, filename))
 
