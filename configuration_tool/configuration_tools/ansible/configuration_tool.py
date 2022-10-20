@@ -555,7 +555,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
         extra_env = {}
         extra_vars = extra.get('global')
         if self.provider == 'amazon':
-            amazon_plugins_path = os.path.join(utils.get_project_root_path(), '.ansible/plugins/modules/cloud/amazon')
+            amazon_plugins_path = '.ansible/plugins/modules/cloud/amazon'
             grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q,
                                ansible_library=amazon_plugins_path)
         else:

@@ -101,5 +101,7 @@ def execute(new_global_elements_map_total_implementation, is_delete, target_para
                                                                    store=False)
         os.remove(filename)
         if grpc_cotea_endpoint:
-            return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter) # добавить переменную для дефолт хоста
+            ansible_library = '.ansible/plugins/modules/artifact'
+            return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter,
+                               ansible_library)  # add a variable for the default host
     return None
