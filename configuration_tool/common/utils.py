@@ -64,7 +64,7 @@ def get_project_root_path():
 
 
 def get_tmp_clouni_dir():
-    return '/tmp/clouni/ansible_additions/'
+    return '/tmp/clouni/'
 
 
 def get_random_int(start, end):

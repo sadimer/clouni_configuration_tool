@@ -42,6 +42,7 @@ def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts
     request.extra_vars = str(extra_vars)
     if ansible_library:
         request.ansible_library = ansible_library
+    request.not_gather_facts = False
     for key, val in extra_env.items():
         obj = MapFieldEntry()
         obj.key = key

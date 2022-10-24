@@ -1,4 +1,3 @@
-
 syntax = "proto3";
 
 service CoteaGateway {
@@ -41,6 +40,7 @@ message Config {
    string extra_vars = 4;
    repeated MapFieldEntry env_vars = 5;
    string ansible_library = 6;
+   bool not_gather_facts = 7;
 }
 
 message WorkerConfig {
@@ -49,6 +49,7 @@ message WorkerConfig {
    string extra_vars = 3;
    repeated MapFieldEntry env_vars = 4;
    string ansible_library = 5;
+   bool not_gather_facts = 6;
 }
 
 message Task {
