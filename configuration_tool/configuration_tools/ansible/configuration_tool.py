@@ -367,11 +367,12 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                     input_name: input_value
                                 }
                             })
-                    with open(file, 'r') as target_file:
-                        new_ansible_tasks = yaml.load(target_file, Loader=Loader)
+                    new_ansible_task = {
+                        IMPORT_TASKS_MODULE: os.path.join(utils.get_tmp_clouni_dir(), file)
+                    }
                     for task in ansible_tasks:
                         task.update(additional_args)
-                    ansible_tasks.extend(new_ansible_tasks)
+                    ansible_tasks.append(new_ansible_task)
         return ansible_tasks
 
     def ansible_description_by_type(self, provider_source_obj_type, description_prefix):
