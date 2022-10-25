@@ -2,7 +2,6 @@ import json
 import logging
 import os
 from threading import Thread
-from tqdm import tqdm
 
 import grpc
 
@@ -53,7 +52,7 @@ def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts
         logging.error("Can't init execution with grpc cotea because of: %s", response.error_msg)
         raise Exception(response.error_msg)
     matched_object = None
-    for i in tqdm(range(len(ansible_tasks))):
+    for i in range(len(ansible_tasks)):
         request = Task()
         request.session_ID = session_id
         request.is_dict = True
