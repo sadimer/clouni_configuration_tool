@@ -85,6 +85,13 @@ data_types:
         entry_schema:
           type: string
 
+  tosca.datatypes.network.SegmentInterfaceInfo:
+    derived_from: tosca.datatypes.network.PortInfo
+    properties:
+      segmentation_id:
+        type: integer
+        required: true
+
   tosca.datatypes.network.PortDef:
     derived_from: tosca.datatypes.Root
     type: integer
@@ -494,6 +501,15 @@ node_types:
     capabilities:
       link:
         type: tosca.capabilities.network.Linkable
+
+  tosca.nodes.network.Trunk:
+    derived_from: tosca.nodes.network.Port
+    properties:
+      segmentations:
+        type: list
+        required: false
+        entry_schema:
+          type: tosca.datatypes.network.SegmentInterfaceInfo
 
   tosca.nodes.network.Port:
     derived_from: tosca.nodes.Root

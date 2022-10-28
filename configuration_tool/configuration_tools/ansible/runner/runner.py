@@ -83,7 +83,7 @@ def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts
 
 def run_and_finish(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q, ansible_library):
     try:
-        run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, ansible_library)
+        run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, ansible_library=ansible_library)
     except Exception as e:
         q.put(e)
     q.put(name + SEPARATOR + op)

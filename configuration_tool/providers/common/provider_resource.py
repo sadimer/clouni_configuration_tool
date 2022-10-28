@@ -14,6 +14,7 @@ from configuration_tool.providers.common.provider_configuration import ProviderC
 
 SET_FACT_SOURCE = "set_fact"
 IMPORT_TASKS_MODULE = "include"
+DEPENDENCY = 'dependency'
 
 class ProviderResource(object):
 
@@ -94,10 +95,11 @@ class ProviderResource(object):
 
             self.node_filter_artifacts = []
             for key, req in self.requirements.items():
-                if type(req) is list:
-                    self.configuration_args[key] = list(v.get_value() for v in req)
-                else:
-                    self.configuration_args[key] = req.get_value()
+                if key != DEPENDENCY:
+                    if type(req) is list:
+                        self.configuration_args[key] = list(v.get_value() for v in req)
+                    else:
+                        self.configuration_args[key] = req.get_value()
 
             if configuration_tool == 'ansible':
                 provider_config = ProviderConfiguration(provider)

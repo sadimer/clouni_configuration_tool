@@ -32,6 +32,32 @@ capability_types:
     derived_from: tosca.capabilities.Node
 
 ##########################################################################
+ # Data Type.
+ # A Datatype is a complex data type declaration which contains other
+ # complex or simple data types.
+##########################################################################
+data_types:
+  openstack.datatypes.Root:
+    description: >
+      The TOSCA root Data Type all other TOSCA base Data Types derive from
+    derived_from: tosca.datatypes.Root
+
+  openstack.datatypes.SubPort:
+    derived_from: openstack.datatypes.Root
+    properties:
+      port_id:
+        type: string
+        required: true
+      segmentation_id:
+        type: string
+        required: false
+      segmentation_type:
+        type: string
+        default: inherit
+        # constraints:
+        #  - valid_values: [ vlan, inherit ]
+
+##########################################################################
 # Node Type.
 # A Node Type is a reusable entity that defines the type of one or more
 # Node Templates.
@@ -221,6 +247,33 @@ node_types:
       link:
         type: openstack.capabilities.network.Linkable
         occurrences: [0, UNBOUNDED ]
+
+  openstack.nodes.Trunk: # os_trunk
+    derived_from: openstack.nodes.Root
+    properties:
+      name:
+        type: string
+        required: false
+      id: # not used in create
+        type: string
+        required: false
+      sub_ports:
+        type: list
+        required: false
+        entry_schema:
+          type: openstack.datatypes.SubPort
+      add_sub_port:
+        type: openstack.datatypes.SubPort
+        required: false
+      del_sub_port:
+        type: openstack.datatypes.SubPort
+        required: false
+    requirements:
+      - port:
+          capability: openstack.capabilities.Node
+          node: openstack.nodes.Port
+          relationship: openstack.relationships.DependsOn
+          occurrences: [ 1, 1 ]
 
   openstack.nodes.Port: # os_port, os_port_facts
     derived_from: openstack.nodes.Root

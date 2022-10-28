@@ -55,7 +55,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
         ansible_config = provider_config.get_section(ANSIBLE)
         node_filter_config = provider_config.get_subsection(ANSIBLE, NODE_FILTER)
 
-        ids_file_path = os.getcwd() + '/id_vars_' + cluster_name + self.get_artifact_extension()
+        ids_file_path = utils.get_tmp_clouni_dir() + 'id_vars_' + cluster_name + self.get_artifact_extension()
 
         self.init_global_variables(inputs)
 
@@ -539,9 +539,6 @@ class AnsibleConfigurationTool(ConfigurationTool):
     def run(self, ansible_tasks, grpc_cotea_endpoint, hosts, name, op, q, extra):
         extra_env = {}
         extra_vars = extra.get('global')
-        if self.provider == 'amazon':
-            amazon_plugins_path = os.path.join(utils.get_tmp_clouni_dir(), 'ansible_plugins/plugins/modules/cloud/amazon')
-            grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q,
-                               ansible_library=amazon_plugins_path)
-        else:
-            grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q)
+        plugins_path = os.path.join(utils.get_tmp_clouni_dir(), 'ansible_plugins/plugins/modules/cloud/', self.provider)
+        grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q,
+                               ansible_library=plugins_path)
