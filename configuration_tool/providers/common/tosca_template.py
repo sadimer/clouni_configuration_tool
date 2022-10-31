@@ -17,7 +17,7 @@ class ProviderToscaTemplate(object):
     DEPENDENCY_FUNCTIONS = (GET_PROPERTY, GET_ATTRIBUTE, GET_OPERATION_OUTPUT)
     DEFAULT_ARTIFACTS_DIRECTOR = ARTIFACTS
 
-    def __init__(self, topology_template, provider, configuration_tool, cluster_name, host_ip_parameter, is_delete,
+    def __init__(self, template, provider, configuration_tool, cluster_name, host_ip_parameter, is_delete,
                  grpc_cotea_endpoint):
         self.host_ip_parameter = host_ip_parameter
         self.provider = provider
@@ -37,12 +37,20 @@ class ProviderToscaTemplate(object):
 
         self.definitions = {}
         import_definition_file = ImportsLoader([self.definition_file()], None, list(SERVICE_TEMPLATE_KEYS),
-                                               topology_template)
+                                               template.get(TOPOLOGY_TEMPLATE))
         self.definitions.update(import_definition_file.get_custom_defs())
 
         import_definition_file = ImportsLoader(self.base_definition_file(), None, list(SERVICE_TEMPLATE_KEYS),
-                                               topology_template)
+                                               template.get(TOPOLOGY_TEMPLATE))
         self.definitions.update(import_definition_file.get_custom_defs())
+
+        self.definitions.update(template.get(NODE_TYPES, {}))
+        self.definitions.update(template.get(RELATIONSHIP_TYPES, {}))
+        self.definitions.update(template.get(CAPABILITY_TYPES, {}))
+        self.definitions.update(template.get(DATA_TYPES, {}))
+        self.definitions.update(template.get(POLICY_TYPES, {}))
+        self.definitions.update(template.get(GROUP_TYPES, {}))
+        self.definitions.update(template.get(INTERFACE_TYPES, {}))
 
         self.fulfil_definitions_with_parents()
 
@@ -51,14 +59,14 @@ class ProviderToscaTemplate(object):
         self.inputs = {}
         self.outputs = {}
 
-        if topology_template.get(NODE_TEMPLATES):
-            self.node_templates = topology_template[NODE_TEMPLATES]
-        if topology_template.get(RELATIONSHIP_TEMPLATES):
-            self.relationship_templates = topology_template[RELATIONSHIP_TEMPLATES]
-        if topology_template.get(OUTPUTS):
-            self.outputs = topology_template[OUTPUTS]
-        if topology_template.get(INPUTS):
-            self.inputs = topology_template[INPUTS]
+        if template.get(TOPOLOGY_TEMPLATE).get(NODE_TEMPLATES):
+            self.node_templates = template.get(TOPOLOGY_TEMPLATE)[NODE_TEMPLATES]
+        if template.get(TOPOLOGY_TEMPLATE).get(RELATIONSHIP_TEMPLATES):
+            self.relationship_templates = template.get(TOPOLOGY_TEMPLATE)[RELATIONSHIP_TEMPLATES]
+        if template.get(TOPOLOGY_TEMPLATE).get(OUTPUTS):
+            self.outputs = template.get(TOPOLOGY_TEMPLATE)[OUTPUTS]
+        if template.get(TOPOLOGY_TEMPLATE).get(INPUTS):
+            self.inputs = template.get(TOPOLOGY_TEMPLATE)[INPUTS]
 
         self.configuration_content = None
         self.configuration_ready = None
@@ -66,7 +74,6 @@ class ProviderToscaTemplate(object):
         self.template_dependencies = dict()
         self._relation_target_source = dict()
         self.resolve_in_template_dependencies()
-
         # After this step self.node_templates has requirements with node_filter parameter
         self.replace_requirements_with_node_filter()
         self.provider_nodes = self._provider_nodes()

@@ -84,7 +84,7 @@ def translate(provider_template, validate_only, configuration_tool, cluster_name
         provider_template_name = key
         tosca_type = topology_template.get('node_templates').get(provider_template_name).get('type')
         (provider, _, _) = utils.tosca_type_parse(tosca_type)
-        if provider is not None and provider != 'tosca':
+        if provider in ['openstack', 'amazon', 'kubernetes']: # TODO: make config prividers file!
             break
 
     provider_config = ProviderConfiguration(provider)
@@ -138,7 +138,7 @@ def translate(provider_template, validate_only, configuration_tool, cluster_name
               % {'template_file': 'TOSCA template'}
         return msg
 
-    tosca = ProviderToscaTemplate(topology_template, provider, configuration_tool, cluster_name,
+    tosca = ProviderToscaTemplate(template, provider, configuration_tool, cluster_name,
                                   host_ip_parameter, is_delete, grpc_cotea_endpoint)
 
     if database_api_endpoint:
