@@ -506,7 +506,7 @@ node_types:
     derived_from: tosca.nodes.network.Port
     properties:
       segmentations:
-        type: list
+        type: map
         required: false
         entry_schema:
           type: tosca.datatypes.network.SegmentInterfaceInfo
