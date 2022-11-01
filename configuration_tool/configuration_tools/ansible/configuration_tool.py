@@ -111,6 +111,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 description_by_type = self.ansible_description_by_type(v.type_name, description_prefix)
                 module_by_type = self.ansible_module_by_type(v.type_name, module_prefix)
                 ansible_tasks = []
+                ansible_tasks.extend(copy.deepcopy(self.get_ansible_tasks_for_inputs(inputs)))
                 host = self.default_host
                 # reload id_vars file
                 if not is_delete and first and not debug:
@@ -138,7 +139,6 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 elif v.operation == 'create':
                     if not v.is_software_component:
                         ansible_tasks.append(copy.deepcopy({'include_vars': ids_file_path}))
-                        ansible_tasks.extend(copy.deepcopy(self.get_ansible_tasks_for_inputs(inputs)))
                         ansible_tasks.extend(self.get_ansible_tasks_for_create(v, target_directory, node_filter_config,
                                                                           description_by_type, module_by_type,
                                                                           additional_args=extra))

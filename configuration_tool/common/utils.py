@@ -99,3 +99,8 @@ def replace_brackets(data, with_splash=True):
             r.append(replace_brackets(i, with_splash))
         return r
     return data
+
+
+class NoAliasDumper(yaml.SafeDumper):
+    def ignore_aliases(self, data):
+        return True
