@@ -23,10 +23,6 @@ REQUIRED_CONFIGURATION_PARAMS = (TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFAC
 REQUIRED_CONFIGURATION_PARAMS = (TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFACTS_DIRECTORY, TOSCA_ELEMENTS_MAP_FILE)
 
 
-class NoAliasDumper(yaml.SafeDumper):
-    def ignore_aliases(self, data):
-        return True
-
 def load_to_db(tosca, config, database_api_endpoint, template, cluster_name):
     definitions = {}
     all_templates = tosca.node_templates
@@ -45,7 +41,7 @@ def load_to_db(tosca, config, database_api_endpoint, template, cluster_name):
     with open(os.path.join(utils.get_tmp_clouni_dir(), 'template.yaml'), "w") as f:
         template = utils.deep_update_dict(template, definitions)
         del template[IMPORTS]
-        print(yaml.dump(template, Dumper=NoAliasDumper), file=f)
+        print(yaml.dump(template, Dumper=utils.NoAliasDumper), file=f)
     with open(os.path.join(utils.get_tmp_clouni_dir(), 'template.yaml'), "r") as f:
         files = {'file': f}
         res = requests.post(utils.get_url_for_loading_to_db(cluster_name, database_api_endpoint), files=files)
