@@ -1,0 +1,29 @@
+topology_template:
+  node_templates:
+    tosca_server_example_keypair:
+      properties:
+        name: tosca_server_example_keypair
+        public_key: '{{ lookup(''file'', ''~/.ssh/id_rsa.pub'') }}'
+      type: openstack.nodes.Keypair
+    tosca_server_example_server:
+      interfaces:
+        Standard:
+          create:
+            implementation: add_host.yaml
+            inputs:
+              ansible_user: '{self[buffer][add_host][ansible_user]}'
+              group: tosca_server_example_server_private_address
+              host_ip: '{{ host_ip | default([]) + [[ "tosca_server_example_private_address_"
+                + item, tosca_server_example_server.results[item | int - 1].server.public_v4
+                ]] }}'
+      properties:
+        auto_ip: false
+        name: tosca_server_example
+        nics:
+        - net-name: test-two-routers
+      requirements:
+      - key_name:
+          node: tosca_server_example_keypair
+      type: openstack.nodes.Server
+tosca_definitions_version: tosca_simple_yaml_1_0
+

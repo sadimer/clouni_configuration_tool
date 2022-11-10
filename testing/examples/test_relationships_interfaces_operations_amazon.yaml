@@ -1,0 +1,82 @@
+node_types:
+  clouni.nodes.ServerExample:
+    derived_from: tosca.nodes.SoftwareComponent
+topology_template:
+  node_templates:
+    service_1_server_example:
+      interfaces:
+        Standard:
+          configure:
+            implementation: testing/examples/ansible-operation-example.yaml
+            inputs:
+              test: test
+          create:
+            implementation: testing/examples/ansible-operation-example.yaml
+            inputs:
+              test: test
+      properties:
+        component_version: 0.1
+      requirements:
+      - host:
+          node: tosca_server_example_instance
+          relationship: test_relationship_hosted_on
+      - dependency:
+          node: tosca_server_example_instance
+      - dependency:
+          node: tosca_server_example_key
+      type: clouni.nodes.ServerExample
+    tosca_server_example_instance:
+      interfaces:
+        Standard:
+          configure:
+            implementation: testing/examples/ansible-operation-example.yaml
+            inputs:
+              test: test
+          create:
+            implementation: add_host.yaml
+            inputs:
+              ansible_user: '{self[buffer][add_host][ansible_user]}'
+              group: tosca_server_example_instance_public_address
+              host_ip: '{{ host_ip | default([]) + [[ "tosca_server_example_public_address_"
+                + item, tosca_server_example_instance.results[item | int - 1].instances[0].public_ip_address
+                ]] }}'
+      properties:
+        name: tosca_server_example
+        network:
+          assign_public_ip: true
+      requirements:
+      - key_name:
+          node: tosca_server_example_key
+      type: amazon.nodes.Instance
+    tosca_server_example_key:
+      properties:
+        key_material: '{{ lookup(''file'', ''~/.ssh/id_rsa.pub'') }}'
+        name: tosca_server_example_key
+      type: amazon.nodes.Key
+  relationship_templates:
+    test_relationship_hosted_on:
+      interfaces:
+        Configure:
+          add_source:
+            implementation: testing/examples/ansible-operation-example.yaml
+            inputs:
+              test: test
+          post_configure_source:
+            implementation: testing/examples/ansible-operation-example.yaml
+            inputs:
+              test: test
+          post_configure_target:
+            implementation: testing/examples/ansible-operation-example.yaml
+            inputs:
+              test: test
+          pre_configure_source:
+            implementation: testing/examples/ansible-operation-example.yaml
+            inputs:
+              test: test
+          pre_configure_target:
+            implementation: testing/examples/ansible-operation-example.yaml
+            inputs:
+              test: test
+      type: amazon.relationships.HostedOn
+tosca_definitions_version: tosca_simple_yaml_1_0
+

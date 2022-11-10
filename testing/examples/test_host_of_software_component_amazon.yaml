@@ -1,0 +1,58 @@
+node_types:
+  clouni.nodes.ServerExample:
+    derived_from: tosca.nodes.SoftwareComponent
+topology_template:
+  node_templates:
+    service_1_server_example:
+      interfaces:
+        Standard:
+          create:
+            implementation: testing/examples/ansible-server-example.yaml
+            inputs:
+              version: 0.1
+      properties:
+        component_version: 0.1
+      requirements:
+      - host:
+          node: tosca_server_example_instance
+      - dependency:
+          node: tosca_server_example_instance
+      - dependency:
+          node: tosca_server_example_key
+      type: clouni.nodes.ServerExample
+    tosca_server_example_instance:
+      interfaces:
+        Standard:
+          create:
+            implementation: add_host.yaml
+            inputs:
+              ansible_user: ubuntu
+              group: tosca_server_example_instance_public_address
+              host_ip: '{{ host_ip | default([]) + [[ "tosca_server_example_public_address_"
+                + item, tosca_server_example_instance.results[item | int - 1].instances[0].public_ip_address
+                ]] }}'
+      properties:
+        name: tosca_server_example
+        network:
+          assign_public_ip: true
+      requirements:
+      - key_name:
+          node: tosca_server_example_key
+      - vpc_subnet_id:
+          node_filter:
+            properties:
+            - parameter: id
+              value: null
+      - image_id:
+          node_filter:
+            properties:
+            - parameter: image_id
+              value: null
+      type: amazon.nodes.Instance
+    tosca_server_example_key:
+      properties:
+        key_material: '{{ lookup(''file'', ''~/.ssh/id_rsa.pub'') }}'
+        name: tosca_server_example_key
+      type: amazon.nodes.Key
+tosca_definitions_version: tosca_simple_yaml_1_0
+

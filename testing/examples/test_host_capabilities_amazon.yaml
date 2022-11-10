@@ -1,0 +1,22 @@
+topology_template:
+  node_templates:
+    tosca_server_example_instance:
+      properties:
+        name: tosca_server_example
+      requirements:
+      - key_name:
+          node: tosca_server_example_key
+      - instance_type:
+          node_filter:
+            properties:
+            - storage: 5.0
+            - memory: 1.0
+            - vcpus: 1
+      type: amazon.nodes.Instance
+    tosca_server_example_key:
+      properties:
+        key_material: '{{ lookup(''file'', ''~/.ssh/id_rsa.pub'') }}'
+        name: tosca_server_example_key
+      type: amazon.nodes.Key
+tosca_definitions_version: tosca_simple_yaml_1_0
+

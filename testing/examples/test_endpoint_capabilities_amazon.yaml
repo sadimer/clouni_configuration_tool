@@ -1,0 +1,31 @@
+topology_template:
+  node_templates:
+    tosca_server_example_group:
+      properties:
+        description: tosca_server_example_group
+        name: tosca_server_example_group
+        rules:
+        - cidr_ip: 0.0.0.0/0
+          ports:
+          - 22
+          proto: tcp
+        - cidr_ip: 0.0.0.0/0
+        rules_egress:
+        - cidr_ip: 0.0.0.0/0
+      type: amazon.nodes.Group
+    tosca_server_example_instance:
+      properties:
+        name: tosca_server_example
+      requirements:
+      - key_name:
+          node: tosca_server_example_key
+      - security_groups:
+          node: tosca_server_example_group
+      type: amazon.nodes.Instance
+    tosca_server_example_key:
+      properties:
+        key_material: '{{ lookup(''file'', ''~/.ssh/id_rsa.pub'') }}'
+        name: tosca_server_example_key
+      type: amazon.nodes.Key
+tosca_definitions_version: tosca_simple_yaml_1_0
+

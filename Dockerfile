@@ -1,6 +1,7 @@
 FROM python:3.6.9-slim
 LABEL maintainer="ISP RAS"
 WORKDIR /app/
+
 RUN apt update &&\
     apt install python3-pip -y
 

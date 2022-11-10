@@ -1,0 +1,18 @@
+topology_template:
+  node_templates:
+    tosca_server_example_instance:
+      properties:
+        name: tosca_server_example
+        tags:
+          metadata: master=true
+      requirements:
+      - key_name:
+          node: tosca_server_example_key
+      type: amazon.nodes.Instance
+    tosca_server_example_key:
+      properties:
+        key_material: '{{ lookup(''file'', ''~/.ssh/id_rsa.pub'') }}'
+        name: tosca_server_example_key
+      type: amazon.nodes.Key
+tosca_definitions_version: tosca_simple_yaml_1_0
+
