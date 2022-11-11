@@ -233,7 +233,8 @@ class ProviderToscaTemplate(object):
         nodes = set(self.provider_nodes.keys())
         nodes = nodes.union(set(self.provider_relations.keys()))
         dependencies = {}
-        lifecycle = ['configure', 'start', 'stop', 'delete']
+        lifecycle = ['configure', 'start', 'stop'] # ['delete'] now we cant support deleting while creating,
+        # deleting operations executes only when --delete option activated
         reversed_full_lifecycle = lifecycle[::-1] + ['create']
         # generate only dependencies from nodes
         for templ_name in nodes:

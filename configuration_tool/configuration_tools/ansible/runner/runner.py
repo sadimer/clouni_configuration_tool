@@ -17,7 +17,7 @@ SEPARATOR = '.'
 def close_session(session_id, stub):
     request = SessionID()
     request.session_ID = session_id
-    response = stub.StopExecution(request, timeout=100)
+    response = stub.StopExecution(request, timeout=1000)
     if not response.ok:
         logging.error("Can't close session with grpc cotea because of: %s", response.error_msg)
         raise Exception(response.error_msg)
@@ -28,7 +28,7 @@ def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts
     channel = grpc.insecure_channel(grpc_cotea_endpoint, options=options)
     stub = cotea_pb2_grpc.CoteaGatewayStub(channel)
     request = EmptyMsg()
-    response = stub.StartSession(request, timeout=100)
+    response = stub.StartSession(request, timeout=1000)
     if not response.ok:
         logging.error("Can't init session with grpc cotea because of: %s", response.error_msg)
         raise Exception(response.error_msg)
@@ -49,7 +49,7 @@ def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts
         obj.key = key
         obj.value = val
         request.env_vars.add(obj)
-    response = stub.InitExecution(request, timeout=100)
+    response = stub.InitExecution(request, timeout=1000)
     if not response.ok:
         logging.error("Can't init execution with grpc cotea because of: %s", response.error_msg)
         raise Exception(response.error_msg)
@@ -59,7 +59,7 @@ def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts
         request.session_ID = session_id
         request.is_dict = True
         request.task_str = json.dumps(ansible_tasks[i])
-        response = stub.RunTask(request, timeout=100)
+        response = stub.RunTask(request, timeout=1000)
         if not response.task_adding_ok:
             raise Exception(response.task_adding_error)
         for result in response.task_results:

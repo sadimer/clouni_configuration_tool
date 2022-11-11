@@ -99,7 +99,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
             for v in elements.get_ready():
                 # in delete mode we skip all operations exept delete and create operation transforms to delete
                 if is_delete:
-                    if v.operation == 'create' and not v.is_software_component:
+                    if v.operation == 'create':
                         v.operation = 'delete'
                     else:
                         elements.done(v)
@@ -126,16 +126,23 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     run_ansible(first_tasks, grpc_cotea_endpoint, {}, {}, 'localhost')
                 # create playbook for every operation
                 if v.operation == 'delete':
-                    tasks = [copy.deepcopy({'include_vars': ids_file_path})]
-                    tasks.extend(self.get_ansible_tasks_for_delete(v, description_by_type, module_by_type,
-                                                                       additional_args=extra))
-                    tasks.extend(
-                        self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
+                    if not v.is_software_component:
+                        tasks = [copy.deepcopy({'include_vars': ids_file_path})]
+                        tasks.extend(self.get_ansible_tasks_for_delete(v, description_by_type, module_by_type,
+                                                                           additional_args=extra))
+                        tasks.extend(
+                            self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
+                                                                      cluster_name,
+                                                                      additional_args=extra))
+                        if not any(item == module_by_type for item in
+                                    ansible_config.get('modules_skipping_delete', [])):
+                            ansible_tasks.extend(copy.deepcopy(tasks))
+                    else:
+                        host = v.host
+                        ansible_tasks.extend(copy.deepcopy(
+                            self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
-                                                                  additional_args=extra))
-                    if not any(item == module_by_type for item in
-                                ansible_config.get('modules_skipping_delete', [])):
-                        ansible_tasks.extend(copy.deepcopy(tasks))
+                                                                  additional_args=extra)))
                 elif v.operation == 'create':
                     if not v.is_software_component:
                         ansible_tasks.append(copy.deepcopy({'include_vars': ids_file_path}))
