@@ -33,4 +33,4 @@ tasks*
 hosts.ini
 id_vars*
 
-instance_model.yaml
+instance_model*
