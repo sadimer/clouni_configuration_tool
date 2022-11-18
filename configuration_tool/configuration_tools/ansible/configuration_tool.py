@@ -192,7 +192,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                             for elem in operations_graph:
                                 if elem.name == v.source:
                                     if elem.is_software_component:
-                                        host = v.host
+                                        host = elem.host
                                     break
                         else:
                             logging.error("Unsupported operation for relationship in operation graph")
