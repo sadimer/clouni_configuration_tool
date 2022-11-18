@@ -6,7 +6,6 @@ import logging, sys, six, copy
 
 from configuration_tool.configuration_tools.common.tool_config import ConfigurationToolConfiguration
 
-
 OUTPUT_IDS = 'output_ids'
 OUTPUT_ID_RANGE_START = 1000
 OUTPUT_ID_RANGE_END = 9999
@@ -25,7 +24,7 @@ class ConfigurationTool(object):
         self.tool_config = ConfigurationToolConfiguration(self.TOOL_NAME)
 
     def to_dsl(self, provider, nodes_relationships_queue, reversed_nodes_relationships_queue,
-               cluster_name, is_delete, target_directory=None, inputs=None, outputs=None, extra=None):
+               cluster_name, is_delete, target_directory=None, extra=None):
         """
         Generate scenarios for configuration tool to execute
         :param provider: provider type key name
@@ -48,72 +47,6 @@ class ConfigurationTool(object):
         :return:
         """
         raise NotImplementedError()
-
-    def gather_global_operations(self, element_object):
-        """
-
-        :param element_object:
-        :return:
-        """
-
-        interfaces = []
-        element_template_name = None
-        (_, element_type, _) = utils.tosca_type_parse(element_object.type)
-        if element_type == NODES:
-            interfaces = self.get_interfaces_from_node(element_object)
-            element_template_name = element_object.name
-            op_required = self.list_get_operation_outputs(element_object.tmpl)
-            self.manage_operation_output(op_required, element_template_name)
-        elif element_type == RELATIONSHIPS:
-            # NOTE interfaces can't be used as it contains the error ()
-            interfaces = self.get_interfaces_from_relationship(element_object)
-            element_template_name = element_object.name
-
-        if not element_template_name:
-            return
-
-        operations = {}
-        for interface_name, ops in interfaces.items():
-            for operation_name, operation_data in ops.items():
-                operations['_'.join([interface_name.lower(), operation_name])] = operation_data
-
-        # Sort operations by dependency
-        prev_len = len(operations) + 1
-        required_operations = {}
-        for op_name, op in operations.items():
-            if isinstance(op, six.string_types):
-                operations[op_name] = {
-                    IMPLEMENTATION: op
-                }
-            op_required = self.list_get_operation_outputs(op)
-            required_operations[op_name] = op_required
-            self.manage_operation_output(op_required, element_template_name)
-
-        while len(operations) > 0 and prev_len > len(operations):
-            ops_for_iter = copy.deepcopy(operations)
-            prev_len = len(operations)
-            for op_name, op in ops_for_iter.items():
-                op_required = required_operations[op_name]
-                if_executable_now = True
-                for i in op_required:
-                    if i[0] == SELF:
-                        i[0] = element_template_name
-                    temp_op_name = '_'.join(i[:3]).lower()
-                    if temp_op_name not in self.global_operations_queue:
-                        if_executable_now = False
-                        break
-                if if_executable_now:
-                    temp_op_name = '_'.join([element_template_name, op_name]).lower()
-                    self.global_operations_queue.append(temp_op_name)
-                    updating_op_info = {
-                        temp_op_name: op
-                    }
-                    utils.deep_update_dict(self.global_operations_info, updating_op_info)
-                    operations.pop(op_name)
-
-        if len(operations) > 0:
-            logging.critical("Resolving dependencies in template failed on element \'%s\'" % element_template_name)
-            raise Exception("Resolving dependencies in template failed on element \'%s\'" % element_template_name)
 
     def get_interfaces_from_node(self, node):
         """
@@ -171,9 +104,6 @@ class ConfigurationTool(object):
                 required_operations.extend(self.list_get_operation_outputs(v))
 
         return required_operations
-
-    def copy_conditions_to_the_directory(self, used_conditions_set, directory):
-        raise NotImplementedError()
 
     def get_artifact_extension(self):
         raise NotImplementedError()

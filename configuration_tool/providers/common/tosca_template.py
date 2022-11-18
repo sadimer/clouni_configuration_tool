@@ -242,11 +242,11 @@ class ProviderToscaTemplate(object):
             templ = self.provider_nodes.get(templ_name, self.provider_relations.get(templ_name))
             (_, element_type, _) = utils.tosca_type_parse(templ.type)
             if element_type == NODES:
-                if 'interfaces' in templ.tmpl and 'Standard' in templ.tmpl['interfaces']:
+                if INTERFACES in templ.tmpl and 'Standard' in templ.tmpl[INTERFACES]:
                     new_operations = ['create']
                     # operation create always exists
                     for elem in lifecycle:
-                        if elem in templ.tmpl['interfaces']['Standard']:
+                        if elem in templ.tmpl[INTERFACES]['Standard']:
                             new_operations.append(elem)
                     # if there is any other operations - add ti new_operations and translate to dict
                     # in format {node.op: {node1, node2}}
@@ -277,7 +277,7 @@ class ProviderToscaTemplate(object):
                         break
             new_dependencies[key] = new_set
 
-        # adding relationships operations pre_configure_source after create source node
+        # Adding relationships operations pre_configure_source after create source node
         # pre_configure_target after create target node
         # add_source in parallel with pre_configure_source but in will be executed on target
         # post_configure_target after configure target node (if not configure then create - in parallel
@@ -289,35 +289,35 @@ class ProviderToscaTemplate(object):
             templ = self.provider_nodes.get(templ_name, self.provider_relations.get(templ_name))
             (_, element_type, _) = utils.tosca_type_parse(templ.type)
             if element_type == RELATIONSHIPS:
-                if 'interfaces' in templ.tmpl and 'Configure' in templ.tmpl['interfaces']:
-                    if 'pre_configure_source' in templ.tmpl['interfaces']['Configure']:
+                if INTERFACES in templ.tmpl and 'Configure' in templ.tmpl[INTERFACES]:
+                    if 'pre_configure_source' in templ.tmpl[INTERFACES]['Configure']:
                         new_dependencies = self.update_relationships(new_dependencies, templ.name, templ.source,
                                                                      'pre_configure_source', 'create', ['add_source'])
-                    if 'pre_configure_target' in templ.tmpl['interfaces']['Configure']:
+                    if 'pre_configure_target' in templ.tmpl[INTERFACES]['Configure']:
                         new_dependencies = self.update_relationships(new_dependencies, templ.name, templ.target,
                                                                      'pre_configure_target', 'create')
-                    if 'post_configure_source' in templ.tmpl['interfaces']['Configure']:
+                    if 'post_configure_source' in templ.tmpl[INTERFACES]['Configure']:
                         if templ.source + SEPARATOR + 'configure' in new_dependencies:
                             new_dependencies = self.update_relationships(new_dependencies, templ.name, templ.source,
                                                                          'post_configure_source', 'configure')
                         else:
                             new_dependencies = self.update_relationships(new_dependencies, templ.name, templ.source,
                                                                          'post_configure_source', 'create')
-                    if 'post_configure_target' in templ.tmpl['interfaces']['Configure']:
+                    if 'post_configure_target' in templ.tmpl[INTERFACES]['Configure']:
                         if templ.target + SEPARATOR + 'configure' in new_dependencies:
                             new_dependencies = self.update_relationships(new_dependencies, templ.name, templ.target,
                                                                          'post_configure_target', 'configure')
                         else:
                             new_dependencies = self.update_relationships(new_dependencies, templ.name, templ.target,
                                                                          'post_configure_target', 'create')
-                    if 'add_source' in templ.tmpl['interfaces']['Configure']:
+                    if 'add_source' in templ.tmpl[INTERFACES]['Configure']:
                         new_dependencies = self.update_relationships(new_dependencies, templ.name, templ.source,
                                                                      'add_source', 'create', ['pre_configure_source'])
-                    if 'add_target' in templ.tmpl['interfaces']['Configure']:
+                    if 'add_target' in templ.tmpl[INTERFACES]['Configure']:
                         logging.warning('Operation add_target not supported, it will be skipped')
-                    if 'target_changed' in templ.tmpl['interfaces']['Configure']:
+                    if 'target_changed' in templ.tmpl[INTERFACES]['Configure']:
                         logging.warning('Operation target_changed not supported, it will be skipped')
-                    if 'remove_target' in templ.tmpl['interfaces']['Configure']:
+                    if 'remove_target' in templ.tmpl[INTERFACES]['Configure']:
                         logging.warning('Operation remove_target not supported, it will be skipped')
         # mapping strings 'node.op' to provider template of this node with this operation
         templ_mappling = {}
@@ -325,6 +325,11 @@ class ProviderToscaTemplate(object):
             templ_name = elem.split(SEPARATOR)[0]
             templ = copy.deepcopy(self.provider_nodes.get(templ_name, self.provider_relations.get(templ_name)))
             templ.operation = elem.split(SEPARATOR)[1]
+            if INTERFACES in templ.tmpl:
+                if 'Configure' in templ.tmpl[INTERFACES]:
+                    templ.tmpl[INTERFACES]['Configure'] = {templ.operation: templ.tmpl[INTERFACES]['Configure'][templ.operation]}
+                if 'Standard' in templ.tmpl[INTERFACES]:
+                    templ.tmpl[INTERFACES]['Standard'] = {templ.operation: templ.tmpl[INTERFACES]['Standard'][templ.operation]}
             templ_mappling[elem] = templ
         templ_dependencies = {}
         reversed_templ_dependencies = {}

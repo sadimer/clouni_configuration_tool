@@ -23,7 +23,7 @@ def close_session(session_id, stub):
         raise Exception(response.error_msg)
 
 
-def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, target_parameter=None, ansible_library=None):
+def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, ansible_config=None, target_parameter=None, ansible_library=None, operation=None, attributes=None):
     options = [('grpc.max_send_message_length', 100 * 1024 * 1024), ('grpc.max_receive_message_length', 100 * 1024 * 1024)]
     channel = grpc.insecure_channel(grpc_cotea_endpoint, options=options)
     stub = cotea_pb2_grpc.CoteaGatewayStub(channel)
@@ -53,7 +53,7 @@ def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts
     if not response.ok:
         logging.error("Can't init execution with grpc cotea because of: %s", response.error_msg)
         raise Exception(response.error_msg)
-    matched_object = None
+    run_result = []
     for i in range(len(ansible_tasks)):
         request = Task()
         request.session_ID = session_id
@@ -75,23 +75,57 @@ def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts
                 logging.error('Task with name %s failed with exception: %s' % (result.task_name, error))
                 close_session(session_id, stub)
                 raise Exception('Task with name %s failed with exception: %s' % (result.task_name, error))
+            else:
+                if not target_parameter:
+                    if operation and ansible_config and attributes:
+                        if ansible_config.get('module_description' + '_' + operation.lower()) and \
+                                ansible_config.get('module_description' + '_' + operation.lower()) in result.task_name:
+                            attribute_matcher = None
+                            for elem in ansible_tasks[i].keys():
+                                if ansible_config.get('module_prefix') in elem:
+                                    attribute_matcher = elem
+                            module_attribute_matcher = ansible_config.get('module_attribute_matcher')
+                            if attribute_matcher in module_attribute_matcher:
+                                attribute_matcher = module_attribute_matcher.get(attribute_matcher)
+                            else:
+                                attribute_matcher = attribute_matcher.replace(ansible_config.get('module_prefix'), '')
+                            operation_output = json.loads(result.results_dict_str).get(attribute_matcher)
+                            operation_output_results = json.loads(result.results_dict_str).get('results')
+                            if operation_output:
+                                tmp = {}
+                                for attribute in attributes:
+                                    if operation_output.get(attribute):
+                                        tmp[attribute] = operation_output.get(attribute)
+                                run_result.append(tmp)
+                            if operation_output_results:
+                                for elem in operation_output_results:
+                                    match = elem.get(attribute_matcher)
+                                    if match:
+                                        tmp = {}
+                                        for attribute in attributes:
+                                            if match.get(attribute):
+                                                tmp[attribute] = match.get(attribute)
+                                        run_result.append(tmp)
             if target_parameter:
                 result = json.loads(result.results_dict_str)
                 if 'ansible_facts' in result and target_parameter.split('.')[-1] in result['ansible_facts']:
-                    matched_object = result['ansible_facts'][target_parameter.split('.')[-1]]
+                    run_result = result['ansible_facts'][target_parameter.split('.')[-1]]
     close_session(session_id, stub)
-    return matched_object
+    return run_result
 
 
-def run_and_finish(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q, ansible_library):
+def run_and_finish(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q, ansible_config,
+                   ansible_library, attributes):
+    result = {}
     try:
-        run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, ansible_library=ansible_library)
+        result = run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts,
+                             ansible_config=ansible_config, ansible_library=ansible_library, operation=op,
+                             attributes=attributes)
     except Exception as e:
         q.put(e)
-    q.put(name + SEPARATOR + op)
+    q.put({name + SEPARATOR + op: result})
 
-def grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q, ansible_library=None):
-    Thread(target=run_and_finish, args=(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q, ansible_library)).start()
-
+def grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q, ansible_config, ansible_library=None, attributes=None):
+    Thread(target=run_and_finish, args=(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q, ansible_config, ansible_library, attributes)).start()
 
 

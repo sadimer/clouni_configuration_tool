@@ -133,23 +133,32 @@ node_types:
   tosca.nodes.Root:
     description: >
       The TOSCA root node all other TOSCA base node types derive from.
-    properties:
+    attributes:
       tosca_id:
-        description: >
-          A unique identifier of the realized instance of a Node Template
-          that derives from any TOSCA normative type.
         type: string
-        required: false
+        description: >-
+          A unique identifier of the realized instance of a Node
+          Template that derives from any TOSCA normative type.
+      tosca_name:
+        type: string
+        description: >
+          This attribute reflects the name of the Node Template as
+          defined in the TOSCA service template.  This name is not
+          unique to the realized instance model of corresponding
+          deployed application as each template in the model can
+          result in one or more instances (e.g., scaled) when
+          orchestrated to a provider environment.
+      state:
+        type: string
+        description: >-
+          The state of the node instance. See section “Node States”
+          for allowed values.
+        default: initial
+    properties:
       tosca_name:
         description: >
           This attribute reflects the name of the Node Template as
           defined in the TOSCA service template.
-        type: string
-        required: false
-      state:
-        description: >
-          The state of the node instance. See section “Node States” for
-          allowed values.
         type: string
         required: false
     capabilities:
@@ -190,6 +199,26 @@ node_types:
         entry_schema:
           type: tosca.datatypes.network.PortInfo
         required: false
+    attributes:
+      private_address:
+        type: string
+        description: >-
+          The primary private IP address assigned by the cloud
+          provider that applications may use to access the Compute
+          node.
+      public_address:
+        type: string
+        description: >-
+          The primary public IP address assigned by the cloud provider
+          that applications may use to access the Compute node.
+      networks:
+        type: map
+        entry_schema:
+          type: tosca.datatypes.network.NetworkInfo
+      ports:
+        type: map
+        entry_schema:
+          type: tosca.datatypes.network.PortInfo
     capabilities:
         host:
            type: tosca.capabilities.Container
@@ -365,9 +394,9 @@ node_types:
       snapshot_id:
         type: string
         required: false
-    # attributes: #TODO
-    #   volume_id:
-    #     type: string
+    attributes: #TODO
+      volume_id:
+        type: string
     capabilities:
       attachment:
         type: tosca.capabilities.Attachment
@@ -498,6 +527,12 @@ node_types:
         default: true
         description: >
           Indicates should DHCP service be enabled on the network or not.
+    attributes:
+      segmentation_id:
+        description: >
+          The actual segmentation_id that is been assigned to the network
+          by the underlying cloud infrastructure.
+        type: string
     capabilities:
       link:
         type: tosca.capabilities.network.Linkable
@@ -551,6 +586,11 @@ node_types:
         description: >
           Defines the ending IP of a range to be allocated for the compute
           instances that are associated with this Port.
+    attributes:
+      ip_address:
+        description: >
+          The IP address would be assigned to the associated compute instance.
+        type: string
     requirements:
       - binding:
           description: >
@@ -581,10 +621,23 @@ relationship_types:
     attributes:
       tosca_id:
         type: string
-        required: true
-      state: 
+        description: >-
+          A unique identifier of the realized instance of a
+          Relationship Template that derives from any TOSCA normative
+          type.
+      tosca_name:
         type: string
-        required: false
+        description: >
+          This attribute reflects the name of the Relationship
+          Template as defined in the TOSCA service template.  This
+          name is not unique to the realized instance model of
+          corresponding deployed application as each template in the
+          model can result in one or more instances (e.g., scaled)
+          when orchestrated to a provider environment.
+      state:
+        type: string
+        description: The state of the relationship instance.
+        default: initial
     properties:
       tosca_name:
         type: string
