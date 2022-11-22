@@ -50,9 +50,7 @@ SUPPORTED_MAPPING_VALUE_STRUCTURE = ((ERROR, REASON),
 (NODES, RELATIONSHIPS, DATATYPES, POLICIES, GROUPS) = ("nodes", "relationships", "datatypes", "policies", "groups")
 ELEMENT_TYPES = (NODES, CAPABILITIES, RELATIONSHIPS, DATATYPES, INTERFACES, ARTIFACTS, POLICIES, GROUPS)
 
-(IMPLEMENTATION, INPUTS) = ("implementation", "inputs")
-
-(OUTPUTS) = ("outputs")
+(IMPLEMENTATION, INPUTS, OUTPUTS) = ("implementation", "inputs", "outputs")
 
 (ROOT) = ("Root")
 

@@ -8,7 +8,7 @@ from toscaparser.functions import GetAttribute, Concat, Token, GetProperty, GetI
 from configuration_tool.common import utils
 from configuration_tool.common.tosca_reserved_keys import PARAMETERS, VALUE, EXTRA, SOURCE, INPUTS, NODE_FILTER, NAME, \
     NODES, GET_OPERATION_OUTPUT, IMPLEMENTATION, ANSIBLE, GET_INPUT, RELATIONSHIPS, ATTRIBUTES, GET_ATTRIBUTE, CONCAT, \
-    JOIN, TOKEN, REQUIREMENTS, NODE, CAPABILITIES, DEFAULT, GET_PROPERTY, PROPERTIES
+    JOIN, TOKEN, REQUIREMENTS, NODE, CAPABILITIES, DEFAULT, GET_PROPERTY, PROPERTIES, INTERFACES, OUTPUTS
 from configuration_tool.configuration_tools.ansible.instance_model.instance_model import update_instance_model, \
     get_actual_state_of_instance_model
 
@@ -86,25 +86,27 @@ class AnsibleConfigurationTool(ConfigurationTool):
         first = True
 
         while elements.is_active():
-            node_attributes = None
+            node_values = None
             # try to get new finished operation from queue and find it in list of active
             # if get - mark done this operation (but before it find in graph)
             # if ready operations exists - get it and execute, remove from active
             try:
-                node_attributes = q.get_nowait()
+                node_values = q.get_nowait()
             except Exception:
                 time.sleep(1)
-            if isinstance(node_attributes, Exception):
-                logging.error("Deploy failed with %s" % node_attributes)
-                raise Exception("Deploy failed with %s" % node_attributes)
-            if node_attributes is not None:
-                if isinstance(node_attributes, dict) and len(node_attributes) == 1:
-                    node_name = list(node_attributes.keys())[0]
+            if isinstance(node_values, Exception):
+                logging.error("Deploy failed with %s" % node_values)
+                raise Exception("Deploy failed with %s" % node_values)
+            if node_values is not None:
+                if isinstance(node_values, dict) and len(node_values) == 1:
+                    node_name = list(node_values.keys())[0]
                     for node in active:
                         if node.name == node_name.split(SEPARATOR)[0] and node.operation == node_name.split(SEPARATOR)[1]:
                             active.remove(node)
                             elements.done(node)
-                            update_instance_model(self.cluster_name, node.tmpl, node.type, node.name, node_attributes[node_name], is_delete)
+                            update_instance_model(self.cluster_name, node.tmpl, node.type, node.name,
+                                                  node_values[node_name][ATTRIBUTES], is_delete)
+                            self.resolve_outputs(node_values[node_name][OUTPUTS], node, is_delete)
                 else:
                     logging.error('Bad element in queue')
                     raise Exception('Bad element in queue')
@@ -143,16 +145,16 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     if not v.is_software_component:
                         tasks = [copy.deepcopy({'include_vars': ids_file_path})]
                         tasks.extend(self.get_ansible_tasks_for_delete(v, description_by_type, module_by_type,
-                                                                           additional_args=extra))
+                                                                       additional_args=extra))
                         tasks.extend(
                             self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
-                                                                      cluster_name,
-                                                                      additional_args=extra))
+                                                                  cluster_name,
+                                                                  additional_args=extra))
                         if not any(item == module_by_type for item in
-                                    ansible_config.get('modules_skipping_delete', [])):
+                                   ansible_config.get('modules_skipping_delete', [])):
                             ansible_tasks.extend(copy.deepcopy(tasks))
                     else:
-                        host = v.host
+                        host = 'localhost'  # v.host
                         ansible_tasks.extend(copy.deepcopy(
                             self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
@@ -161,8 +163,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     if not v.is_software_component:
                         ansible_tasks.append(copy.deepcopy({'include_vars': ids_file_path}))
                         ansible_tasks.extend(self.get_ansible_tasks_for_create(v, target_directory, node_filter_config,
-                                                                          description_by_type, module_by_type,
-                                                                          additional_args=extra))
+                                                                               description_by_type, module_by_type,
+                                                                               additional_args=extra))
                         ansible_tasks.extend(
                             self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
@@ -170,7 +172,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                         ansible_tasks.extend(copy.deepcopy(extra_tasks_for_delete))
 
                     else:
-                        host = v.host
+                        host = 'localhost'  # v.host
                         ansible_tasks.extend(copy.deepcopy(
                             self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
@@ -179,20 +181,20 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     (_, element_type, _) = utils.tosca_type_parse(v.type)
                     if element_type == NODES:
                         if v.is_software_component:
-                            host = v.host
+                            host = 'localhost'  # v.host
                     # operations for relationships executes on target/source host depends on operation
                     elif element_type == RELATIONSHIPS:
                         if v.operation == 'pre_configure_target' or v.operation == 'post_configure_target' or v.operation == 'add_source':
                             for elem in operations_graph:
                                 if elem.name == v.target:
                                     if elem.is_software_component:
-                                        host = v.host
+                                        host = 'localhost'  # v.host
                                     break
                         elif v.operation == 'pre_configure_source' or v.operation == 'post_configure_source':
                             for elem in operations_graph:
                                 if elem.name == v.source:
                                     if elem.is_software_component:
-                                        host = elem.host
+                                        host = 'localhost'  # elem.host
                                     break
                         else:
                             logging.error("Unsupported operation for relationship in operation graph")
@@ -206,14 +208,16 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 if len(ansible_tasks) > 0:
                     ansible_play_for_elem = {'tasks': ansible_tasks,
                                              'hosts': host,
-                                              'name': description_prefix + ' ' + self.provider + ' cluster: ' +
-                                                      v.name + ':' + v.operation}
+                                             'name': description_prefix + ' ' + self.provider + ' cluster: ' +
+                                                     v.name + ':' + v.operation}
                     ansible_playbook.append(ansible_play_for_elem)
                 if debug:
                     elements.done(v)
                 else:
                     if len(ansible_tasks) > 0:
-                        self.run(ansible_tasks, grpc_cotea_endpoint, host, v.name, v.operation, q, extra, ansible_config, self.get_defined_attributes(v))
+                        outputs, _ = self.get_outputs(v)
+                        self.run(ansible_tasks, grpc_cotea_endpoint, host, v.name, v.operation, q, extra,
+                                 ansible_config, self.get_defined_attributes(v), outputs)
                     else:
                         elements.done(v)
                     active.append(v)
@@ -222,8 +226,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 PATH: ids_file_path,
                 STATE: 'absent'}}]
             ansible_play_for_elem = {'tasks': ansible_tasks,
-                                         'hosts': self.default_host,
-                                         'name': 'Renew id_vars_example.yaml'}
+                                     'hosts': self.default_host,
+                                     'name': 'Renew id_vars_example.yaml'}
             ansible_playbook.append(ansible_play_for_elem)
             if not debug:
                 run_ansible(ansible_tasks, grpc_cotea_endpoint, {}, {}, self.default_host)
@@ -528,13 +532,46 @@ class AnsibleConfigurationTool(ConfigurationTool):
     def get_artifact_extension(self):
         return '.yaml'
 
-    def run(self, ansible_tasks, grpc_cotea_endpoint, hosts, name, op, q, extra, ansible_config, attributes):
+    def run(self, ansible_tasks, grpc_cotea_endpoint, hosts, name, op, q, extra, ansible_config, attributes, outputs):
         extra_env = {}
         extra_vars = extra.get('global')
         plugins_path = os.path.join(utils.get_tmp_clouni_dir(), 'ansible_plugins/plugins/modules/cloud/', self.provider)
-        grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q, ansible_config,
-                               ansible_library=plugins_path, attributes=attributes)
-    
+        grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q,
+                               ansible_config,
+                               ansible_library=plugins_path, attributes=attributes, outputs=outputs)
+
+    def resolve_outputs(self, outputs_val, resource, is_delete):
+        outputs, attrs = self.get_outputs(resource)
+        for output, attr in zip(outputs, attrs):
+            attr = self._resolve_tosca_travers(attr, resource.name)
+            found = False
+            for v in self.operations_graph:
+                if v.name == attr[0]:
+                    found = True
+                    for output_val in outputs_val:
+                        if output_val.get(output):
+                            update_instance_model(self.cluster_name, v.tmpl, v.type, v.name,
+                                                              [{attr[1]: output_val[output]}], is_delete)
+            if not found:
+                logging.error('Template with name %s not found' % attr[0])
+                raise Exception('Template with name %s not found' % attr[0])
+
+    def get_outputs(self, resource):
+        res_outputs = []
+        res_attrs = []
+        operation = resource.operation
+        interfaces = resource.tmpl.get(INTERFACES)
+        if interfaces:
+            for interface, value in interfaces.items():
+                op = value.get(operation)
+                if op:
+                    outputs = op.get(OUTPUTS)
+                    if outputs:
+                        for output, attr in outputs.items():
+                            res_outputs.append(output)
+                            res_attrs.append(attr)
+        return res_outputs, res_attrs
+
     def resolve_get_attribute_and_intrinsic_functions(self, data, tmpl_name=None):
         if isinstance(data, dict):
             new_data = {}
@@ -592,7 +629,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                         "string_with_tokens, string_of_token_chars, substring_index")
                 else:
                     new_data[key] = self.resolve_get_attribute_and_intrinsic_functions(value,
-                                                                        tmpl_name if tmpl_name is not None else key)
+                                                                                       tmpl_name if tmpl_name is not None else key)
             return new_data
         elif isinstance(data, list):
             new_data = []
@@ -657,34 +694,45 @@ class AnsibleConfigurationTool(ConfigurationTool):
             logging.error('Parameter of get_input should be a list')
             raise Exception('Parameter of get_input should be a list')
 
+    def _resolve_tosca_travers(self, value, tmpl_name):
+        if value[0] == 'SELF':
+            value[0] = tmpl_name
+        if value[0] == 'HOST':
+            value = [tmpl_name, 'host'] + value[1:]
+        if value[0] == 'SOURCE':
+            found = False
+            for v in self.operations_graph:
+                if v.name == tmpl_name:
+                    found = True
+                    value[0] = v.source
+            if not found:
+                logging.error("Relationship %s not found" % tmpl_name)
+                raise Exception("Relationship %s not found" % tmpl_name)
+        if value[0] == 'TARGET':
+            found = False
+            for v in self.operations_graph:
+                if v.name == tmpl_name:
+                    found = True
+                    value[0] = v.target
+            if not found:
+                logging.error("Relationship %s not found" % tmpl_name)
+                raise Exception("Relationship %s not found" % tmpl_name)
+
+        template, type = get_actual_state_of_instance_model(self.cluster_name, value[0])
+        if type == NODES:
+            node_tmpl = template
+            if node_tmpl.get(REQUIREMENTS, None) is not None:
+                for req in node_tmpl[REQUIREMENTS]:
+                    if req.get(value[1], None) is not None:
+                        if req[value[1]].get(NODE, None) is not None:
+                            return self._resolve_tosca_travers([req[value[1]][NODE]] + value[2:], req[value[1]][NODE])
+        return value
+
     def _get_attribute_value(self, value, tmpl_name):
         if isinstance(value, list):
             attr_keys = []
             tmpl_attrs = None
-
-            if value[0] == 'SELF':
-                value[0] = tmpl_name
-            if value[0] == 'HOST':
-                value = [tmpl_name, 'host'] + value[1:]
-            if value[0] == 'SOURCE':
-                found = False
-                for v in self.operations_graph:
-                    if v.name == tmpl_name:
-                        found = True
-                        value[0] = v.source
-                if not found:
-                    logging.error("Relationship %s not found" % tmpl_name)
-                    raise Exception("Relationship %s not found" % tmpl_name)
-            if value[0] == 'TARGET':
-                found = False
-                for v in self.operations_graph:
-                    if v.name == tmpl_name:
-                        found = True
-                        value[0] = v.target
-                if not found:
-                    logging.error("Relationship %s not found" % tmpl_name)
-                    raise Exception("Relationship %s not found" % tmpl_name)
-
+            value = self._resolve_tosca_travers(value, tmpl_name)
             template, type = get_actual_state_of_instance_model(self.cluster_name, value[0])
             if type == NODES:
                 node_tmpl = template
@@ -731,32 +779,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
         if isinstance(value, list):
             prop_keys = []
             tmpl_properties = None
-
-            if value[0] == 'SELF':
-                value[0] = tmpl_name
-            if value[0] == 'HOST':
-                value = [tmpl_name, 'host'] + value[1:]
-            if value[0] == 'SOURCE':
-                found = False
-                for v in self.operations_graph:
-                    if v.name == tmpl_name:
-                        found = True
-                        value[0] = v.source
-                if not found:
-                    logging.error("Relationship %s not found" % tmpl_name)
-                    raise Exception("Relationship %s not found" % tmpl_name)
-            if value[0] == 'TARGET':
-                found = False
-                for v in self.operations_graph:
-                    if v.name == tmpl_name:
-                        found = True
-                        value[0] = v.target
-                if not found:
-                    logging.error("Relationship %s not found" % tmpl_name)
-                    raise Exception("Relationship %s not found" % tmpl_name)
-
+            value = self._resolve_tosca_travers(value, tmpl_name)
             template, type = get_actual_state_of_instance_model(self.cluster_name, value[0])
-
             if type == NODES:
                 node_tmpl = template
                 if node_tmpl.get(REQUIREMENTS, None) is not None:

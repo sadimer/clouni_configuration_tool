@@ -32,6 +32,13 @@ def update_instance_model(cluster_name, tmpl, type, name, attributes, delete, in
                 return
             for i in range(len(attributes)):
                 name = name + '_' + str(i + 1)
+                # temporary solution
+                with open('instance_model_' + cluster_name + '.yaml', 'r+') as instance_model_read:
+                    old_state = yaml.load(instance_model_read, Loader=Loader)
+                    for elem in old_state[::-1]:
+                        if elem.get(elem_type) and name in elem.get(elem_type):
+                            tmpl = elem[elem_type][name]
+                            break
                 curr_state[elem_type][name] = utils.deep_update_dict(copy.deepcopy(tmpl),
                                                                             {ATTRIBUTES: attributes[i]})
                 print(yaml.dump([curr_state]), file=instance_model)
