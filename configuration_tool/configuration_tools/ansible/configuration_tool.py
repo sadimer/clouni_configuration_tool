@@ -139,7 +139,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                    ansible_config.get('modules_skipping_delete', [])):
                             ansible_tasks.extend(copy.deepcopy(tasks))
                     else:
-                        host = 'localhost'  # v.host
+                        host = v.host
                         ansible_tasks.extend(copy.deepcopy(
                             self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
@@ -155,7 +155,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                                                   additional_args=extra))
 
                     else:
-                        host = 'localhost'  # v.host
+                        host = v.host
                         ansible_tasks.extend(copy.deepcopy(
                             self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
@@ -164,20 +164,20 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     (_, element_type, _) = utils.tosca_type_parse(v.type)
                     if element_type == NODES:
                         if v.is_software_component:
-                            host = 'localhost'  # v.host
+                            host = v.host
                     # operations for relationships executes on target/source host depends on operation
                     elif element_type == RELATIONSHIPS:
                         if v.operation == 'pre_configure_target' or v.operation == 'post_configure_target' or v.operation == 'add_source':
                             for elem in operations_graph:
                                 if elem.name == v.target:
                                     if elem.is_software_component:
-                                        host = 'localhost'  # v.host
+                                        host = v.host
                                     break
                         elif v.operation == 'pre_configure_source' or v.operation == 'post_configure_source':
                             for elem in operations_graph:
                                 if elem.name == v.source:
                                     if elem.is_software_component:
-                                        host = 'localhost'  # elem.host
+                                        host = elem.host
                                     break
                         else:
                             logging.error("Unsupported operation for relationship in operation graph")
