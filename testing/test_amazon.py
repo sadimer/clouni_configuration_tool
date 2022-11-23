@@ -36,9 +36,9 @@ class TestAnsibleAmazonOutput (unittest.TestCase, TestAnsibleProvider):
         for play in playbook:
             for task in play['tasks']:
                 tasks.append(task)
-        self.assertEqual(len(tasks), 13)
-        self.assertIsNotNone(tasks[4][INSTANCE_MODULE_NAME])
-        server = tasks[4][INSTANCE_MODULE_NAME]
+        self.assertEqual(len(tasks), 2)
+        self.assertIsNotNone(tasks[1][INSTANCE_MODULE_NAME])
+        server = tasks[1][INSTANCE_MODULE_NAME]
         self.assertEqual(server['name'], self.NODE_NAME)
 
     def test_meta(self, extra=None):

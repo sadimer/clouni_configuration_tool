@@ -68,7 +68,7 @@ def translate(provider_template, validate_only, configuration_tool, cluster_name
     )
 
     logging_format = "%(asctime)s %(levelname)s %(message)s"
-    logging.basicConfig(filename=os.path.join(os.getenv('HOME'), '.clouni.log'), filemode='a', level=log_map[log_level],
+    logging.basicConfig(filename='.clouni-configuration-tool.log', filemode='a', level=log_map[log_level],
                         format=logging_format, datefmt='%Y-%m-%d %H:%M:%S')
 
     config = Configuration()
@@ -135,11 +135,11 @@ def translate(provider_template, validate_only, configuration_tool, cluster_name
             if tmpl.get(NODE_TEMPLATES):
                 node_templates = tmpl.get(NODE_TEMPLATES)
                 for elem in node_templates:
-                    update_instance_model(cluster_name, node_templates[elem], node_templates[elem][TYPE], elem, [], is_delete, init=True)
+                    update_instance_model(cluster_name, node_templates[elem], node_templates[elem][TYPE], elem, [], [], is_delete, init=True)
             if tmpl.get(RELATIONSHIP_TEMPLATES):
                 rel_templates = tmpl.get(RELATIONSHIP_TEMPLATES)
                 for elem in rel_templates:
-                    update_instance_model(cluster_name, rel_templates[elem], rel_templates[elem][TYPE], elem, [], is_delete, init=True)
+                    update_instance_model(cluster_name, rel_templates[elem], rel_templates[elem][TYPE], elem, [], [], is_delete, init=True)
 
     copy_of_template = copy.deepcopy(template)
     try:

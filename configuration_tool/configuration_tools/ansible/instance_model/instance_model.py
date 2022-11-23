@@ -1,15 +1,16 @@
 import copy
 import logging
+import os
 
 import yaml
 from yaml import Loader
 
 from configuration_tool.common import utils
 from configuration_tool.common.tosca_reserved_keys import NODES, NODE_TYPES, ATTRIBUTES, NODE_TEMPLATES, NAME, \
-    RELATIONSHIP_TEMPLATES, RELATIONSHIPS
+    RELATIONSHIP_TEMPLATES, RELATIONSHIPS, PROPERTIES
 
 
-def update_instance_model(cluster_name, tmpl, type, name, attributes, delete, init=False):
+def update_instance_model(cluster_name, tmpl, type, name, attributes, properties, delete, init=False):
     with open('instance_model_' + cluster_name + '.yaml', 'a+') as instance_model:
         curr_state = {}
         if not delete:
@@ -28,30 +29,46 @@ def update_instance_model(cluster_name, tmpl, type, name, attributes, delete, in
             if init:
                 name = name + '_' + str(1)
                 curr_state[elem_type][name] = copy.deepcopy(tmpl)
-                print(yaml.dump([curr_state]), file=instance_model)
+                print(yaml.dump([curr_state]), file=instance_model, flush=True)
                 return
-            for i in range(len(attributes)):
-                name = name + '_' + str(i + 1)
-                # temporary solution
-                with open('instance_model_' + cluster_name + '.yaml', 'r+') as instance_model_read:
-                    old_state = yaml.load(instance_model_read, Loader=Loader)
-                    for elem in old_state[::-1]:
-                        if elem.get(elem_type) and name in elem.get(elem_type):
-                            tmpl = elem[elem_type][name]
-                            break
-                curr_state[elem_type][name] = utils.deep_update_dict(copy.deepcopy(tmpl),
-                                                                            {ATTRIBUTES: attributes[i]})
-                print(yaml.dump([curr_state]), file=instance_model)
+            update_attributes_or_properties(cluster_name, name, curr_state, elem_type,
+                                            attributes, ATTRIBUTES, instance_model)
+            update_attributes_or_properties(cluster_name, name, curr_state, elem_type,
+                                            properties, PROPERTIES, instance_model)
 
 
-def get_actual_state_of_instance_model(cluster_name, name):
-    name = name + '_' + '1' # temporary solution
+def update_attributes_or_properties(cluster_name, name, curr_state, elem_type, parameters, parameter_type,
+                                    instance_model):
+    for i in range(len(parameters)):
+        tmpl = get_actual_state_of_instance_model(cluster_name, name, i + 1, init=True)
+        if not tmpl:
+            logging.error('Cant get actual state of template with name: %s' % name)
+            raise Exception('Cant get actual state of template with name: %s' % name)
+        curr_state[elem_type][name + '_' + str(i + 1)] = utils.deep_update_dict(copy.deepcopy(tmpl),
+                                                                                {parameter_type: parameters[i]})
+        print(yaml.dump([curr_state], Dumper=utils.NoAliasDumper), file=instance_model, flush=True)
+
+
+def get_elem(curr_state, name):
+    for elem in curr_state[::-1]:
+        if elem.get(NODE_TEMPLATES) and name in elem.get(NODE_TEMPLATES):
+            return elem[NODE_TEMPLATES][name]
+        if elem.get(RELATIONSHIP_TEMPLATES) and name in elem.get(RELATIONSHIP_TEMPLATES):
+            return elem[RELATIONSHIP_TEMPLATES][name]
+    return None
+
+
+def get_actual_state_of_instance_model(cluster_name, name, index, init=False):
     with open('instance_model_' + cluster_name + '.yaml', 'r+') as instance_model:
         curr_state = yaml.load(instance_model, Loader=Loader)
-        for elem in curr_state[::-1]:
-            if elem.get(NODE_TEMPLATES) and name in elem.get(NODE_TEMPLATES):
-                return elem[NODE_TEMPLATES][name], NODES
-            if elem.get(RELATIONSHIP_TEMPLATES) and name in elem.get(RELATIONSHIP_TEMPLATES):
-                return elem[RELATIONSHIP_TEMPLATES][name], RELATIONSHIPS
-    logging.error('Node or relationship with name %s does not exists' % name)
-    raise Exception('Node or relationship with name %s does not exists' % name)
+        elem = get_elem(curr_state, name + '_' + str(index))
+        if elem:
+            return elem
+        if init:
+            # if can't find elem in template with index - get from 1 index
+            return get_elem(curr_state, name + '_' + '1')
+        return None
+
+
+def delete_cluster_from_instance_model(cluster_name):
+    os.remove('instance_model_' + cluster_name + '.yaml')

@@ -8,9 +8,9 @@ from toscaparser.functions import GetAttribute, Concat, Token, GetProperty, GetI
 from configuration_tool.common import utils
 from configuration_tool.common.tosca_reserved_keys import PARAMETERS, VALUE, EXTRA, SOURCE, INPUTS, NODE_FILTER, NAME, \
     NODES, GET_OPERATION_OUTPUT, IMPLEMENTATION, ANSIBLE, GET_INPUT, RELATIONSHIPS, ATTRIBUTES, GET_ATTRIBUTE, CONCAT, \
-    JOIN, TOKEN, REQUIREMENTS, NODE, CAPABILITIES, DEFAULT, GET_PROPERTY, PROPERTIES, INTERFACES, OUTPUTS
+    JOIN, TOKEN, REQUIREMENTS, NODE, CAPABILITIES, DEFAULT, GET_PROPERTY, PROPERTIES, INTERFACES, OUTPUTS, ID, TYPE
 from configuration_tool.configuration_tools.ansible.instance_model.instance_model import update_instance_model, \
-    get_actual_state_of_instance_model
+    get_actual_state_of_instance_model, delete_cluster_from_instance_model
 
 from configuration_tool.providers.common.provider_configuration import ProviderConfiguration
 from configuration_tool.configuration_tools.common.configuration_tool import ConfigurationTool, \
@@ -58,8 +58,6 @@ class AnsibleConfigurationTool(ConfigurationTool):
         ansible_config = provider_config.get_section(ANSIBLE)
         node_filter_config = provider_config.get_subsection(ANSIBLE, NODE_FILTER)
 
-        ids_file_path = utils.get_tmp_clouni_dir() + 'id_vars_' + cluster_name + self.get_artifact_extension()
-
         if not debug and not grpc_cotea_endpoint:
             logging.warning("No grpc cotea endpoint provided! Use debug mode!")
             debug = True
@@ -105,7 +103,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
                             active.remove(node)
                             elements.done(node)
                             update_instance_model(self.cluster_name, node.tmpl, node.type, node.name,
-                                                  node_values[node_name][ATTRIBUTES], is_delete)
+                                                  node_values[node_name].get(ATTRIBUTES, []),
+                                                  node_values[node_name].get(PROPERTIES, []), is_delete)
                             self.resolve_outputs(node_values[node_name][OUTPUTS], node, is_delete)
                 else:
                     logging.error('Bad element in queue')
@@ -119,8 +118,6 @@ class AnsibleConfigurationTool(ConfigurationTool):
                         elements.done(v)
                         continue
                 logging.debug("Creating ansible play from operation: %s" % v.name + ':' + v.operation)
-                extra_tasks_for_delete = self.get_extra_tasks_for_delete(v.type, v.name.replace('-', '_'),
-                                                                         ids_file_path)
                 description_prefix, module_prefix = self.get_module_prefixes(is_delete, ansible_config)
                 description_by_type = self.ansible_description_by_type(v.type_name, description_prefix)
                 module_by_type = self.ansible_module_by_type(v.type_name, module_prefix)
@@ -129,23 +126,11 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     result = self.resolve_get_attribute_and_intrinsic_functions({v.name: v.tmpl})
                     v.tmpl = result[v.name]
                 host = self.default_host
-                # reload id_vars file
-                if not is_delete and first and not debug:
-                    first = False
-                    first_tasks = []
-                    first_tasks.append(copy.deepcopy({FILE: {
-                        PATH: ids_file_path,
-                        STATE: 'absent'}}))
-                    first_tasks.append(copy.deepcopy({FILE: {
-                        PATH: ids_file_path,
-                        STATE: 'touch'}}))
-                    run_ansible(first_tasks, grpc_cotea_endpoint, {}, {}, 'localhost')
                 # create playbook for every operation
                 if v.operation == 'delete':
                     if not v.is_software_component:
-                        tasks = [copy.deepcopy({'include_vars': ids_file_path})]
-                        tasks.extend(self.get_ansible_tasks_for_delete(v, description_by_type, module_by_type,
-                                                                       additional_args=extra))
+                        tasks = self.get_ansible_tasks_for_delete(v, cluster_name, description_by_type, module_by_type,
+                                                                  additional_args=extra)
                         tasks.extend(
                             self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
@@ -161,7 +146,6 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                                                   additional_args=extra)))
                 elif v.operation == 'create':
                     if not v.is_software_component:
-                        ansible_tasks.append(copy.deepcopy({'include_vars': ids_file_path}))
                         ansible_tasks.extend(self.get_ansible_tasks_for_create(v, target_directory, node_filter_config,
                                                                                description_by_type, module_by_type,
                                                                                additional_args=extra))
@@ -169,7 +153,6 @@ class AnsibleConfigurationTool(ConfigurationTool):
                             self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
                                                                   additional_args=extra))
-                        ansible_tasks.extend(copy.deepcopy(extra_tasks_for_delete))
 
                     else:
                         host = 'localhost'  # v.host
@@ -216,47 +199,19 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 else:
                     if len(ansible_tasks) > 0:
                         outputs, _ = self.get_outputs(v)
+                        if v.tmpl.get(PROPERTIES):
+                            properties = list(v.tmpl.get(PROPERTIES).keys())
+                        else:
+                            properties = []
                         self.run(ansible_tasks, grpc_cotea_endpoint, host, v.name, v.operation, q, extra,
-                                 ansible_config, self.get_defined_attributes(v), outputs)
+                                 ansible_config, self.get_defined_attributes(v),
+                                 outputs, properties)
                     else:
                         elements.done(v)
                     active.append(v)
-        if is_delete:
-            ansible_tasks = [{FILE: {
-                PATH: ids_file_path,
-                STATE: 'absent'}}]
-            ansible_play_for_elem = {'tasks': ansible_tasks,
-                                     'hosts': self.default_host,
-                                     'name': 'Renew id_vars_example.yaml'}
-            ansible_playbook.append(ansible_play_for_elem)
-            if not debug:
-                run_ansible(ansible_tasks, grpc_cotea_endpoint, {}, {}, self.default_host)
+        if not debug and is_delete:
+            delete_cluster_from_instance_model(cluster_name)
         return yaml.dump(ansible_playbook, default_flow_style=False)
-
-    def replace_all_get_functions(self, data):
-        if isinstance(data, dict):
-            if len(data) == 1 and data.get(GET_OPERATION_OUTPUT, None) is not None:
-                full_op_name = '_'.join(data[GET_OPERATION_OUTPUT][:3]).lower()
-                output_id = self.global_operations_info[full_op_name][OUTPUT_IDS][data[GET_OPERATION_OUTPUT][-1]]
-                return self.rap_ansible_variable(output_id)
-            if len(data) == 1 and data.get(GET_INPUT, None) is not None:
-                output_id = self.global_variables['input_' + data[GET_INPUT]]
-                return self.rap_ansible_variable(output_id)
-
-            r = {}
-            for k, v in data.items():
-                r[k] = self.replace_all_get_functions(v)
-            return r
-
-        elif isinstance(data, (list, set, tuple)):
-            type_save = type(data)
-            r = type_save()
-            for i in data:
-                temp = self.replace_all_get_functions(i)
-                r = type_save(itertools.chain(r, [temp]))
-            return r
-        else:
-            return data
 
     def get_ansible_tasks_for_create(self, element_object, target_directory, node_filter_config, description_by_type,
                                      module_by_type, additional_args=None):
@@ -295,13 +250,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
         ansible_tasks.append(ansible_task_as_dict)
         return ansible_tasks
 
-    def get_ansible_tasks_for_delete(self, element_object, description_by_type, module_by_type, additional_args=None):
-        """
-        Fulfill the dict with ansible task arguments to delete infrastructure
-        Operations are mentioned in the node or in relationship_template
-        :param: node: ProviderResource
-        :return: string of ansible task to place in playbook
-        """
+    def get_ansible_tasks_for_delete(self, element_object, cluster_name, description_by_type, module_by_type,
+                                     additional_args=None):
         ansible_tasks = []
         if additional_args is None:
             additional_args = {}
@@ -310,27 +260,36 @@ class AnsibleConfigurationTool(ConfigurationTool):
             additional_args_element = {}
             additional_args = utils.deep_update_dict(additional_args_global, additional_args_element)
 
-        task_name = element_object.name.replace('-', '_')
-        ansible_task_list = [dict(), dict(), dict()]
-        for task in ansible_task_list:
-            task[NAME] = description_by_type
-        ansible_task_list[0][module_by_type] = {
-            NAME: self.rap_ansible_variable(task_name + '_delete'), 'state': 'absent'}
-        ansible_task_list[1][module_by_type] = {
-            NAME: self.rap_ansible_variable('item'), 'state': 'absent'}
-        ansible_task_list[2][module_by_type] = self.rap_ansible_variable('item')
-        ansible_task_list[2]['loop'] = self.rap_ansible_variable(task_name + '_dicts')
-        ansible_task_list[0]['when'] = task_name + '_delete' + IS_DEFINED
-        ansible_task_list[1]['when'] = task_name + '_ids is defined'
-        ansible_task_list[1]['loop'] = self.rap_ansible_variable(task_name + '_ids | flatten(levels=1)')
-        ansible_task_list[2]['when'] = task_name + '_dicts' + IS_DEFINED
-        for task in ansible_task_list:
-            task[REGISTER] = task_name + '_var'
-            task.update(additional_args)
-            ansible_tasks.append(task)
-            ansible_tasks.append(
-                {SET_FACT: task_name + '=\'' + self.rap_ansible_variable(task_name + '_var') + '\'',
-                 'when': task_name + '_var' + '.changed'})
+        index = 1
+        current_state = get_actual_state_of_instance_model(cluster_name, element_object.name, index)
+        ids = []
+        while current_state is not None:
+            index += 1
+            if current_state.get(ATTRIBUTES) and current_state.get(ATTRIBUTES).get(ID):
+                if element_object.type != 'openstack.nodes.FloatingIp':
+                    ids.append(current_state.get(ATTRIBUTES).get(ID))
+                else:
+                    ids.append([current_state.get(ATTRIBUTES).get('port_details').get('device_id'),
+                                current_state.get(ATTRIBUTES).get('floating_ip_address')])
+            current_state = get_actual_state_of_instance_model(cluster_name, element_object.name, index)
+        if element_object.type != 'openstack.nodes.FloatingIp':
+            task = {
+                NAME: description_by_type,
+                module_by_type: {NAME: self.rap_ansible_variable('item'), 'state': 'absent'},
+                'with_list': ids
+            }
+        else:
+            task = {
+                NAME: description_by_type,
+                module_by_type: {
+                    'server': self.rap_ansible_variable('item[0]'),
+                    'floating_ip_address': self.rap_ansible_variable('item[1]'),
+                    'purge': 'yes',
+                    'state': 'absent'},
+                'with_list': ids
+            }
+        task.update(additional_args)
+        ansible_tasks.append(task)
         return ansible_tasks
 
     def get_ansible_tasks_from_interface(self, element_object, target_directory, is_delete, operation, cluster_name,
@@ -436,109 +395,20 @@ class AnsibleConfigurationTool(ConfigurationTool):
     def get_defined_attributes(self, provider_tpl):
         return list(provider_tpl.type_definition.get(ATTRIBUTES))
 
-    def get_extra_tasks_for_delete(self, type, task_name, path):
-        ansible_tasks_for_create = []
-        (_, _, node_type) = utils.tosca_type_parse(type)
-        node_type = utils.snake_case(node_type)
-        # TODO: fix this chaos
-        if type == 'openstack.nodes.FloatingIp':  # temporary solutions
-            ansible_tasks_for_create.append({
-                'set_fact': {task_name + '_dict': {'floating_ip_address': self.rap_ansible_variable(
-                    'item.floating_ip.floating_ip_address'),
-                    'server': self.rap_ansible_variable('item.floating_ip.port_details.device_id'),
-                    'purge': 'yes',
-                    'state': 'absent'}},
-                'with_items': self.rap_ansible_variable(task_name + ".results"),
-                'when': task_name + IS_DEFINED,
-                'register': 'tmp'
-            })
-            ansible_tasks_for_create.append({
-                'set_fact': {
-                    task_name + '_dicts': self.rap_ansible_variable(
-                        task_name + '_dicts | default([]) + [item.ansible_facts.' + task_name + '_dict]')
-                },
-                'with_items': self.rap_ansible_variable("tmp.results"),
-                'when': task_name + '_dict' + IS_DEFINED
-            })
-            ansible_tasks_for_create.append({
-                LINEINFILE: {
-                    PATH: path,
-                    'line': task_name + '_dicts:\n' + self.rap_ansible_variable(task_name + '_dicts | to_nice_yaml')},
-                'when': task_name + '_dicts' + IS_DEFINED,
-            })
-        elif type == 'amazon.nodes.Key':  # temporary solutions
-            # amazon ec2 has very BAD return values - there is no id in return value for ec2_key module
-            ansible_tasks_for_create.append({
-                LINEINFILE: {
-                    PATH: path,
-                    'line': '' + task_name + '_delete' + ': ' + self.rap_ansible_variable(
-                        task_name + '.' + node_type + '.name')},
-                'when': task_name + '.' + node_type + '.name' + IS_DEFINED
-            })
-        else:
-            ansible_tasks_for_create.append({
-                'set_fact': {
-                    task_name + '_list': self.rap_ansible_variable(
-                        task_name + '_list' + " | default([])") + " + [ \"{{ item.id }}\" ]"},
-                'loop': self.rap_ansible_variable(task_name + '.results | flatten(levels=1) '),
-                'when': 'item.id ' + IS_DEFINED
-            })
-            ansible_tasks_for_create.append({  # temporary solutions
-                'set_fact': {
-                    task_name + '_list': self.rap_ansible_variable(
-                        task_name + '_list' + " | default([])") + " + [ \"{{ item." + node_type + "_ids[0] }}\" ]"},
-                'loop': self.rap_ansible_variable(task_name + '.results | flatten(levels=1) '),
-                'when': 'item.' + node_type + '_ids' + IS_DEFINED
-            })
-            ansible_tasks_for_create.append({
-                'set_fact': {
-                    task_name + '_list': {task_name + '_ids': self.rap_ansible_variable(task_name + '_list')}},
-                'when': task_name + '_list' + IS_DEFINED
-            })
-            ansible_tasks_for_create.append({
-                LINEINFILE: {
-                    PATH: path,
-                    'line': '' + task_name + '_delete' + ': ' + self.rap_ansible_variable(task_name + '.id')},
-                'when': task_name + '.id' + IS_DEFINED
-            })
-            # amazon ec2 has very BAD return values - we need to search where is id of current node
-            ansible_tasks_for_create.append({
-                LINEINFILE: {
-                    PATH: path,
-                    'line': '' + task_name + '_delete' + ': ' + self.rap_ansible_variable(
-                        task_name + '.' + node_type + '_id')},
-                'when': task_name + '.' + node_type + '_id' + IS_DEFINED
-            })
-            for elem in node_type.split('_'):  # temporary solutions
-                ansible_tasks_for_create.append({
-                    LINEINFILE: {
-                        PATH: path,
-                        'line': '' + task_name + '_delete' + ': ' + self.rap_ansible_variable(
-                            task_name + '.' + elem + '.id')},
-                    'when': task_name + '.' + elem + '.id' + IS_DEFINED
-                })
-            ansible_tasks_for_create.append({
-                LINEINFILE: {
-                    PATH: path,
-                    'line': self.rap_ansible_variable(task_name + '_list' + ' | to_nice_yaml')},
-                'when': task_name + '_list' + IS_DEFINED
-            })
-            ansible_tasks_for_create.append({
-                'fail': {'msg': 'Variable ' + task_name + ' is undefined! So it will not be deleted'},
-                'when': task_name + '_list is undefined and ' + task_name + '.id is undefined',
-                'ignore_errors': True})
-        return ansible_tasks_for_create
-
     def get_artifact_extension(self):
         return '.yaml'
 
-    def run(self, ansible_tasks, grpc_cotea_endpoint, hosts, name, op, q, extra, ansible_config, attributes, outputs):
+    def run(self, ansible_tasks, grpc_cotea_endpoint, hosts, name, op, q, extra,
+            ansible_config, attributes, outputs, properties):
         extra_env = {}
         extra_vars = extra.get('global')
         plugins_path = os.path.join(utils.get_tmp_clouni_dir(), 'ansible_plugins/plugins/modules/cloud/', self.provider)
         grpc_cotea_run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q,
                                ansible_config,
-                               ansible_library=plugins_path, attributes=attributes, outputs=outputs)
+                               ansible_library=plugins_path,
+                               attributes=attributes,
+                               outputs=outputs,
+                               properties=properties)
 
     def resolve_outputs(self, outputs_val, resource, is_delete):
         outputs, attrs = self.get_outputs(resource)
@@ -551,7 +421,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     for output_val in outputs_val:
                         if output_val.get(output):
                             update_instance_model(self.cluster_name, v.tmpl, v.type, v.name,
-                                                              [{attr[1]: output_val[output]}], is_delete)
+                                                  [{attr[1]: output_val[output]}], [], is_delete)
             if not found:
                 logging.error('Template with name %s not found' % attr[0])
                 raise Exception('Template with name %s not found' % attr[0])
@@ -718,7 +588,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 logging.error("Relationship %s not found" % tmpl_name)
                 raise Exception("Relationship %s not found" % tmpl_name)
 
-        template, type = get_actual_state_of_instance_model(self.cluster_name, value[0])
+        template = get_actual_state_of_instance_model(self.cluster_name, value[0], 1)
+        (_, type, _) = utils.tosca_type_parse(template.get(TYPE))
         if type == NODES:
             node_tmpl = template
             if node_tmpl.get(REQUIREMENTS, None) is not None:
@@ -733,7 +604,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
             attr_keys = []
             tmpl_attrs = None
             value = self._resolve_tosca_travers(value, tmpl_name)
-            template, type = get_actual_state_of_instance_model(self.cluster_name, value[0])
+            template = get_actual_state_of_instance_model(self.cluster_name, value[0], 1)
+            (_, type, _) = utils.tosca_type_parse(template.get(TYPE))
             if type == NODES:
                 node_tmpl = template
                 if node_tmpl.get(REQUIREMENTS, None) is not None:
@@ -780,7 +652,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
             prop_keys = []
             tmpl_properties = None
             value = self._resolve_tosca_travers(value, tmpl_name)
-            template, type = get_actual_state_of_instance_model(self.cluster_name, value[0])
+            template = get_actual_state_of_instance_model(self.cluster_name, value[0], 1)
+            (_, type, _) = utils.tosca_type_parse(template.get(TYPE))
             if type == NODES:
                 node_tmpl = template
                 if node_tmpl.get(REQUIREMENTS, None) is not None:
