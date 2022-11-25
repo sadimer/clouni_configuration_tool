@@ -17,7 +17,7 @@ class KubernetesConfigurationTool(ConfigurationTool):
         self.provider = provider
 
     def to_dsl(self, provider, nodes_relationships_queue, reversed_nodes_relationships_queue, cluster_name, is_delete,
-               target_directory=None, inputs=None, outputs=None, extra=None):
+               target_directory=None, extra=None):
         if not is_delete:
             return self.to_dsl_for_create(self.provider, nodes_relationships_queue, target_directory,
                                           cluster_name, extra)
@@ -46,9 +46,6 @@ class KubernetesConfigurationTool(ConfigurationTool):
                         props_dict['spec']['template']['spec']['containers'][i]['resources']['limits']['memory']\
                             .replace('MB', 'M')
         return props_dict
-
-    def copy_conditions_to_the_directory(self, used_conditions_set, directory):
-        return
 
     def get_artifact_extension(self):
         return '.yaml'

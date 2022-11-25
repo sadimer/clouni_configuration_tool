@@ -1,3 +1,4 @@
+import copy
 import json
 import logging
 import os
@@ -11,9 +12,10 @@ from yaml import Loader
 
 from configuration_tool.common.tosca_reserved_keys import IMPORTS, DEFAULT_ARTIFACTS_DIRECTORY, \
     EXECUTOR, NAME, TOSCA_ELEMENTS_MAP_FILE, TOSCA_ELEMENTS_DEFINITION_FILE, TOPOLOGY_TEMPLATE, TYPE, \
-    TOSCA_ELEMENTS_DEFINITION_DB_CLUSTER_NAME
+    TOSCA_ELEMENTS_DEFINITION_DB_CLUSTER_NAME, NODE_TEMPLATES, RELATIONSHIP_TEMPLATES
 from configuration_tool.common import utils
 from configuration_tool.common.configuration import Configuration
+from configuration_tool.configuration_tools.ansible.instance_model.instance_model import update_instance_model
 from configuration_tool.configuration_tools.combined.combine_configuration_tools import get_configuration_tool_class
 from configuration_tool.providers.common.provider_configuration import ProviderConfiguration
 from configuration_tool.providers.common.tosca_template import ProviderToscaTemplate
@@ -23,10 +25,10 @@ REQUIRED_CONFIGURATION_PARAMS = (TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFAC
 REQUIRED_CONFIGURATION_PARAMS = (TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFACTS_DIRECTORY, TOSCA_ELEMENTS_MAP_FILE)
 
 
-def load_to_db(tosca, config, database_api_endpoint, template, cluster_name):
+def load_to_db(node_templates, relationship_templates, config, database_api_endpoint, template, cluster_name):
     definitions = {}
-    all_templates = tosca.node_templates
-    all_templates = utils.deep_update_dict(all_templates, tosca.relationship_templates)
+    all_templates = node_templates
+    all_templates = utils.deep_update_dict(all_templates, relationship_templates)
     def_cluster = config.get_section(config.MAIN_SECTION).get(TOSCA_ELEMENTS_DEFINITION_DB_CLUSTER_NAME)
     for key, value in all_templates.items():
         type = value[TYPE]
@@ -66,7 +68,7 @@ def translate(provider_template, validate_only, configuration_tool, cluster_name
     )
 
     logging_format = "%(asctime)s %(levelname)s %(message)s"
-    logging.basicConfig(filename=os.path.join(os.getenv('HOME'), '.clouni.log'), filemode='a', level=log_map[log_level],
+    logging.basicConfig(filename='.clouni-configuration-tool.log', filemode='a', level=log_map[log_level],
                         format=logging_format, datefmt='%Y-%m-%d %H:%M:%S')
 
     config = Configuration()
@@ -121,9 +123,27 @@ def translate(provider_template, validate_only, configuration_tool, cluster_name
     template[IMPORTS].extend(default_import_files)
     for i in range(len(template[IMPORTS])):
         template[IMPORTS][i] = os.path.abspath(template[IMPORTS][i])
+    if template.get(TOPOLOGY_TEMPLATE):
+        tmpl = template.get(TOPOLOGY_TEMPLATE)
+        if database_api_endpoint:
+            if not tmpl.get(NODE_TEMPLATES):
+                tmpl[NODE_TEMPLATES] = {}
+            if not tmpl.get(RELATIONSHIP_TEMPLATES):
+                tmpl[RELATIONSHIP_TEMPLATES] = {}
+            load_to_db(tmpl[NODE_TEMPLATES], tmpl[RELATIONSHIP_TEMPLATES], config, database_api_endpoint, template, cluster_name)
+        else:
+            if tmpl.get(NODE_TEMPLATES):
+                node_templates = tmpl.get(NODE_TEMPLATES)
+                for elem in node_templates:
+                    update_instance_model(cluster_name, node_templates[elem], node_templates[elem][TYPE], elem, [], [], is_delete, init=True)
+            if tmpl.get(RELATIONSHIP_TEMPLATES):
+                rel_templates = tmpl.get(RELATIONSHIP_TEMPLATES)
+                for elem in rel_templates:
+                    update_instance_model(cluster_name, rel_templates[elem], rel_templates[elem][TYPE], elem, [], [], is_delete, init=True)
 
+    copy_of_template = copy.deepcopy(template)
     try:
-        tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=template)
+        tosca_parser_template_object = ToscaTemplate(yaml_dict_tpl=copy_of_template)
     except Exception as e:
         logging.exception("Got exception from OpenStack tosca-parser: %s" % e)
         raise Exception("Got exception from OpenStack tosca-parser: %s" % e)
@@ -137,15 +157,12 @@ def translate(provider_template, validate_only, configuration_tool, cluster_name
     tosca = ProviderToscaTemplate(template, provider, configuration_tool, cluster_name,
                                   host_ip_parameter, is_delete, grpc_cotea_endpoint)
 
-    if database_api_endpoint:
-        load_to_db(tosca, config, database_api_endpoint, template, cluster_name)
-
     tool = get_configuration_tool_class(configuration_tool)(provider)
 
     default_artifacts_directory = config.get_section(config.MAIN_SECTION).get(DEFAULT_ARTIFACTS_DIRECTORY)
 
     configuration_content = tool.to_dsl(provider, tosca.provider_operations, tosca.reversed_provider_operations,
                                         tosca.cluster_name, is_delete, target_directory=default_artifacts_directory,
-                                        inputs=tosca.inputs, outputs=tosca.outputs, extra=extra, debug=debug,
+                                        extra=extra, debug=debug,
                                         grpc_cotea_endpoint=grpc_cotea_endpoint)
     return configuration_content

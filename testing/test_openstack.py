@@ -43,9 +43,9 @@ class TestAnsibleOpenStackOutput (unittest.TestCase, TestAnsibleProvider):
         for play in playbook:
             for task in play['tasks']:
                 tasks.append(task)
-        self.assertEqual(len(tasks), 24)
-        self.assertIsNotNone(tasks[11][SERVER_MODULE_NAME])
-        server = tasks[11][SERVER_MODULE_NAME]
+        self.assertEqual(len(tasks), 6)
+        self.assertIsNotNone(tasks[1][SERVER_MODULE_NAME])
+        server = tasks[1][SERVER_MODULE_NAME]
         self.assertEqual(server['name'], self.NODE_NAME)
 
     def test_meta(self, extra=None):

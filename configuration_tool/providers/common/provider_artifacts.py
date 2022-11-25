@@ -102,6 +102,6 @@ def execute(new_global_elements_map_total_implementation, is_delete, target_para
         os.remove(filename)
         if grpc_cotea_endpoint:
             ansible_library = os.path.join(utils.get_tmp_clouni_dir(), 'ansible_plugins/plugins/modules/artifact')
-            return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter,
-                               ansible_library)  # add a variable for the default host
+            return run_ansible(new_ansible_tasks, grpc_cotea_endpoint, {}, {}, 'localhost', target_parameter=target_parameter,
+                               ansible_library=ansible_library)  # add a variable for the default host
     return None

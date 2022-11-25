@@ -65,6 +65,15 @@ data_types:
 node_types:
   openstack.nodes.Root:
     derived_from: tosca.nodes.Root
+    attributes:
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      updated_at:
+        type: string
     capabilities:
       feature:
         type: openstack.capabilities.Node
@@ -112,6 +121,21 @@ node_types:
 
   openstack.nodes.FloatingIp: # os_floating_ip, no facts
     derived_from: openstack.nodes.Root
+    attributes:
+      fixed_ip_address:
+        type: string
+      floating_ip_address:
+        type: string
+      network:
+        type: string
+      port:
+        type: string
+      port_details:
+        type: map
+        entry_schema:
+          type: string
+      updated_at:
+        type: string
     properties:
       fixed_address:
         type: string
@@ -197,6 +221,15 @@ node_types:
 
   openstack.nodes.Keypair: # os_keypair
     derived_from: openstack.nodes.Root
+    attributes:
+      fingerprint:
+        type: string
+      private_key:
+        type: string
+      public_key:
+        type: string
+      type:
+        type: string
     properties:
       name:
         type: string
@@ -215,6 +248,17 @@ node_types:
 
   openstack.nodes.Network: # os_network, os_networks_facts
     derived_from: openstack.nodes.Root
+    attributes:
+      dns_domain:
+        type: string
+      mtu:
+        type: integer
+      provider:segmentation_id:
+        type: integer
+      provider:network_type:
+        type: string
+      provider:physical_network:
+        type: string
     properties:
       admin_state_up:
         type: boolean
@@ -348,6 +392,29 @@ node_types:
       vnic_type: # binding:vnic_type in facts
         type: string
         default: normal
+    attributes:
+      dns_assignment:
+        type: list
+        entry_schema:
+          type: map
+          entry_schema:
+            type: string
+      dns_name:
+        type: string
+      extra_dhcp_opts:
+        type: list
+        entry_schema:
+          type: string
+      fixed_ips:
+        type: list
+        entry_schema:
+          type: map
+          entry_schema:
+            type: string
+      mac_address:
+        type: string
+      network_id:
+        type: string
     requirements:
       - network: # network_id in facts
           capability: openstack.capabilities.Node
@@ -410,6 +477,9 @@ node_types:
         occurrences: [0, UNBOUNDED ]
 
   openstack.nodes.SecurityGroupRule: # os_security_group_rule
+    attributes:
+      security_group_id:
+        type: string
     derived_from: openstack.nodes.Root
     properties:
       direction:
@@ -445,6 +515,25 @@ node_types:
           occurrences: [ 1, 1 ]
 
   openstack.nodes.Server: # os_server, os_server_facts
+    attributes:
+      addresses:
+        type: map
+        entry_schema:
+          type: list
+          entry_schema:
+            type: map
+            entry_schema:
+              type: list
+      adminPass:
+        type: string
+      launched_at:
+        type: string
+      networks:
+        type: map
+      private_v4:
+        type: string
+      public_v4:
+        type: string
     derived_from: openstack.nodes.Root
     properties:
       auto_ip:
@@ -552,6 +641,19 @@ node_types:
 
   openstack.nodes.Subnet: # os_subnet, os_subnets_facts
     derived_from: openstack.nodes.Root
+    attributes:
+      allocation_pools:
+        type: list
+        entry_schema:
+          type: map
+      cidr:
+        type: string
+      gateway_ip:
+        type: string
+      network_id:
+        type: string
+      segment_id:
+        type: string
     properties:
       extra_specs:
         type: map

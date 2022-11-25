@@ -10,6 +10,9 @@ PROVIDERS = (AMAZON, OPENSTACK, KUBERNETES)
     = ('get_input', 'get_property', 'get_attribute', 'get_operation_output', 'get_nodes_of_type', 'get_artifact')
 GET_FUNCTIONS = (GET_INPUT, GET_PROPERTY, GET_ATTRIBUTE, GET_OPERATION_OUTPUT, GET_NODES_OF_TYPE, GET_ARTIFACT)
 
+(CONCAT, JOIN, TOKEN) = ('concat', 'join', 'token')
+INTRINSIC_FUNCTIONS = (CONCAT, JOIN, TOKEN)
+
 (SELF, SOURCE, SOURCES, TARGET, TARGETS, HOST) \
     = ('SELF', 'SOURCE', 'SOURCES', 'TARGET', 'TARGETS', 'HOST')
 TEMPLATE_REFERENCES = (SELF, SOURCE, SOURCES, TARGET, TARGETS, HOST)
@@ -22,6 +25,9 @@ REQUIREMENT_KEYS = (NODE, NODE_FILTER, OCCURRENCES, CAPABILITY, RELATIONSHIP)
     = ('type', 'description', 'metadata', 'directives', 'properties', 'attributes', 'capabilities', 'requirements', 'artifacts', 'interfaces')
 NODE_TEMPLATE_KEYS = (TYPE, DESCRIPTION, METADATA, DIRECTIVES, PROPERTIES, ATTRIBUTES, CAPABILITIES, REQUIREMENTS, ARTIFACTS, INTERFACES)
 DERIVED_FROM = 'derived_from'
+
+(FILE, REPOSITORY, DEPLOY_PATH, ARTIFACT_VERSION, CHECKSUM, CHECKSUM_ALGORITHM) = ('file', 'repository', 'deploy_path', 'artifact_version', 'checksum', 'checksum_algorithm')
+ARTIFACTS_KEYS = (TYPE, FILE, DESCRIPTION, REPOSITORY, DEPLOY_PATH, ARTIFACT_VERSION, CHECKSUM, CHECKSUM_ALGORITHM, PROPERTIES)
 
 (NAME, ID) = ('name', 'id')
 (NAME_SUFFIX, ID_SUFFIX) = ('_name', '_id')
@@ -47,9 +53,7 @@ SUPPORTED_MAPPING_VALUE_STRUCTURE = ((ERROR, REASON),
 (NODES, RELATIONSHIPS, DATATYPES, POLICIES, GROUPS) = ("nodes", "relationships", "datatypes", "policies", "groups")
 ELEMENT_TYPES = (NODES, CAPABILITIES, RELATIONSHIPS, DATATYPES, INTERFACES, ARTIFACTS, POLICIES, GROUPS)
 
-(IMPLEMENTATION, INPUTS) = ("implementation", "inputs")
-
-(OUTPUTS) = ("outputs")
+(IMPLEMENTATION, INPUTS, OUTPUTS) = ("implementation", "inputs", "outputs")
 
 (ROOT) = ("Root")
 
@@ -57,3 +61,5 @@ ELEMENT_TYPES = (NODES, CAPABILITIES, RELATIONSHIPS, DATATYPES, INTERFACES, ARTI
 
 (TOSCA_ELEMENTS_DEFINITION_FILE, DEFAULT_ARTIFACTS_DIRECTORY, TOSCA_ELEMENTS_MAP_FILE, TOSCA_ELEMENTS_DEFINITION_DB_CLUSTER_NAME) = \
     ('tosca_elements_definition_file', 'default_artifacts_directory', 'tosca_elements_map_file', 'tosca_elements_definition_db_cluster_name')
+
+(TIMEOUT) = ('timeout')
