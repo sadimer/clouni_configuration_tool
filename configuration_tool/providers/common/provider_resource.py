@@ -39,7 +39,7 @@ class ProviderResource(object):
         self.type_name = type_name
         self.type_definition = node_type
         self.is_software_component = is_software_component
-        self.host = None
+        self.host = 'localhost'
         self.self = node_name
         self.target = None
         self.source = None
@@ -71,24 +71,21 @@ class ProviderResource(object):
                         if value:
                             self.configuration_args[def_prop_key] = value
 
-            for key, value in self.tmpl.get(ARTIFACTS, []):
-                self.configuration_args[key] = value
-
             provider_requirements = ProviderRequirements(self.requirement_definitions, self.provider)
             self.requirements = provider_requirements.get_requirements(tmpl)
 
             for req_name, reqs in self.requirements.items():
                 if isinstance(reqs, list):
-                    iter_reqs =  reqs
+                    iter_reqs = reqs
                 else:
                     iter_reqs = [reqs]
                 for req in iter_reqs:
                     relationship = req.definition[RELATIONSHIP]
                     (_, _, type_name) = utils.tosca_type_parse(relationship)
                     if type_name == 'HostedOn':
-                        if self.host is not None:
-                            logging.critical("Node \'\' can be hosted only on one node" % self.name)
-                            raise Exception("Node \'\' can be hosted only on one node" % self.name)
+                        if self.host != 'localhost':
+                            logging.critical("Node %s can be hosted only on one node" % self.name)
+                            raise Exception("Node %s can be hosted only on one node" % self.name)
                         if host_ip_parameter not in ('public_address', 'private_address'):
                             host_ip_parameter = 'private_address'
                         self.host = req.data['node'] + '_' + host_ip_parameter

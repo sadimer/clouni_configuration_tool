@@ -8,7 +8,8 @@ from toscaparser.functions import GetAttribute, Concat, Token, GetProperty, GetI
 from configuration_tool.common import utils
 from configuration_tool.common.tosca_reserved_keys import PARAMETERS, VALUE, EXTRA, SOURCE, INPUTS, NODE_FILTER, NAME, \
     NODES, GET_OPERATION_OUTPUT, IMPLEMENTATION, ANSIBLE, GET_INPUT, RELATIONSHIPS, ATTRIBUTES, GET_ATTRIBUTE, CONCAT, \
-    JOIN, TOKEN, REQUIREMENTS, NODE, CAPABILITIES, DEFAULT, GET_PROPERTY, PROPERTIES, INTERFACES, OUTPUTS, ID, TYPE
+    JOIN, TOKEN, REQUIREMENTS, NODE, CAPABILITIES, DEFAULT, GET_PROPERTY, PROPERTIES, INTERFACES, OUTPUTS, ID, TYPE, \
+    DEPLOY_PATH, CHECKSUM, CHECKSUM_ALGORITHM, TIMEOUT
 from configuration_tool.configuration_tools.ansible.instance_model.instance_model import update_instance_model, \
     get_actual_state_of_instance_model, delete_cluster_from_instance_model
 
@@ -26,8 +27,10 @@ ARTIFACT_RANGE_START = 1000
 ARTIFACT_RANGE_END = 9999
 
 ANSIBLE_RESERVED_KEYS = \
-    (REGISTER, PATH, FILE, STATE, LINEINFILE, SET_FACT, IS_DEFINED, IS_UNDEFINED, IMPORT_TASKS_MODULE) = \
-    ('register', 'path', 'file', 'state', 'lineinfile', 'set_fact', ' is defined', ' is undefined', 'include')
+    (REGISTER, PATH, FILE, STATE, LINEINFILE, SET_FACT, IS_DEFINED, IS_UNDEFINED,
+     IMPORT_TASKS_MODULE, COPY, SRC, DST, STAT, FAIL, MSG, WHEN, WITH_LIST, ASYNC) = \
+    ('register', 'path', 'file', 'state', 'lineinfile', 'set_fact', ' is defined',
+     ' is undefined', 'include', 'copy', 'src', 'dest', 'stat', 'fail', 'msg', 'when', 'with_list', 'async')
 
 REQUIRED_CONFIG_PARAMS = (INITIAL_ARTIFACTS_DIRECTORY, DEFAULT_HOST) = ("initial_artifacts_directory", "default_host")
 
@@ -99,7 +102,8 @@ class AnsibleConfigurationTool(ConfigurationTool):
                 if isinstance(node_values, dict) and len(node_values) == 1:
                     node_name = list(node_values.keys())[0]
                     for node in active:
-                        if node.name == node_name.split(SEPARATOR)[0] and node.operation == node_name.split(SEPARATOR)[1]:
+                        if node.name == node_name.split(SEPARATOR)[0] and node.operation == node_name.split(SEPARATOR)[
+                            1]:
                             active.remove(node)
                             elements.done(node)
                             update_instance_model(self.cluster_name, node.tmpl, node.type, node.name,
@@ -139,11 +143,11 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                    ansible_config.get('modules_skipping_delete', [])):
                             ansible_tasks.extend(copy.deepcopy(tasks))
                     else:
-                        host = v.host
                         ansible_tasks.extend(copy.deepcopy(
                             self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
                                                                   additional_args=extra)))
+                        host = v.host
                 elif v.operation == 'create':
                     if not v.is_software_component:
                         ansible_tasks.extend(self.get_ansible_tasks_for_create(v, target_directory, node_filter_config,
@@ -155,11 +159,11 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                                                   additional_args=extra))
 
                     else:
-                        host = v.host
                         ansible_tasks.extend(copy.deepcopy(
                             self.get_ansible_tasks_from_interface(v, target_directory, is_delete, v.operation,
                                                                   cluster_name,
                                                                   additional_args=extra)))
+                        host = v.host
                 else:
                     (_, element_type, _) = utils.tosca_type_parse(v.type)
                     if element_type == NODES:
@@ -276,7 +280,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
             task = {
                 NAME: description_by_type,
                 module_by_type: {NAME: self.rap_ansible_variable('item'), 'state': 'absent'},
-                'with_list': ids
+                WITH_LIST: ids
             }
         else:
             task = {
@@ -286,7 +290,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     'floating_ip_address': self.rap_ansible_variable('item[1]'),
                     'purge': 'yes',
                     'state': 'absent'},
-                'with_list': ids
+                WITH_LIST: ids
             }
         task.update(additional_args)
         ansible_tasks.append(task)
@@ -303,6 +307,7 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                                      additional_args_element)
         ansible_tasks = []
         scripts = []
+        timeout = None
 
         for interface_name, interface in self.get_interfaces_from_node(element_object).items():
             interface_operation = interface.get(operation, {})
@@ -315,9 +320,67 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     interface_name == 'Standard' and element_type == NODES or interface_name == 'Configure' and element_type == RELATIONSHIPS) and implementations is not None:
                 if isinstance(implementations, six.string_types):
                     implementations = [implementations]
-                if isinstance(implementations, dict) and 'primary' in implementations and isinstance(
-                        implementations['primary'], six.string_types):
-                    implementations = [implementations['primary']]
+                if isinstance(implementations, dict):
+                    if 'timeout' in implementations:
+                        if isinstance(implementations['timeout'], int) or isinstance(implementations['timeout'], six.string_types):
+                            timeout = int(implementations['timeout'])
+                        else:
+                            logging.error('Timeout must be a string or integer value')
+                            raise Exception('Timeout must be a string or integer value')
+                    if 'operation_host' in implementations:
+                        if isinstance(implementations['operation_host'], six.string_types):
+                            host = self._resolve_tosca_travers([implementations['operation_host'], ''], element_object.name)
+                            for v in self.operations_graph:
+                                if v.name == host[0] and v.operation == 'create':
+                                    element_object.host = v.host  # if operation_host defined - we try to find
+                                    # operation create of target node and get host of this operation
+                                    break
+                        else:
+                            logging.error('Operation_host must be a string value')
+                            raise Exception('Operation_host must be a string value')
+                    if 'dependencies' in implementations:
+                        if isinstance(implementations['dependencies'], list):
+                            for dependency in implementations['dependencies']:
+                                if isinstance(dependency, dict) and TYPE in dependency and FILE in dependency:
+                                    if dependency.get(DEPLOY_PATH):
+                                        ansible_tasks.append({
+                                            COPY: {
+                                                SRC: os.path.join(utils.get_tmp_clouni_dir(), target_directory,
+                                                                  dependency[FILE]),
+                                                DST: dependency[DEPLOY_PATH]
+                                            }
+                                        })
+                                    if dependency.get(CHECKSUM) and dependency.get(CHECKSUM_ALGORITHM):
+                                        ansible_tasks.append({
+                                            STAT: {
+                                                CHECKSUM_ALGORITHM: dependency[CHECKSUM_ALGORITHM],
+                                                'get_checksum': 'yes',
+                                                PATH: os.path.join(utils.get_tmp_clouni_dir(), target_directory,
+                                                                   dependency[FILE])
+                                            },
+                                            REGISTER: CHECKSUM
+                                        })
+                                        ansible_tasks.append({
+                                            'debug': {
+                                                MSG: self.rap_ansible_variable(CHECKSUM)
+                                            }
+                                        })
+                                        ansible_tasks.append({
+                                            FAIL: {
+                                                MSG: 'Checksum of %s file is incorrect' % dependency[FILE]
+                                            },
+                                            WHEN: CHECKSUM + '.' + STAT + '.' + CHECKSUM + ' != '
+                                                  + '"' + str(dependency[CHECKSUM]) + '"'
+                                        })
+                        else:
+                            logging.error('Dependencies interface implementation must be a list')
+                            raise Exception('Dependencies interface implementation must be a list')
+                    if 'primary' in implementations:
+                        if isinstance(implementations['primary'], six.string_types):
+                            implementations = [implementations['primary']]
+                        else:
+                            logging.error('Primary interface implementation must be a string')
+                            raise Exception('Primary interface implementation must be a string')
                 scripts.extend(implementations)
                 if interface_operation.get(INPUTS) is not None:
                     for input_name, input_value in interface_operation[INPUTS].items():
@@ -328,9 +391,15 @@ class AnsibleConfigurationTool(ConfigurationTool):
                         })
                 for script in implementations:
                     script_filename = os.path.join(os.path.join(utils.get_tmp_clouni_dir(), 'artifacts'), script)
-                    new_ansible_task = {
-                        IMPORT_TASKS_MODULE: os.path.join(utils.get_tmp_clouni_dir(), script_filename)
-                    }
+                    if timeout:
+                        new_ansible_task = {
+                            ASYNC: timeout,
+                            IMPORT_TASKS_MODULE: os.path.join(utils.get_tmp_clouni_dir(), script_filename)
+                        }
+                    else:
+                        new_ansible_task = {
+                            IMPORT_TASKS_MODULE: os.path.join(utils.get_tmp_clouni_dir(), script_filename)
+                        }
                     for task in ansible_tasks:
                         task.update(additional_args)
                     ansible_tasks.append(new_ansible_task)
