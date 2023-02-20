@@ -62,6 +62,7 @@ message ClouniConfigurationToolRequest {
     bool debug = 8;
     string database_api_endpoint = 9;
     string grpc_cotea_endpoint = 10;
+    string host_parameter = 11;
 }
 
 message ClouniConfigurationToolResponse {

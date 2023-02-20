@@ -32,6 +32,7 @@ class TranslatorServer(object):
         self.cluster_name = argv['cluster_name']
         self.is_delete = argv['delete']
         self.configuration_tool = argv['configuration_tool']
+        self.host_parameter = argv['host_parameter']
         self.database_api_endpoint = argv['database_api_endpoint']
         self.grpc_cotea_endpoint = argv['grpc_cotea_endpoint']
         self.extra = argv['extra']
@@ -62,7 +63,7 @@ class TranslatorServer(object):
         self.output = translate(self.provider_template, self.validate_only, self.configuration_tool,
                                 self.cluster_name, is_delete=self.is_delete, extra=self.extra,
                                 log_level=self.log_level, debug=self.debug,
-                                database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint)
+                                database_api_endpoint=self.database_api_endpoint, grpc_cotea_endpoint=self.grpc_cotea_endpoint, host_ip_parameter=self.host_parameter)
 
 
 class ClouniConfigurationToolServicer(api_pb2_grpc.ClouniConfigurationToolServicer):
@@ -128,6 +129,10 @@ class ClouniConfigurationToolServicer(api_pb2_grpc.ClouniConfigurationToolServic
             args['configuration_tool'] = request.configuration_tool
         else:
             args['configuration_tool'] = 'ansible'
+        if request.host_parameter != "":
+            args['host_parameter'] = request.host_parameter
+        else:
+            args['host_parameter'] = 'public_address'
         if request.database_api_endpoint != "":
             args['database_api_endpoint'] = request.database_api_endpoint
         else:

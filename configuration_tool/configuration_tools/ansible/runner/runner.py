@@ -1,6 +1,8 @@
 import json
 import logging
 import os
+import random
+import time
 from threading import Thread
 
 import grpc
@@ -41,7 +43,7 @@ def run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts
     request = Config()
     request.session_ID = session_id
     request.hosts = hosts
-    request.inv_path = os.path.join('pb_starts', 'hosts.ini')
+    request.inv_path = os.path.join('pb_starts', hosts + '_' + 'hosts.ini')
     request.extra_vars = str(extra_vars)
     if ansible_library:
         request.ansible_library = ansible_library
@@ -164,6 +166,7 @@ def get_attributes_or_properties(task, result, parameters, ansible_config, opera
 def run_and_finish(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts, name, op, q, ansible_config,
                    ansible_library, attributes, outputs, properties):
     result = {}
+    # time.sleep(random.randint(0, 30))
     try:
         result = run_ansible(ansible_tasks, grpc_cotea_endpoint, extra_env, extra_vars, hosts,
                              ansible_config=ansible_config, ansible_library=ansible_library, operation=op,

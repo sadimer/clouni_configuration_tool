@@ -855,7 +855,7 @@ capability_types:
           debian, fedora, rhel and ubuntu.
       version:
         required: false
-        type: version
+        type: string # change it
         description: >
           The host Operating System version.
 
