@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import configuration_tool.configuration_tools.ansible.runner.cotea_pb2 as cotea__pb2
+import configuration_tool.runner.cotea_pb2 as cotea__pb2
 
 
 class CoteaGatewayStub(object):

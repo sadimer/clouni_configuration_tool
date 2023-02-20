@@ -5,11 +5,10 @@ from threading import Thread
 
 import grpc
 
-from configuration_tool.common import utils
 from configuration_tool.common.tosca_reserved_keys import ATTRIBUTES, OUTPUTS, PROPERTIES
 
-from configuration_tool.configuration_tools.ansible.runner import cotea_pb2_grpc
-from configuration_tool.configuration_tools.ansible.runner.cotea_pb2 import EmptyMsg, Config, MapFieldEntry, \
+from configuration_tool.runner import cotea_pb2_grpc
+from configuration_tool.runner.cotea_pb2 import EmptyMsg, Config, MapFieldEntry, \
     Task, SessionID
 
 SEPARATOR = '.'

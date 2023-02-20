@@ -13,11 +13,10 @@ class KubernetesConfigurationTool(ConfigurationTool):
     TOOL_NAME = KUBERNETES
 
     def __init__(self, provider=None):
-        super(KubernetesConfigurationTool, self).__init__()
-        self.provider = provider
+        super(KubernetesConfigurationTool, self).__init__(provider=provider)
 
     def to_dsl(self, provider, nodes_relationships_queue, reversed_nodes_relationships_queue, cluster_name, is_delete,
-               target_directory=None, extra=None):
+               target_directory=None, extra=None, debug=False, grpc_cotea_endpoint=None):
         if not is_delete:
             return self.to_dsl_for_create(self.provider, nodes_relationships_queue, target_directory,
                                           cluster_name, extra)
@@ -44,8 +43,5 @@ class KubernetesConfigurationTool(ConfigurationTool):
                 if memory is not None:
                     props_dict['spec']['template']['spec']['containers'][i]['resources']['limits']['memory'] = \
                         props_dict['spec']['template']['spec']['containers'][i]['resources']['limits']['memory']\
-                            .replace('MB', 'M')
+                            .replace('MB', 'M').replace(' ', '')
         return props_dict
-
-    def get_artifact_extension(self):
-        return '.yaml'

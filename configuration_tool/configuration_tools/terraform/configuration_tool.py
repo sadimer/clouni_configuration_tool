@@ -1,21 +1,22 @@
+import copy
+import logging
+import os
+
+import hcl2
+import json
+import six
+import yaml
 
 from configuration_tool.common import utils
-from configuration_tool.common.tosca_reserved_keys import PARAMETERS, VALUE, EXTRA, SOURCE, INPUTS, NODE_FILTER, NAME, \
-    NODES, IMPLEMENTATION, ANSIBLE, RELATIONSHIPS, ATTRIBUTES, PROPERTIES, OUTPUTS, ID, TYPE, \
-    DEPLOY_PATH, CHECKSUM, CHECKSUM_ALGORITHM
-from configuration_tool.configuration_tools.common.instance_model.instance_model import get_actual_state_of_instance_model
 
 from configuration_tool.configuration_tools.common.configuration_tool import ConfigurationTool
+from configuration_tool.common.tosca_reserved_keys import ANSIBLE, TERRAFORM, IMPLEMENTATION, RELATIONSHIPS, NODES, \
+    DEPLOY_PATH, TYPE, CHECKSUM, CHECKSUM_ALGORITHM, INPUTS, NAME, ATTRIBUTES, ID
+from configuration_tool.configuration_tools.common.instance_model.instance_model import \
+    get_actual_state_of_instance_model
 
-from configuration_tool.runner.runner import grpc_cotea_run_ansible
-
-import copy, yaml, os, six, logging
-
-SEPARATOR = '.'
-
-ARTIFACT_RANGE_START = 1000
-ARTIFACT_RANGE_END = 9999
-
+TERRAFORM_RESERVED_KEYS = \
+    (PROJECT_PATH, STATE, FORCE_INIT, RESOURCE) = ('project_path', 'state', 'force_init', 'resource')
 ANSIBLE_RESERVED_KEYS = \
     (REGISTER, PATH, FILE, STATE, LINEINFILE, SET_FACT, IS_DEFINED, IS_UNDEFINED,
      IMPORT_TASKS_MODULE, COPY, SRC, DST, STAT, FAIL, MSG, WHEN, WITH_LIST, ASYNC) = \
@@ -23,97 +24,14 @@ ANSIBLE_RESERVED_KEYS = \
      ' is undefined', 'include', 'copy', 'src', 'dest', 'stat', 'fail', 'msg', 'when', 'with_list', 'async')
 
 
-
-class AnsibleConfigurationTool(ConfigurationTool):
-    TOOL_NAME = ANSIBLE
-    """
-    Must be tested by TestAnsibleOpenstack.test_translating_to_ansible
-    """
+class TerraformConfigurationTool(ConfigurationTool):
+    TOOL_NAME = TERRAFORM
 
     def __init__(self, provider=None):
-        super(AnsibleConfigurationTool, self).__init__(provider=provider)
-
-    def get_for_create(self, element_object, target_directory, node_filter_config, description_by_type,
-                                     module_by_type, additional_args=None):
-        """
-        Fulfill the dict with ansible task arguments to create infrastructure
-        If the node contains get_operation_output parameters then the operation is executed
-        If the operation is not mentioned then it is not executed
-        Operations are mentioned in the node or in relationship_template
-        :param: node: ProviderResource
-        :param additional_args: dict of arguments to add
-        :return: string of ansible task to place in playbook
-        """
-
-        if additional_args is None:
-            additional_args = {}
-        else:
-            additional_args_global = copy.deepcopy(additional_args.get('global', {}))
-            additional_args_element = copy.deepcopy(additional_args.get(element_object.name, {}))
-            additional_args = utils.deep_update_dict(additional_args_global,
-                                                     additional_args_element)
-
-        ansible_tasks = []
-
-        configuration_args = {}
-        for arg_key, arg in element_object.configuration_args.items():
-            configuration_args[arg_key] = arg
-
-        ansible_args = copy.copy(element_object.configuration_args)
-        ansible_args[STATE] = 'present'
-        task_name = element_object.name.replace('-', '_')
-        ansible_task_as_dict = dict()
-        ansible_task_as_dict[NAME] = description_by_type
-        ansible_task_as_dict[module_by_type] = configuration_args
-        ansible_task_as_dict[REGISTER] = task_name
-        ansible_task_as_dict.update(additional_args)
-        ansible_tasks.append(ansible_task_as_dict)
-        return ansible_tasks
-
-    def get_for_delete(self, element_object, cluster_name, description_by_type, module_by_type,
-                                     additional_args=None):
-        ansible_tasks = []
-        if additional_args is None:
-            additional_args = {}
-        else:
-            additional_args_global = copy.deepcopy(additional_args.get('global', {}))
-            additional_args_element = {}
-            additional_args = utils.deep_update_dict(additional_args_global, additional_args_element)
-
-        index = 1
-        current_state = get_actual_state_of_instance_model(cluster_name, element_object.name, index)
-        ids = []
-        while current_state is not None:
-            index += 1
-            if current_state.get(ATTRIBUTES) and current_state.get(ATTRIBUTES).get(ID):
-                if element_object.type != 'openstack.nodes.FloatingIp':
-                    ids.append(current_state.get(ATTRIBUTES).get(ID))
-                else:
-                    ids.append([current_state.get(ATTRIBUTES).get('port_details').get('device_id'),
-                                current_state.get(ATTRIBUTES).get('floating_ip_address')])
-            current_state = get_actual_state_of_instance_model(cluster_name, element_object.name, index)
-        if element_object.type != 'openstack.nodes.FloatingIp':
-            task = {
-                NAME: description_by_type,
-                module_by_type: {NAME: self.rap_ansible_variable('item'), 'state': 'absent'},
-                WITH_LIST: ids
-            }
-        else:
-            task = {
-                NAME: description_by_type,
-                module_by_type: {
-                    'server': self.rap_ansible_variable('item[0]'),
-                    'floating_ip_address': self.rap_ansible_variable('item[1]'),
-                    'purge': 'yes',
-                    'state': 'absent'},
-                WITH_LIST: ids
-            }
-        task.update(additional_args)
-        ansible_tasks.append(task)
-        return ansible_tasks
+        super(TerraformConfigurationTool, self).__init__(provider=provider)
 
     def get_from_interface(self, element_object, target_directory, is_delete, operation, cluster_name,
-                                         additional_args=None):
+                           additional_args=None):
         if additional_args is None:
             additional_args = {}
         else:
@@ -138,14 +56,16 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     implementations = [implementations]
                 if isinstance(implementations, dict):
                     if 'timeout' in implementations:
-                        if isinstance(implementations['timeout'], int) or isinstance(implementations['timeout'], six.string_types):
+                        if isinstance(implementations['timeout'], int) or isinstance(implementations['timeout'],
+                                                                                     six.string_types):
                             timeout = int(implementations['timeout'])
                         else:
                             logging.error('Timeout must be a string or integer value')
                             raise Exception('Timeout must be a string or integer value')
                     if 'operation_host' in implementations:
                         if isinstance(implementations['operation_host'], six.string_types):
-                            host = self._resolve_tosca_travers([implementations['operation_host'], ''], element_object.name)
+                            host = self._resolve_tosca_travers([implementations['operation_host'], ''],
+                                                               element_object.name)
                             for v in self.operations_graph:
                                 if v.name == host[0] and v.operation == 'create':
                                     element_object.host = v.host  # if operation_host defined - we try to find
@@ -221,7 +141,61 @@ class AnsibleConfigurationTool(ConfigurationTool):
                     ansible_tasks.append(new_ansible_task)
         return ansible_tasks
 
-
     def rap_ansible_variable(self, s):
         r = "{{ " + s + " }}"
         return r
+
+    def get_for_create(self, element_object, target_directory, node_filter_config, description_by_type,
+                       module_by_type, additional_args=None):
+        """
+        Fulfill the dict with ansible task arguments to create infrastructure
+        If the node contains get_operation_output parameters then the operation is executed
+        If the operation is not mentioned then it is not executed
+        Operations are mentioned in the node or in relationship_template
+        :param: node: ProviderResource
+        :param additional_args: dict of arguments to add
+        :return: string of ansible task to place in playbook
+        """
+
+        if additional_args is None:
+            additional_args = {}
+        else:
+            additional_args_global = copy.deepcopy(additional_args.get('global', {}))
+            additional_args_element = copy.deepcopy(additional_args.get(element_object.name, {}))
+            additional_args = utils.deep_update_dict(additional_args_global,
+                                                     additional_args_element)
+
+        ansible_tasks = []
+
+        configuration_args = {}
+        for arg_key, arg in element_object.configuration_args.items():
+            configuration_args[arg_key] = arg
+
+        task_name = element_object.name.replace('-', '_')
+
+        terraform_config = {
+            RESOURCE: {
+                module_by_type: {
+                    task_name: configuration_args
+                }
+            }
+        }
+        print(json.dumps(terraform_config, sort_keys=True, indent=4))
+
+        ansible_task_as_dict = dict()
+        ansible_task_as_dict[NAME] = description_by_type
+        ansible_task_as_dict['shell'] = '|\n' + 'cat > main.tf.json << EOF\n' \
+                                        + json.dumps(terraform_config, sort_keys=True, indent=4) + '\nEOF'
+        ansible_tasks.append(copy.deepcopy(ansible_task_as_dict))
+        del ansible_task_as_dict['shell']
+
+        ansible_task_as_dict[NAME] = description_by_type
+        ansible_task_as_dict[self.TOOL_NAME] = {
+            PROJECT_PATH: task_name,
+            STATE: 'present',
+            FORCE_INIT: True
+        }
+        ansible_task_as_dict[REGISTER] = task_name
+        ansible_task_as_dict.update(additional_args)
+        ansible_tasks.append(copy.deepcopy(ansible_task_as_dict))
+        return ansible_tasks

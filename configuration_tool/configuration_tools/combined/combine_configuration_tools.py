@@ -1,13 +1,14 @@
 from configuration_tool.configuration_tools.ansible.configuration_tool import AnsibleConfigurationTool
 from configuration_tool.configuration_tools.kubernetes.configuration_tool import KubernetesConfigurationTool
+from configuration_tool.configuration_tools.terraform.configuration_tool import TerraformConfigurationTool
 
 import logging
 
 CONFIGURATION_TOOLS = [
     AnsibleConfigurationTool,
-    KubernetesConfigurationTool
+    KubernetesConfigurationTool,
+    TerraformConfigurationTool
 ]
-
 
 def get_configuration_tool_class(tool_name):
     possible_values = []

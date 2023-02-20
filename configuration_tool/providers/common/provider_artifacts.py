@@ -1,13 +1,11 @@
 import copy
-import sys
 import logging
-from multiprocessing import Queue
 
 from random import seed, randint
 from time import time
 
 from configuration_tool.common.configuration import Configuration
-from configuration_tool.configuration_tools.ansible.runner.runner import run_ansible
+from configuration_tool.runner.runner import run_ansible
 
 ARTIFACT_RANGE_START = 1000
 ARTIFACT_RANGE_END = 9999

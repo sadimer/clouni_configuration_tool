@@ -98,7 +98,7 @@ class ProviderResource(object):
                     else:
                         self.configuration_args[key] = req.get_value()
 
-            if configuration_tool == 'ansible':
+            if configuration_tool != 'kubernetes':
                 provider_config = ProviderConfiguration(provider)
                 node_filter_config = provider_config.get_subsection(ANSIBLE, NODE_FILTER)
                 if not node_filter_config:

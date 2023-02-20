@@ -2,7 +2,6 @@ import copy
 import json
 import logging
 import os
-from threading import Thread
 
 import requests
 import six
@@ -11,11 +10,11 @@ from toscaparser.tosca_template import ToscaTemplate
 from yaml import Loader
 
 from configuration_tool.common.tosca_reserved_keys import IMPORTS, DEFAULT_ARTIFACTS_DIRECTORY, \
-    EXECUTOR, NAME, TOSCA_ELEMENTS_MAP_FILE, TOSCA_ELEMENTS_DEFINITION_FILE, TOPOLOGY_TEMPLATE, TYPE, \
+    TOSCA_ELEMENTS_MAP_FILE, TOSCA_ELEMENTS_DEFINITION_FILE, TOPOLOGY_TEMPLATE, TYPE, \
     TOSCA_ELEMENTS_DEFINITION_DB_CLUSTER_NAME, NODE_TEMPLATES, RELATIONSHIP_TEMPLATES
 from configuration_tool.common import utils
 from configuration_tool.common.configuration import Configuration
-from configuration_tool.configuration_tools.ansible.instance_model.instance_model import update_instance_model
+from configuration_tool.configuration_tools.common.instance_model.instance_model import update_instance_model
 from configuration_tool.configuration_tools.combined.combine_configuration_tools import get_configuration_tool_class
 from configuration_tool.providers.common.provider_configuration import ProviderConfiguration
 from configuration_tool.providers.common.tosca_template import ProviderToscaTemplate

@@ -157,8 +157,6 @@ data_types:
           If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie $$(VAR_NAME).
           Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated.
         type: list
-        entry_schema:
-          type: string
         required: false
       command:
         description: >
