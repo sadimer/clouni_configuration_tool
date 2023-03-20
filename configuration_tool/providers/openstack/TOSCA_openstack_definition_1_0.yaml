@@ -555,7 +555,7 @@ node_types:
         default: true
       config_drive:
         type: boolean
-        default: false
+        default: true
       created_at: # not used in create
         type: string
         required: false

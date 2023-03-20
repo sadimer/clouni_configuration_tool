@@ -340,9 +340,14 @@ class AnsibleConfigurationTool(ConfigurationTool):
                             raise Exception('Operation_host must be a string value')
                     if 'dependencies' in implementations:
                         if isinstance(implementations['dependencies'], list):
+                            deps = []
                             for dependency in implementations['dependencies']:
+                                if isinstance(dependency, str):
+                                    deps.append(dependency)
                                 if isinstance(dependency, dict) and TYPE in dependency and FILE in dependency:
+                                    deps.append(dependency[FILE])
                                     if dependency.get(DEPLOY_PATH):
+                                        deps.append(dependency[DEPLOY_PATH])
                                         ansible_tasks.append({
                                             COPY: {
                                                 SRC: os.path.join(utils.get_tmp_clouni_dir(), target_directory,
@@ -372,6 +377,11 @@ class AnsibleConfigurationTool(ConfigurationTool):
                                             WHEN: CHECKSUM + '.' + STAT + '.' + CHECKSUM + ' != '
                                                   + '"' + str(dependency[CHECKSUM]) + '"'
                                         })
+                            ansible_tasks.append({
+                                SET_FACT: {
+                                    'dependencies': deps
+                                }
+                            })
                         else:
                             logging.error('Dependencies interface implementation must be a list')
                             raise Exception('Dependencies interface implementation must be a list')
